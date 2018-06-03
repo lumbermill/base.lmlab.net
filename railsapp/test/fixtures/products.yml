@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  code: 
+  maker: MyString
+  name: MyString
+  size: MyString
+  price: 1
+  cost: 9.99
+  picture_id: 1
+  copy: MyString
+  memo: MyString
+
+two:
+  user_id: 1
+  code: 
+  maker: MyString
+  name: MyString
+  size: MyString
+  price: 1
+  cost: 9.99
+  picture_id: 1
+  copy: MyString
+  memo: MyString

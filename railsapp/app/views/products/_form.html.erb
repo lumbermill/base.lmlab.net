@@ -1,0 +1,67 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :product_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :product_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :maker %>
+    <%= form.text_field :maker, id: :product_maker %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :product_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size, id: :product_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :product_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost, id: :product_cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :picture_id %>
+    <%= form.number_field :picture_id, id: :product_picture_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :copy %>
+    <%= form.text_field :copy, id: :product_copy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo %>
+    <%= form.text_field :memo, id: :product_memo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
