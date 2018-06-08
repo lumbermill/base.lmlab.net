@@ -1,67 +1,97 @@
-<%= form_with(model: product, local: true) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= form_for @product, :html => { :class => "form-horizontal product" } do |f| %>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @product.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :product_user_id %>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:user_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :code, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :code, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:code) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :maker, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :maker, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:maker) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :size, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :size, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:size) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :price, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:price) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :cost, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :cost, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:cost) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :picture_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:picture_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :copy, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :copy, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:copy) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :memo, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :memo, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:memo) %>
   </div>
 
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code, id: :product_code %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                products_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :maker %>
-    <%= form.text_field :maker, id: :product_maker %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :product_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :size %>
-    <%= form.text_field :size, id: :product_size %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, id: :product_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost, id: :product_cost %>
-  </div>
-
-  <div class="field">
-    <%= form.label :picture_id %>
-    <%= form.number_field :picture_id, id: :product_picture_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :copy %>
-    <%= form.text_field :copy, id: :product_copy %>
-  </div>
-
-  <div class="field">
-    <%= form.label :memo %>
-    <%= form.text_field :memo, id: :product_memo %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

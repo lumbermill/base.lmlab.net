@@ -1,54 +1,37 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @product.user_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @product.user_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
+  <dd><%= @product.code %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:maker) %>:</strong></dt>
+  <dd><%= @product.maker %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @product.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:size) %>:</strong></dt>
+  <dd><%= @product.size %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @product.price %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
+  <dd><%= @product.cost %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:picture_id) %>:</strong></dt>
+  <dd><%= @product.picture_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:copy) %>:</strong></dt>
+  <dd><%= @product.copy %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:memo) %>:</strong></dt>
+  <dd><%= @product.memo %></dd>
+</dl>
 
-<p>
-  <strong>Code:</strong>
-  <%= @product.code %>
-</p>
-
-<p>
-  <strong>Maker:</strong>
-  <%= @product.maker %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-
-<p>
-  <strong>Size:</strong>
-  <%= @product.size %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
-
-<p>
-  <strong>Cost:</strong>
-  <%= @product.cost %>
-</p>
-
-<p>
-  <strong>Picture:</strong>
-  <%= @product.picture_id %>
-</p>
-
-<p>
-  <strong>Copy:</strong>
-  <%= @product.copy %>
-</p>
-
-<p>
-  <strong>Memo:</strong>
-  <%= @product.memo %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              products_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_product_path(@product), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              product_path(@product),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
