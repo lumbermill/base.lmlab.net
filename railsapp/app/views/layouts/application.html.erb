@@ -26,6 +26,14 @@
             <li><%= link_to "Link2", "/path2"  %></li>
             <li><%= link_to "Link3", "/path3"  %></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= link_to ("<span class='fa fa-user'></span> "+current_user.name).html_safe, edit_user_registration_path %></li>
+              <li><%= link_to "<span class='glyphicon glyphicon-log-out'></span> Sign out".html_safe, destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "<span class='glyphicon glyphicon-log-in'></span> Sign in".html_safe, new_user_session_path %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
