@@ -28,6 +28,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
+              <li><%= link_to "<span class='fa fa-home'></span>".html_safe, pages_dashboard_path %></li>
+              <li><%= link_to "<span class='fa fa-shopping-cart'></span>".html_safe, orders_path %></li>
               <li><%= link_to ("<span class='fa fa-user'></span> "+current_user.name).html_safe, edit_user_registration_path %></li>
               <li><%= link_to "<span class='glyphicon glyphicon-log-out'></span> Sign out".html_safe, destroy_user_session_path, method: :delete %></li>
             <% else %>

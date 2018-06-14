@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
+    # TODO: should be one's shopping cart?
     @orders = Order.all
   end
 
