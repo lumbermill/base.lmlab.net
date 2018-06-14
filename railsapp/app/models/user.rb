@@ -6,4 +6,8 @@ class User < ApplicationRecord
          :confirmable, :lockable
   has_many :products
   has_many :orders
+
+  def admin?
+    id == 1
+  end
 end

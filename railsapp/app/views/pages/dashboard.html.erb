@@ -1,2 +1,7 @@
 <h1>Pages#dashboard</h1>
 <p>Find me in app/views/pages/dashboard.html.erb</p>
+
+<% if current_user.admin? %>
+  # TODO: implements users_controller link_to "Users", users_path %>
+  <%= link_to "Products", products_path %>
+<% end %>
