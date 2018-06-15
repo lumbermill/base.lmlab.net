@@ -6,4 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(name: "Admin", email: "info@lmlab.net", password: "secret")
+now = Time.now
+admin = User.create(name: "Admin", email: "info@lmlab.net", password: "secret", confirmed_at: now)
+
+if Rails.env == "development"
+  d1 = User.create(name: "Distributor1", email: "dist@lmlab.net", password: "secret", confirmed_at: now)
+  u1 = User.create(name: "User1", email: "user1@lmlab.net", password: "secret", confirmed_at: now)
+  u2 = User.create(name: "User2", email: "user2@lmlab.net", password: "secret", confirmed_at: now)
+
+  Product.create(code: "5050", name: "トリプルＸ（レフィル）", user: admin)
+  Product.create(code: "0029", name: "ハーブラスト", user: admin)
+  Product.create(code: "0581", name: "ハーブラスト", size: "１０本入り", user: admin)
+  Product.create(code: "5070", name: "プロテイン シェーカー", user: admin)
+  Product.create(code: "5165", name: "ニュートリ プロテイン （オールプラント）", user: admin)
+  Product.create(code: "5910", name: "ニュートリ プロテイン （オールプラント）", size: "お徳用", user: admin)
+  Product.create(code: "5441", name: "ＸＳ エナジードリンク エクストラバーン リモンチェッロ パイレーツブラスト", size: "６本入り", user: admin)
+  Product.create(code: "5414", name: "ＸＳ エナジードリンク エクストラバーン ミックスベリーブラスト", size: "６本入り", user: admin)
+end
