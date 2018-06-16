@@ -1,46 +1,44 @@
 <%- model_class = Order -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Cart</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:slip_id) %></th>
-      <th><%= model_class.human_attribute_name(:product_id) %></th>
-      <th><%= model_class.human_attribute_name(:amount) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Amount</th>
+      <th>Subtotal</th>
     </tr>
   </thead>
   <tbody>
-    <% @orders.each do |order| %>
+    <% if @orders.count == 0 %>
       <tr>
-        <td><%= link_to order.id, order_path(order) %></td>
-        <td><%= order.user_id %></td>
-        <td><%= order.slip_id %></td>
-        <td><%= order.product_id %></td>
-        <td><%= order.amount %></td>
-        <td><%= order.status %></td>
-        <td><%=l order.created_at %></td>
-        <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      order_path(order), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_order_path(order), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      order_path(order),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
+        <td colspan="5">Cart is empty.</td>
       </tr>
-    <% end %>
+    <% else
+         total = 0
+         @orders.each do |order| %>
+      <tr>
+        <td><%= order.name %></td>
+        <td><%= order.product.name %><small>Code: <%= order.product %></small></td>
+        <td><%= order.product.price %></td>
+        <td><%= order.amount %></td>
+        <td><%= order.product.price * order.amount %></td>
+        <% total += order.product.price * order.amount %>
+      </tr>
+      <% end
+       end %>
+    <tr>
+      <th colspan="4" style="text-aling: right">Total:</td>
+      <td><%= total %></td>
+    </tr>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_order_path,
-            :class => 'btn btn-primary' %>
+<% if @orders.count == 0 %>
+  <button class="btn btn-primary" disabled="disabled">Proceed to checkout</button>
+<% else %>
+  <%= link_to 'Proceed to checkout', orders_checkout_path, class: 'btn btn-primary' %>
+<% end %>

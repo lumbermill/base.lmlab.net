@@ -1,5 +1,21 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<h1>Dashboard</h1>
+<div class="row">
+  <form method="post" action="" class="form-inline search">
+    <%= text_field_tag :search, "", class: 'form-control', placeholder: "name or code" %>
+    <%= submit_tag :search, class: 'btn btn-primary' %>
+  </form>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    category?
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    order history?
+  </div>
+</div>
 
 <% if current_user.admin? %>
   <%= link_to "Users", pages_users_path %>

@@ -4,8 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    # TODO: should be one's shopping cart?
-    @orders = Order.all
+    @orders = current_user.orders.in_cart
   end
 
   # GET /orders/1
@@ -60,6 +59,10 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def checkout
+    @orders = current_user.orders.in_cart
   end
 
   private

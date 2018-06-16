@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :products
   devise_for :users
 
+  get 'orders/checkout'
   get 'pages/dashboard'
   get 'pages/users'
   root to: 'pages#root'
