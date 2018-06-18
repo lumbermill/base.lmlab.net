@@ -18,6 +18,7 @@ Online shopping system for small(individual) distributors.
   - can view all orders from their members.
     - member: Users who belong to the distributor.
     - can change status of the orders.
+    - can get the printable page of each order.(a statement of delivery)
   - can show/hide announcements for their members on the dashboard page.
 - Admin
   - has all privileges.
@@ -35,11 +36,20 @@ Online shopping system for small(individual) distributors.
 
 
 ## Views
-- root:
-- dashboard:
-  - cart:
-  - orders:
-  - products:
+- root: Top page. Everyone(includes search engine bots) can see it.
+- (user area)
+  - dashboard: Top page for each User. search form, order history, links to other pages.
+  - products: A list of products as a result of search.
+  - orders(cart): A list of products which an User is going to buy.
+    - checkout: Confirmation form.
+  - orders(history): A list of products which an User had bought.
+  - user: Information about the user.
+- (distributor area)
+  - orders(ordered): A list of product which the Distributor has to deliver.
+- (admin area)
+  - users: All registered Users and their status.
+
+See also railsapp/config/routes.rb
 
 
 ## Status of order
