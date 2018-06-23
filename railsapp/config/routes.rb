@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'orders/checkout'
+  get 'pages/about'
   get 'pages/dashboard'
   get 'pages/users'
   root to: 'pages#root'

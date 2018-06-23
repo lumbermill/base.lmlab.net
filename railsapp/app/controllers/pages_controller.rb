@@ -1,8 +1,13 @@
 class PagesController < ApplicationController
+  def about
+  end
+
   def root
   end
 
   def dashboard
+    @messages = [] # from distributor, from admin
+    @histories = [] # TODO:
   end
 
   def users
