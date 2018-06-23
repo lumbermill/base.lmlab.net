@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  get 'orders/checkout'
+  get 'products/picture' # code=0000&suffix=main
+
   resources :orders
   resources :products
   devise_for :users
 
-  get 'orders/checkout'
   get 'pages/about'
   get 'pages/dashboard'
   get 'pages/users'

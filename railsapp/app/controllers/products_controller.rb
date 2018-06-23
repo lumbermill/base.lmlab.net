@@ -61,6 +61,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def picture
+    code = params[:code]
+    f = Product.picture_realpath(code)
+    if File.file? f
+      send_file(f, type: 'image/jpeg', disposition: "inline")
+    else
+      head 404
+      send_file(Rails.root.join('app', 'assets', 'images', 'no-photo.png'), type: 'image/jpeg', disposition: "inline", status: 404)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
