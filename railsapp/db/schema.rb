@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(version: 20180604135511) do
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
-    t.bigint "code"
-    t.string "maker"
-    t.string "name"
-    t.string "size"
-    t.integer "price"
-    t.decimal "cost", precision: 10
+    t.bigint "code", default: 0, null: false
+    t.string "maker", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "size", default: "", null: false
+    t.integer "price", default: 0, null: false
+    t.decimal "cost", precision: 10, default: "0", null: false
     t.integer "picture_id"
-    t.string "copy"
-    t.string "memo"
+    t.string "copy", default: "", null: false
+    t.string "memo", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

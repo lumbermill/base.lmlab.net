@@ -5,39 +5,25 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:code) %></th>
-      <th><%= model_class.human_attribute_name(:maker) %></th>
+      <th><%= model_class.human_attribute_name(:picture) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:size) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:cost) %></th>
-      <th><%= model_class.human_attribute_name(:picture_id) %></th>
-      <th><%= model_class.human_attribute_name(:copy) %></th>
-      <th><%= model_class.human_attribute_name(:memo) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.id, product_path(product) %></td>
-        <td><%= product.user_id %></td>
-        <td><%= product.code %></td>
-        <td><%= product.maker %></td>
-        <td><%= product.name %> <%= image_tag product.picture_path %></td>
-        <td><%= product.size %></td>
-        <td><%= product.price %></td>
-        <td><%= product.cost %></td>
-        <td><%= product.picture_id %></td>
-        <td><%= product.copy %></td>
-        <td><%= product.memo %></td>
-        <td><%=l product.created_at %></td>
+        <td><%= link_to image_tag(product.picture_path, style: "max-height: 64px"), product_path(product) %></td>
         <td>
-          <%= link_to t('.show', :default => t("helpers.links.show")),
-                      product_path(product), :class => 'btn btn-default btn-xs' %>
+          <%= link_to product.name+" "+product.size, product_path(product) %> <small class="text-muted"><%= product.code %></small><br/>
+          <%= product.copy %>
+        </td>
+        <td><%= product.price %></td>
+        <td>
+          <%= link_to "Add to cart", "#", class: "btn btn-success btn-xs" %>
+          <% if current_user.admin? %>
+          <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_product_path(product), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -45,12 +31,17 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
+          </p>
+          <% end %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<% if current_user.admin? %>
+<p class="admin">
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_product_path,
             :class => 'btn btn-primary' %>
+</p>
+<% end %>

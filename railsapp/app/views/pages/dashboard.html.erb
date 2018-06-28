@@ -8,7 +8,7 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <form method="post" action="" class="form-inline search">
+    <form method="get" action="<%= products_path %>" class="form-inline search">
       <%= text_field_tag :search, "", class: 'form-control', placeholder: "name or code" %>
       <%= submit_tag :search, class: 'btn btn-primary' %>
     </form>
