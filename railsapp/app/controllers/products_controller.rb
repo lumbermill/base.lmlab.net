@@ -4,7 +4,14 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    keyword = params[:search]
+    if keyword.empty?
+      @products = Product.all
+    elsif keyword.to_i == 0
+      @products = Product.where("name like ? or size like ?", "%"+keyword+"%", "%"+keyword+"%")
+    else
+      @products = Product.where(code: keyword.to_i)
+    end
   end
 
   # GET /products/1
