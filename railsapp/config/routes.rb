@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :orders
   resources :products
+  resources :tags
   devise_for :users
 
   get 'pages/about'
