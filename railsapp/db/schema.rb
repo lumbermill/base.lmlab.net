@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180604135511) do
+ActiveRecord::Schema.define(version: 20180628115016) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20180604135511) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "product_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_tags_on_product_id"
+    t.index ["tag_id"], name: "index_product_tags_on_tag_id"
+  end
+
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.bigint "code", default: 0, null: false
@@ -31,6 +40,16 @@ ActiveRecord::Schema.define(version: 20180604135511) do
     t.integer "price", default: 0, null: false
     t.decimal "cost", precision: 10, default: "0", null: false
     t.integer "picture_id"
+    t.string "copy", default: "", null: false
+    t.string "memo", default: "", null: false
+    t.string "keywords", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "code", default: "", null: false
+    t.string "name", default: "", null: false
     t.string "copy", default: "", null: false
     t.string "memo", default: "", null: false
     t.datetime "created_at", null: false
@@ -81,4 +100,6 @@ ActiveRecord::Schema.define(version: 20180604135511) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "product_tags", "products"
+  add_foreign_key "product_tags", "tags"
 end

@@ -11,6 +11,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.integer :picture_id
       t.string :copy, null: false, default: ""
       t.string :memo, null: false, default: ""
+      t.string :keywords, null: false, default: ""
 
       t.timestamps
     end
