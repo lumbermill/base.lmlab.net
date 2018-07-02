@@ -1,7 +1,8 @@
 <%- model_class = Product -%>
 <script>
-  function btn_clicked(){
-    $(this).prop("disabled", true);
+  function btn_clicked(b){
+  $(b).addClass('disabled');
+  console.log(b);
   }
 </script>
 <div class="page-header">
@@ -26,7 +27,7 @@
         </td>
         <td><%= product.price %></td>
         <td>
-          <%= link_to "Add to cart", "#", class: "btn btn-success btn-xs", onclick: "btn_clicked()" %>
+          <%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(this)" %>
           <% if current_user.admin? %>
           <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
