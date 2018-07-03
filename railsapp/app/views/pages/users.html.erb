@@ -1,1 +1,17 @@
 <h1>Users</h1>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Confirmed</th>
+    <th>Last signed in</th>
+  </tr>
+  <% @users.each do |u| %>
+  <tr>
+    <td><%= u.name %></td>
+    <td><%= u.email %></td>
+    <td><%= u.confirmed? ? ('<span class="fa fa-check" title="'+u.confirmed_at.to_s+'"></span>').html_safe : "" %></td>
+    <td><%= u.last_sign_in_at %></td>
+  </tr>
+  <% end %>
+</table>

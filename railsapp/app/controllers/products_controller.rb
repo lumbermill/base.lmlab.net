@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     keyword = params[:search]
-    if keyword.empty?
+    if keyword.blank?
       @products = Product.all
     elsif keyword.to_i == 0
       @products = Product.where("name like ? or size like ?", "%"+keyword+"%", "%"+keyword+"%")
