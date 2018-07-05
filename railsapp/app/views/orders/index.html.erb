@@ -10,6 +10,7 @@
       <th>Price</th>
       <th>Amount</th>
       <th>Subtotal</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -26,13 +27,14 @@
         <td><%= order.product.price %></td>
         <td><%= order.amount %></td>
         <td><%= order.product.price * order.amount %></td>
+        <td><%= link_to "Delete", "#", class: "btn btn-danger btn-xs" %></td>
         <% total += order.product.price * order.amount %>
       </tr>
       <% end
        end %>
     <tr>
       <th colspan="4" style="text-aling: right">Total:</td>
-      <td><%= total %></td>
+      <td colspan="2"><%= total %></td>
     </tr>
   </tbody>
 </table>
