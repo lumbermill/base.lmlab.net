@@ -6,6 +6,13 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     keyword = params[:search]
+    # Use previous keyword.
+    if keyword.nil?
+      keyword = session[:search]
+    else
+      session[:search] = keyword
+    end
+
     if keyword.blank?
       @products = Product.all
     elsif keyword.to_i == 0

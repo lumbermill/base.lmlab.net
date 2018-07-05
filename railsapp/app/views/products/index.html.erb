@@ -1,15 +1,27 @@
 <%- model_class = Product -%>
 <script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
   function btn_clicked(id,b){
-  $(b).addClass('disabled');
-   $("p#product-"+id).show();
-   setTimeout(reset_btn, 5000, id,b);
+    $(b).addClass('disabled');
+    setTimeout(reset_btn, 5000, id,b);
+    $.post("/orders.json",{order: {product_id: id, amount: 1}})
+      .done(function(d){
+        $("p#product-"+id).show();
+      })
+      .fail(function(d){
+        alert("Can not process the order.");
+      });
   }
+
   function reset_btn(id,b){
     $(b).removeClass('disabled');
     $("p#product-"+id).hide();
   }
-
 </script>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>

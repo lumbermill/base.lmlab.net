@@ -21,8 +21,8 @@
          total = 0
          @orders.each do |order| %>
       <tr>
-        <td><%= order.name %></td>
-        <td><%= order.product.name %><small>Code: <%= order.product %></small></td>
+        <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
+        <td><%= order.product.name %><small><%= order.product.code %></small></td>
         <td><%= order.product.price %></td>
         <td><%= order.amount %></td>
         <td><%= order.product.price * order.amount %></td>
