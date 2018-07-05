@@ -1,9 +1,15 @@
 <%- model_class = Product -%>
 <script>
-  function btn_clicked(b){
+  function btn_clicked(id,b){
   $(b).addClass('disabled');
-  console.log(b);
+   $("p#product-"+id).show();
+   setTimeout(reset_btn, 5000, id,b);
   }
+  function reset_btn(id,b){
+    $(b).removeClass('disabled');
+    $("p#product-"+id).hide();
+  }
+
 </script>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
@@ -24,10 +30,11 @@
         <td>
           <%= link_to product.name+" "+product.size, product_path(product) %> <small class="text-muted"><%= product.code %></small><br/>
           <%= product.copy %>
+          <p id="product-<%= product.id %>" style="display: none;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</p>
         </td>
         <td><%= product.price %></td>
         <td>
-          <%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(this)" %>
+          <%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},this)" %>
           <% if current_user.admin? %>
           <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
