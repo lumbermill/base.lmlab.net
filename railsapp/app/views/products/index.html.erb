@@ -11,7 +11,7 @@
     setTimeout(reset_btn, 5000, id,b);
     $.post("/orders.json",{order: {product_id: id, amount: 1}})
       .done(function(d){
-        $("p#product-"+id).show();
+        $("div#product-"+id).show();
       })
       .fail(function(d){
         alert("Can not process the order.");
@@ -20,7 +20,7 @@
 
   function reset_btn(id,b){
     $(b).removeClass('disabled');
-    $("p#product-"+id).hide();
+    $("div#product-"+id).fadeOut();
   }
 </script>
 <div class="page-header">
@@ -42,7 +42,7 @@
         <td>
           <%= link_to product.name+" "+product.size, product_path(product) %> <small class="text-muted"><%= product.code %></small><br/>
           <%= product.copy %>
-          <p id="product-<%= product.id %>" style="display: none;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</p>
+          <div id="product-<%= product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
         </td>
         <td><%= product.price %></td>
         <td>
