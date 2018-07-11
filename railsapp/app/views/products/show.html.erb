@@ -1,44 +1,59 @@
 <%- model_class = Product -%>
 <script>
-function btn_clicked(id,b){
-$(b).addClass('disabled');
- $("p#cart_btn").show();
- setTimeout(reset_btn, 5000, id,b);
-}
-function reset_btn(id,b){
-  $(b).removeClass('disabled');
-  $("p#cart_btn").hide();
-}
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  function btn_clicked(id,b){
+    $(b).addClass('disabled');
+    setTimeout(reset_btn, 5000, id,b);
+    $.post("/orders.json", {order: {product_id: id, amount: 1}})
+      .done(function(d){
+        $("div#product-"+id).show();
+      })
+      .fail(function(d){
+        alert("Can not process the order.");
+      });
+  }
+
+  function reset_btn(id,b){
+    $(b).removeClass('disabled');
+    $("div#product-"+id).fadeOut();
+  }
 </script>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @product.user_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
+<h2><%= @product.name %></h2>
+<%= link_to image_tag(@product.picture_path, :height => "300"), product_path(@product) %>
+<dl class="dl-horizontal product_detail">
+  <dt><%= model_class.human_attribute_name(:code) %>:</dt>
   <dd><%= @product.code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:maker) %>:</strong></dt>
-  <dd><%= @product.maker %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @product.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:size) %>:</strong></dt>
   <dd><%= @product.size %></dd>
   <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
   <dd><%= @product.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
-  <dd><%= @product.cost %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:picture_id) %>:</strong></dt>
-  <dd><%= @product.picture_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:copy) %>:</strong></dt>
   <dd><%= @product.copy %></dd>
   <dt><strong><%= model_class.human_attribute_name(:memo) %>:</strong></dt>
   <dd><%= @product.memo %></dd>
+  <!--  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+    <dd><%= @product.user_id %></dd>
+  <dt><%= model_class.human_attribute_name(:name) %>:</dt>
+    <dd><strong><%= @product.name %></strong></dd>
+  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
+    <dd><%= @product.cost %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:maker) %>:</strong></dt>
+    <dd><%= @product.maker %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:picture_id) %>:</strong></dt>
+    <dd><%= @product.picture_id %></dd>  -->
 </dl>
-<%= link_to image_tag(@product.picture_path), product_path(@product) %>
-<%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(this)" %>
-<p id="cart_btn" style="display: none;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</p>
+
+<%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{@product.id}, this)" %>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               products_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -48,3 +63,5 @@ function reset_btn(id,b){
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+
+<div id="product-<%= @product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
