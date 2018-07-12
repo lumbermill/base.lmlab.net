@@ -9,7 +9,8 @@
   function btn_clicked(id,b){
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
-    $.post("/orders.json", {order: {product_id: id, amount: 1}})
+    var amount = $("#amount").val();
+    $.post("/orders.json", {order: {product_id: id, amount: amount}})
       .done(function(d){
         $("div#product-"+id).show();
       })
@@ -25,37 +26,33 @@
 </script>
 
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @product.name + " " + @product.size %></h1>
 </div>
-<h2><%= @product.name %></h2>
-<%= link_to image_tag(@product.picture_path, :height => "300"), product_path(@product) %>
-<dl class="dl-horizontal product_detail">
-  <dt><%= model_class.human_attribute_name(:code) %>:</dt>
-  <dd><%= @product.code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:size) %>:</strong></dt>
-  <dd><%= @product.size %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @product.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:copy) %>:</strong></dt>
-  <dd><%= @product.copy %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:memo) %>:</strong></dt>
-  <dd><%= @product.memo %></dd>
-  <!--  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-    <dd><%= @product.user_id %></dd>
-  <dt><%= model_class.human_attribute_name(:name) %>:</dt>
-    <dd><strong><%= @product.name %></strong></dd>
-  <dt><strong><%= model_class.human_attribute_name(:cost) %>:</strong></dt>
-    <dd><%= @product.cost %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:maker) %>:</strong></dt>
-    <dd><%= @product.maker %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:picture_id) %>:</strong></dt>
-    <dd><%= @product.picture_id %></dd>  -->
-</dl>
+<div class="row">
+  <div class="col-sm-6">
+    <%= image_tag(@product.picture_path, class: "img-responsive") %>
+  </div>
+  <div class="col-sm-6">
+    <p><%= @product.copy %></p>
+    <table class="table">
+      <tr>
+      <th><%= model_class.human_attribute_name(:code) %>:</th>
+      <td><%= @product.code %></td>
+      </tr><tr>
+      <th><%= model_class.human_attribute_name(:price) %>:</th>
+      <td><%= @product.price %></td>
+      </tr>
+    </table>
+    <form class="form-inline">
+      <input type="number" value="1" id="amount" name="amount" class="form-control"/>
+      <%= link_to "<span class='fa fa-plus'></span> Add to cart".html_safe, "javascript:void(0)", class: "btn btn-success", onclick: "btn_clicked(#{@product.id}, this)" %>
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+                  products_path, :class => 'btn btn-default'  %>
+    </form>
+  </div>
+</div>
 
-<%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{@product.id}, this)" %>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              products_path, :class => 'btn btn-default'  %>
+<p class="admin">
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_product_path(@product), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -63,5 +60,5 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
-
+</p>
 <div id="product-<%= @product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
