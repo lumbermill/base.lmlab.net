@@ -19,6 +19,7 @@ function remove_from_cart(order_id,b){
         sum += Number($(this).text());
       });
       $("#total").text(sum).fadeIn();
+      $("#n-in-cart").load("/orders/n-in-cart");
     })
     .fail(function(d){
       alert("Can not process the order.");
