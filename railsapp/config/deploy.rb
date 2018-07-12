@@ -1,8 +1,12 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.10.2"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :application, "base"
+set :repo_url, "git@github.com-base:lumbermill/base.lmlab.net.git"
+set :repo_tree, 'railsapp'
+# **Notice** githubではrsa鍵を複数プロジェクトで使い回せないため、.ssh/configに細工をしています
+
+ask :user, `whoami`.chomp
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
