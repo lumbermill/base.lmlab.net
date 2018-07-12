@@ -6,22 +6,29 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" style="padding: 24px 0">
   <div class="col-xs-12">
     <form method="get" action="<%= products_path %>" class="form-inline search">
-      <%= text_field_tag :search, "", class: 'form-control', placeholder: "name or code" %>
-      <%= submit_tag :search, class: 'btn btn-primary' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "name,code or tag:name" %>
+      <%= submit_tag 'Search', class: 'btn btn-primary' %>
     </form>
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4">
-    category?
-  </div>
+    <% @tags.each do |tag| %>
+      <div class="col-sm-4 col-md-2">
+      <figure>
+        <%= link_to image_tag(tag.picture_path, class: "img-thumbnail"), products_path(search: "tag:"+tag.code) %>
+        <figcaption><%= tag.name %></figcaption>
+      </figure>
+      </div>
+    <% end %>
 </div>
-
-<div class="row">
+<div class="row" style="padding: 24px 0">
   <div class="col-sm-4">
+    <% @tags.each do |t| %>
+
+    <% end %>
     order history?
   </div>
 </div>

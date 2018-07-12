@@ -5,20 +5,23 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    keyword = params[:search]
+    @keyword = params[:search]
     # Use previous keyword.
-    if keyword.nil?
-      keyword = session[:search]
+    if @keyword.nil?
+      @keyword = session[:search]
     else
-      session[:search] = keyword
+      session[:search] = @keyword
     end
 
-    if keyword.blank?
+    if @keyword.blank?
       @products = Product.all
-    elsif keyword.to_i == 0
-      @products = Product.where("name like ? or size like ?", "%"+keyword+"%", "%"+keyword+"%")
+    elsif @keyword.start_with? "tag:"
+      tag = @keyword.sub("tag:","").strip
+      @products = Tag.where(code:tag).first.products
+    elsif @keyword.to_i == 0
+      @products = Product.where("name like ? or size like ?", "%"+@keyword+"%", "%"+@keyword+"%")
     else
-      @products = Product.where(code: keyword.to_i)
+      @products = Product.where(code: @keyword.to_i)
     end
   end
 

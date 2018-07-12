@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'orders/checkout'
   get 'products/picture' # code=0000&suffix=main
+  get 'tags/picture' # code=0000
 
   resources :orders
   resources :products
