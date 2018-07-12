@@ -1,0 +1,71 @@
+<%- model_class = Order -%>
+<script>
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+function remove_from_cart(order_id,b){
+  var tr = b.parentNode.parentNode;
+  $(tr).fadeOut();
+  $("#total").fadeOut();
+  $.ajax({url:"/orders/"+order_id+".json", type: "delete"})
+    .done(function(d){
+      console.log(d);
+      var sum = 0;
+      $(tr).remove();
+      $(".subtotal").each(function(){
+        sum += Number($(this).text());
+      });
+      $("#total").text(sum).fadeIn();
+      $("#n-in-cart").load("/orders/n-in-cart");
+    })
+    .fail(function(d){
+      alert("Can not process the order.");
+    });
+}
+</script>
+<div class="page-header">
+  <h1><span class="fa fa-credit-card"></span> Checkout</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Amount</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @orders.count == 0 %>
+      <tr>
+        <td colspan="6">Cart is empty.</td>
+      </tr>
+    <% else
+         total = 0
+         @orders.each do |order| %>
+      <tr>
+        <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
+        <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
+        <td><%= order.product.price %></td>
+        <td><%= order.amount %></td>
+        <td class="subtotal"><%= order.product.price * order.amount %></td>
+      </tr>
+      <% end
+       end %>
+    <tr>
+      <th colspan="4" style="text-aling: right">Total:</td>
+      <td colspan="1" id="total"><%= total %></td>
+    </tr>
+  </tbody>
+</table>
+
+<% if @orders.count == 0 %>
+  <button class="btn btn-primary" disabled="disabled">Place the order</button>
+<% else %>
+  <%= link_to 'Place the order', orders_checkout_path, class: 'btn btn-primary' %>
+  <%= link_to 'Back', orders_path, class: 'btn btn-default' %>
+<% end %>
