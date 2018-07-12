@@ -1,6 +1,32 @@
 <%- model_class = Order -%>
+<script>
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+function remove_from_cart(order_id,b){
+  var tr = b.parentNode.parentNode;
+  $(tr).fadeOut();
+  $("#total").fadeOut();
+  $.ajax({url:"/orders/"+order_id+".json", type: "delete"})
+    .done(function(d){
+      console.log(d);
+      var sum = 0;
+      $(tr).remove();
+      $(".subtotal").each(function(){
+        sum += Number($(this).text());
+      });
+      $("#total").text(sum).fadeIn();
+    })
+    .fail(function(d){
+      alert("Can not process the order.");
+    });
+}
+</script>
 <div class="page-header">
-  <h1>Cart</h1>
+  <h1><span class="fa fa-shopping-cart"></span> Cart</h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -23,18 +49,18 @@
          @orders.each do |order| %>
       <tr>
         <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
-        <td><%= order.product.name %><small><%= order.product.code %></small></td>
+        <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
         <td><%= order.product.price %></td>
         <td><%= order.amount %></td>
-        <td><%= order.product.price * order.amount %></td>
-        <td><%= link_to "Delete", "#", class: "btn btn-danger btn-xs" %></td>
+        <td class="subtotal"><%= order.product.price * order.amount %></td>
+        <td><%= link_to "Remove", "javascript:void(0)", onclick: "remove_from_cart(#{order.id},this)", class: "btn btn-danger btn-xs" %></td>
         <% total += order.product.price * order.amount %>
       </tr>
       <% end
        end %>
     <tr>
       <th colspan="4" style="text-aling: right">Total:</td>
-      <td colspan="2"><%= total %></td>
+      <td colspan="2" id="total"><%= total %></td>
     </tr>
   </tbody>
 </table>
