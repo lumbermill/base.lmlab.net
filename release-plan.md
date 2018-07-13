@@ -21,3 +21,12 @@
 
 ## Environment
 - https://base.lmlab.net
+
+Preparation for deployment.
+
+```
+mkdir /var/www/base
+chown ubuntu:ubuntu /var/www/base
+apt install nodejs
+letsencrypt certonly -d base.lmlab.net
+```

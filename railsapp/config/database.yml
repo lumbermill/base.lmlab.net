@@ -50,5 +50,4 @@ test:
 production:
   <<: *default
   database: base_lmlab_net_production
-  username: base_lmlab_net
   password: <%= ENV['BASE_LMLAB_NET_DATABASE_PASSWORD'] %>

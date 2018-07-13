@@ -6,7 +6,7 @@ set :repo_url, "git@github.com-base:lumbermill/base.lmlab.net.git"
 set :repo_tree, 'railsapp'
 # **Notice** githubではrsa鍵を複数プロジェクトで使い回せないため、.ssh/configに細工をしています
 
-ask :user, `whoami`.chomp
+# ask :user, `whoami`.chomp
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -37,7 +37,7 @@ ask :user, `whoami`.chomp
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 3
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
