@@ -30,5 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  hello: "Hello,"
   about: "About"
   search: "Search"

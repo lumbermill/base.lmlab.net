@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
-    <p>Hello, <b><%= current_user.name %></b>!
-      <%= link_to "Edit user info", edit_user_registration_path, class: "btn btn-xs btn-default" %>
+    <p><%= t("hello") %> <b><%= current_user.name %></b>!
+      <%= link_to t("edit_user"), edit_user_registration_path, class: "btn btn-xs btn-default" %>
     </p>
   </div>
 </div>
