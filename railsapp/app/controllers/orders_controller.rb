@@ -27,6 +27,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user_id = current_user.id if @order.user_id == 0
+    another_order = current_user.orders.in_cart.where(product_id: @order.product_id).first
+    if another_order
+      another_order.amount += @order.amount
+      @order = another_order
+    end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
