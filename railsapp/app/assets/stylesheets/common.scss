@@ -2,13 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// styies(related to navbar) are copyied from 360/places.
+.navbar-default{
+  background-color: #101020 !important;
+}
+
+.navbar-default a{
+  color: #eee !important;
+}
+
+.navbar-default .active a{
+  color: #555 !important;
+}
+
+.navbar-brand {
+  background: image-url("logowhite.png") no-repeat left center;
+  background-size: contain;
+  margin-right: 16px;
+}
+
+.navbar-default .dropdown-menu a{
+  color: #555 !important;
+}
+
 form div.actions {
   margin: 15px 0 15px 0;
 }
 
 footer{
-  margin-top: 30px;
+  margin-top: 20px;
   border-top: 1px solid #eee;
+  padding: 20px 0;
 }
 
 .admin {
