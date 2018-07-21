@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 now = Time.now
-admin = User.create(name: "Admin", email: "info@lmlab.net", password: "secret", confirmed_at: now)
+admin = User.create(name: "Admin", email: "info@lmlab.net", password: "secret",parent: User.new, confirmed_at: now)
 
 # The mkdir_p may fail, then run the following command.
 # sudo mkdir /var/www/base.lmlab.net && sudo chown vagrant:vagrant /var/www/base.lmlab.net
@@ -15,9 +15,9 @@ FileUtils.mkdir_p(PRODUCT_IMAGES_DIR)
 FileUtils.mkdir_p(TAG_IMAGES_DIR)
 
 if Rails.env == "development"
-  d1 = User.create(name: "Distributor1", email: "dist@lmlab.net", password: "secret", confirmed_at: now)
-  u1 = User.create(name: "User1", email: "user1@lmlab.net", password: "secret", confirmed_at: now)
-  u2 = User.create(name: "User2", email: "user2@lmlab.net", password: "secret", confirmed_at: now)
+  d1 = User.create(name: "Distributor1", email: "dist@lmlab.net", password: "secret", parent: admin, confirmed_at: now)
+  u1 = User.create(name: "User1", email: "user1@lmlab.net", password: "secret", parent: d1, confirmed_at: now)
+  u2 = User.create(name: "User2", email: "user2@lmlab.net", password: "secret", parent: d1, confirmed_at: now)
 
   tag1 = Tag.create(code: "supplement", name: "サプリメント")
   tag2 = Tag.create(code: "food", name: "食品")

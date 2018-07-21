@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.datetime "locked_at"
     t.string "name", default: "", null: false
     t.string "message", default: "", null: false
+    t.string "message4payment", default: "", null: false
     t.integer "gender", default: 0, null: false
     t.string "tel", default: "", null: false
     t.string "line_id", default: "", null: false
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.string "prefecture", default: "", null: false
     t.string "address", default: "", null: false
     t.string "street", default: "", null: false
+    t.integer "parent_user_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
