@@ -67,8 +67,18 @@ class OrdersController < ApplicationController
     end
   end
 
-  def checkout
+  def checkout1
     @orders = current_user.orders.in_cart
+  end
+
+  def checkout2
+    orders = current_user.orders.in_cart
+    ts = Time.now
+    orders.each do |o|
+      o.checkout_at = ts
+      o.status = "ordered"
+      o.save
+    end
   end
 
   def n_in_cart
@@ -83,6 +93,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :slip_id, :product_id, :amount, :status)
+      params.require(:order).permit(:user_id, :checkout_at, :product_id, :amount, :status)
     end
 end

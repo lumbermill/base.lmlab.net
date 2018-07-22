@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", default: 0, null: false
-    t.integer "slip_id"
+    t.datetime "checkout_at"
     t.integer "product_id", default: 0, null: false
     t.integer "amount", default: 1, null: false
     t.string "status", default: "in-cart", null: false
