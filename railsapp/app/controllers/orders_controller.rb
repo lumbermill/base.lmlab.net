@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id if @order.user_id == 0
     another_order = current_user.orders.in_cart.where(product_id: @order.product_id).first
     if another_order
-      another_order.amount += @order.amount
+      another_order.quantity += @order.quantity
       @order = another_order
     end
     respond_to do |format|
@@ -93,6 +93,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :checkout_at, :product_id, :amount, :status)
+      params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
     end
 end

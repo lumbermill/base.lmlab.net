@@ -10,8 +10,10 @@
   <dd><%= @order.checkout_at %></dd>
   <dt><strong><%= model_class.human_attribute_name(:product_id) %>:</strong></dt>
   <dd><%= @order.product_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
-  <dd><%= @order.amount %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:quantity) %>:</strong></dt>
+  <dd><%= @order.quantity %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
+  <dd><%= @order.price %></dd>
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <dd><%= @order.status %></dd>
 </dl>

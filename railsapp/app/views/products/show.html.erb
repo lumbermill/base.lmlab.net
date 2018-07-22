@@ -9,8 +9,8 @@
   function btn_clicked(id,b){
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
-    var amount = $("#amount").val();
-    $.post("/orders.json", {order: {product_id: id, amount: amount}})
+    var quantity = $("#quantity").val();
+    $.post("/orders.json", {order: {product_id: id, quantity: quantity}})
       .done(function(d){
         $("div#product-"+id).show();
       })
@@ -44,7 +44,7 @@
       </tr>
     </table>
     <form class="form-inline">
-      <input type="number" value="1" id="amount" name="amount" class="form-control"/>
+      <input type="number" value="1" id="quantity" name="quantity" class="form-control"/>
       <%= link_to "<span class='fa fa-plus'></span> Add to cart".html_safe, "javascript:void(0)", class: "btn btn-success", onclick: "btn_clicked(#{@product.id}, this)" %>
       <%= link_to t('.back', :default => t("helpers.links.back")),
                   products_path, :class => 'btn btn-default'  %>

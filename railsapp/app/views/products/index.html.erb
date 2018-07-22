@@ -9,7 +9,7 @@
   function btn_clicked(id,b){
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
-    $.post("/orders.json",{order: {product_id: id, amount: 1}})
+    $.post("/orders.json",{order: {product_id: id, quantity: 1}})
       .done(function(d){
         $("div#product-"+id).show();
       })

@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.integer "user_id", default: 0, null: false
     t.datetime "checkout_at"
     t.integer "product_id", default: 0, null: false
-    t.integer "amount", default: 1, null: false
+    t.integer "quantity", default: 1, null: false
+    t.integer "price", default: 1, null: false
     t.string "status", default: "in-cart", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

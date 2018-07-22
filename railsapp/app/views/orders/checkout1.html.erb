@@ -35,7 +35,7 @@ function remove_from_cart(order_id,b){
       <th>Picture</th>
       <th>Name</th>
       <th>Price</th>
-      <th>Amount</th>
+      <th>Quantity</th>
       <th>Subtotal</th>
     </tr>
   </thead>
@@ -51,8 +51,8 @@ function remove_from_cart(order_id,b){
         <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
         <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
         <td><%= order.product.price %></td>
-        <td><%= order.amount %></td>
-        <td class="subtotal"><%= order.product.price * order.amount %></td>
+        <td><%= order.quantity %></td>
+        <td class="subtotal"><%= order.product.price * order.quantity %></td>
       </tr>
       <% end
        end %>
