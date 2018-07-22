@@ -18,6 +18,8 @@ class User < ApplicationRecord
   end
 
   def checkout_histories
-    orders.select("checkout_at,sum(quantity) as quantity,sum(price) as price,status").group(:checkout_at,:status).having("checkout_at is not null")
+    orders.select("checkout_at,sum(quantity) as quantity,sum(price) as price,status")
+      .group(:checkout_at,:status).having("checkout_at is not null")
+      .order("checkout_at desc")
   end
 end

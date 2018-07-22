@@ -27,7 +27,14 @@ function remove_from_cart(order_id,b){
 }
 </script>
 <div class="page-header">
-  <h1><span class="fa fa-shopping-cart"></span> Cart</h1>
+  <% if @checkout_at %>
+    <h1><span class="fa fa-shopping-cart"></span> Order</h1>
+    <p><%= l(@checkout_at) %> <%= @orders.first.status %>
+      <%= link_to t("back"), orders_history_path, class: "btn btn-default btn-sm" %>
+    </p>
+  <% else %>
+    <h1><span class="fa fa-shopping-cart"></span> Cart</h1>
+  <% end %>
 </div>
 <table class="table table-striped">
   <thead>
@@ -66,7 +73,8 @@ function remove_from_cart(order_id,b){
   </tbody>
 </table>
 
-<% if @orders.count == 0 %>
+<% if @checkout_at %>
+<% elsif @orders.count == 0 %>
   <button class="btn btn-primary" disabled="disabled">Proceed to checkout</button>
 <% else %>
   <%= link_to 'Proceed to checkout', orders_checkout1_path, class: 'btn btn-primary' %>

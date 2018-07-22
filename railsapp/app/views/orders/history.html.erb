@@ -1,54 +1,31 @@
 <%- model_class = Order -%>
-<script>
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-
-function remove_from_cart(order_id,b){
-  var tr = b.parentNode.parentNode;
-  $(tr).fadeOut();
-  $("#total").fadeOut();
-  $.ajax({url:"/orders/"+order_id+".json", type: "delete"})
-    .done(function(d){
-      console.log(d);
-      var sum = 0;
-      $(tr).remove();
-      $(".subtotal").each(function(){
-        sum += Number($(this).text());
-      });
-      $("#total").text(sum).fadeIn();
-      $("#n-in-cart").load("/orders/n-in-cart");
-    })
-    .fail(function(d){
-      alert("Can not process the order.");
-    });
-}
-</script>
 <div class="page-header">
   <h1><span class="fa fa-shopping-cart"></span> History</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Quantity</th>
-      <th>Subtotal</th>
+      <th><%= t("datetime") %></th>
+      <th><%= t("status") %></th>
+      <th><%= t("quantity") %></th>
+      <th><%= t("price") %></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     <% if @orders.length == 0 %>
       <tr>
-        <td colspan="3">Cart is empty.</td>
+        <td colspan="5">No orders.</td>
       </tr>
     <% else
          total = 0
          @orders.each do |order| %>
       <tr>
-        <td><%= order.checkout_at %> <%= order.status %></td>
+        <td><%= l(order.checkout_at) %></td>
+        <td><%= order.status %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>
+        <td><%= link_to t("detail"), orders_path(checkout_at: order.checkout_at), class: "btn btn-default btn-sm" %></td>
       </tr>
       <% end
        end %>
