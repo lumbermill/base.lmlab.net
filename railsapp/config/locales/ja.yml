@@ -3,3 +3,6 @@ ja:
   about: "Baseについて"
   search: "検索"
   edit_user: "ユーザ情報の編集"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
