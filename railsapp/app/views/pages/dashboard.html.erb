@@ -32,6 +32,11 @@
     order history?
   </div>
 </div>
+<div class="row" style="padding: 24px 0">
+  <div class="col-sm-12">
+    <%= link_to t("order_history"), orders_history_path, class: "btn btn-default" %>
+  </div>
+</div>
 
 <% if current_user.admin? %>
   <div class="row">

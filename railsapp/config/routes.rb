@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'orders/checkout1'
   get 'orders/checkout2'
   get 'orders/n-in-cart'
+  get 'orders/history'
   get 'products/picture' # code=0000&suffix=main
   get 'tags/picture' # code=0000
 

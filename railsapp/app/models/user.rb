@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def admin?
     id == 1
   end
+
+  def checkout_histories
+    orders.select("checkout_at,sum(quantity) as quantity,sum(price) as price,status").group(:checkout_at,:status).having("checkout_at is not null")
+  end
 end

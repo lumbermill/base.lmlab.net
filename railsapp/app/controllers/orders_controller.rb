@@ -81,6 +81,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def history
+    @orders = current_user.checkout_histories
+  end
+
   def n_in_cart
     render plain: "#{current_user.orders.in_cart.count}"
   end
