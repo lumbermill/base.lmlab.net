@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   def dashboard
     @messages = [] # from distributor, from admin
     @tags = Tag.all.order(:code)
-    @histories = [] # TODO:
+    @recents = current_user.recent_products
   end
 
   def users

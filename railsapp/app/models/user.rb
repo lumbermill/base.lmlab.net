@@ -17,6 +17,11 @@ class User < ApplicationRecord
     id == 1
   end
 
+  def recent_products
+    ids = orders.select("product_id").order("updated_at desc").map { |o| o.product_id }.uniq[0,4]
+    ids.map { |id| Product.find(id) }
+  end
+
   def checkout_histories
     orders.select("checkout_at,sum(quantity) as quantity,sum(price) as price,status")
       .group(:checkout_at,:status).having("checkout_at is not null")
