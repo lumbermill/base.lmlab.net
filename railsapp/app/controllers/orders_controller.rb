@@ -5,13 +5,13 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    ts = Time.parse(params[:checkout_at])
+    ts = params[:checkout_at]
     if ts.nil?
       @checkout_at = nil
       @orders = current_user.orders.in_cart
     else
-      @checkout_at = ts
-      @orders = current_user.orders.where(checkout_at: ts)
+      @checkout_at = Time.parse(ts)
+      @orders = current_user.orders.where(checkout_at: @checkout_at)
     end
   end
 
