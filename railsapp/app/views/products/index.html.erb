@@ -25,9 +25,9 @@
 </script>
 <div class="page-header">
   <form method="get" action="<%= products_path %>" class="form-inline search">
-    <%= text_field_tag :search, @keyword, class: 'form-control', placeholder: "name,code or tag:name" %>
-    <%= submit_tag 'Search', class: 'btn btn-primary' %>
-    <%= link_to 'Back', pages_dashboard_path, class: 'btn btn-default' %>
+    <%= text_field_tag :search, @keyword, class: 'form-control', placeholder: t("name,code or tag:name")%>
+    <%= submit_tag t('Search'), class: 'btn btn-primary' %>
+    <%= link_to t('Back'), pages_dashboard_path, class: 'btn btn-default' %>
   </form>
 </div>
 <table class="table table-striped">
@@ -50,7 +50,7 @@
         </td>
         <td><%= product.price %></td>
         <td>
-          <%= link_to "Add to cart", "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},this)" %>
+          <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},this)" %>
           <% if current_user.admin? %>
           <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

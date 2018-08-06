@@ -2,7 +2,15 @@ ja:
   hello: "こんにちは、"
   about: "Baseについて"
   search: "検索"
+  Search: "検索"
+  Back: "戻る"
+  Sign in: "ログイン"
   edit_user: "ユーザ情報の編集"
+  order_history: "注文履歴"
+  Add to cart: "カートに入れる"
+  code: "コード"
+  price: "価格"
+  name,code or tag:name: "キーワード"
   time:
     formats:
       default: "%Y/%m/%d %H:%M"

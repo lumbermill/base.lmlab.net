@@ -9,7 +9,7 @@
 <div class="row" style="padding: 24px 0">
   <div class="col-xs-12">
     <form method="get" action="<%= products_path %>" class="form-inline search">
-      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "name,code or tag:name" %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name")%>
       <%= submit_tag t('search'), class: 'btn btn-primary' %>
     </form>
   </div>
