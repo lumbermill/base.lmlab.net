@@ -36,10 +36,10 @@
     <p><%= @product.copy %></p>
     <table class="table">
       <tr>
-      <th><%= model_class.human_attribute_name(:code) %>:</th>
+      <th><%= model_class.human_attribute_name(t(:code)) %>:</th>
       <td><%= @product.code %></td>
       </tr><tr>
-      <th><%= model_class.human_attribute_name(:price) %>:</th>
+      <th><%= model_class.human_attribute_name(t(:price)) %>:</th>
       <td><%= @product.price %></td>
       </tr>
     </table>

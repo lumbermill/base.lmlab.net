@@ -27,16 +27,16 @@ function remove_from_cart(order_id,b){
 }
 </script>
 <div class="page-header">
-  <h1><span class="fa fa-credit-card"></span> Checkout</h1>
+  <h1><span class="fa fa-credit-card"></span><%= t("Checkout") %></h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Picture</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
+      <th><%= t("Picture") %></th>
+      <th><%= t("Name") %></th>
+      <th><%= t("Price") %></th>
+      <th><%= t("Quantity") %></th>
+      <th><%= t("Subtotal") %></th>
     </tr>
   </thead>
   <tbody>
@@ -57,7 +57,7 @@ function remove_from_cart(order_id,b){
       <% end
        end %>
     <tr>
-      <th colspan="4" style="text-aling: right">Total:</td>
+      <th colspan="4" style="text-aling: right"><%= t("Total") +":" %></td>
       <td colspan="1" id="total"><%= total %></td>
     </tr>
   </tbody>
@@ -66,6 +66,6 @@ function remove_from_cart(order_id,b){
 <% if @orders.count == 0 %>
   <button class="btn btn-primary" disabled="disabled">Place the order</button>
 <% else %>
-  <%= link_to 'Place the order', orders_checkout2_path, class: 'btn btn-primary' %>
-  <%= link_to 'Back', orders_path, class: 'btn btn-default' %>
+  <%= link_to t('Place the order'), orders_checkout2_path, class: 'btn btn-primary' %>
+  <%= link_to t('Back'), orders_path, class: 'btn btn-default' %>
 <% end %>

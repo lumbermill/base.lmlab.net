@@ -33,9 +33,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:picture) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(t(:picture)) %></th>
+      <th><%= model_class.human_attribute_name(t(:name)) %></th>
+      <th><%= model_class.human_attribute_name(t(:price)) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
