@@ -64,7 +64,7 @@ function remove_from_cart(order_id,b){
 </table>
 
 <% if @orders.count == 0 %>
-  <button class="btn btn-primary" disabled="disabled">Place the order</button>
+  <button class="btn btn-primary" disabled="disabled"><%= t("Place the order") %></button>
 <% else %>
   <%= link_to t('Place the order'), orders_checkout2_path, class: 'btn btn-primary' %>
   <%= link_to t('Back'), orders_path, class: 'btn btn-default' %>
