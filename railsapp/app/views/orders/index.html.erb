@@ -22,7 +22,7 @@ function remove_from_cart(order_id,b){
       $("#n-in-cart").load("/orders/n-in-cart");
     })
     .fail(function(d){
-      alert("Can not process the order.");
+      alert("<%= t("Can not process the order.") %>");
     });
 }
 </script>
