@@ -15,6 +15,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def index_of_children
+    # 自分の子どものordersでstatusがorderedの商品
+    @checkout_at = nil
+    @children = current_user.children
+    @orders = []
+    @children.each do |child|
+      @orders += child.orders.ordered
+    end
+  end
+
   # GET /orders/1
   # GET /orders/1.json
   def show
