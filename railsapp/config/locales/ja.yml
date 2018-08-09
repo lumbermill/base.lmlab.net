@@ -9,11 +9,14 @@ ja:
   History: "注文履歴"
   Cart: "カート"
   Checkout: "注文"
+  Confirmed: "承認"
   copy: "キャッチコピー"
   cost: "仕入れ値"
+  Email: "Eメール"
   Sign in: "ログイン"
   Sign out: "ログアウト"
   Remove: "削除"
+  Last signed in: "最終ログイン日時"
   Proceed to checkout: "この内容で注文する"
   Place the order: "注文を確定する"
   edit_user: "ユーザ情報の編集"
@@ -35,6 +38,7 @@ ja:
   picture: "商品写真"
   Picture: "商品写真"
   picture_id: "写真ＩＤ"
+  Products: "商品"
   maker: "製造者"
   memo: "メモ"
   name: "商品名"
@@ -42,8 +46,14 @@ ja:
   size: "サイズ"
   Subtotal: "小計"
   Total: "合計"
+  Users: "ユーザ一覧"
   user_id: "ユーザ"
+  User Name: "名前"
   name,code or tag:name: "キーワード"
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する

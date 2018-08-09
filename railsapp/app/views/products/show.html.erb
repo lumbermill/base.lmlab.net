@@ -15,7 +15,7 @@
         $("div#product-"+id).show();
       })
       .fail(function(d){
-        alert("Can not process the order.");
+        alert(" + <%= t("Can not process the order.") %> + ");
       });
   }
 

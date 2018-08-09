@@ -52,8 +52,8 @@
 <% if current_user.admin? %>
   <div class="row">
     <div class="col-xs-12 admin">
-        <%= link_to "Users", pages_users_path %>
-        <%= link_to "Products", products_path(search: "") %>
+        <%= link_to t("Users"), pages_users_path %>
+        <%= link_to t("Products"), products_path(search: "") %>
         <%= link_to "GitHub", "https://github.com/lumbermill/base.lmlab.net", target: "_blank" %>
     </div>
   </div>

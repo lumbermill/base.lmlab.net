@@ -1,10 +1,10 @@
-<h1>Users</h1>
+<h1><%= t("Users") %></h1>
 <table class="table">
   <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Confirmed</th>
-    <th>Last signed in</th>
+    <th><%= t("User Name") %></th>
+    <th><%= t("Email") %></th>
+    <th><%= t("Confirmed") %></th>
+    <th><%= t("Last signed in") %></th>
   </tr>
   <% @users.each do |u| %>
   <tr>
