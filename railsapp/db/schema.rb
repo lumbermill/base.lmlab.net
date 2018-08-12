@@ -13,11 +13,12 @@
 ActiveRecord::Schema.define(version: 20180628115016) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.integer "slip_id"
-    t.integer "product_id"
-    t.integer "amount"
-    t.string "status"
+    t.integer "user_id", default: 0, null: false
+    t.datetime "checkout_at"
+    t.integer "product_id", default: 0, null: false
+    t.integer "quantity", default: 1, null: false
+    t.integer "price", default: 1, null: false
+    t.string "status", default: "in-cart", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.datetime "locked_at"
     t.string "name", default: "", null: false
     t.string "message", default: "", null: false
+    t.string "message4payment", default: "", null: false
     t.integer "gender", default: 0, null: false
     t.string "tel", default: "", null: false
     t.string "line_id", default: "", null: false
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.string "prefecture", default: "", null: false
     t.string "address", default: "", null: false
     t.string "street", default: "", null: false
+    t.integer "parent_user_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

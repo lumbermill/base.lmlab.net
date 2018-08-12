@@ -1,10 +1,28 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = current_user.orders.in_cart
+    ts = params[:checkout_at]
+    if ts.nil?
+      @checkout_at = nil
+      @orders = current_user.orders.in_cart
+    else
+      @checkout_at = Time.parse(ts)
+      @orders = current_user.orders.where(checkout_at: @checkout_at)
+    end
+  end
+
+  def index_of_children
+    # 自分の子どものordersでstatusがorderedの商品
+    @checkout_at = nil
+    @children = current_user.children
+    @orders = []
+    @children.each do |child|
+      @orders += child.orders.ordered
+    end
   end
 
   # GET /orders/1
@@ -25,7 +43,12 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    @order.user_id = current_user.id if @order.user_id == 0
+    another_order = current_user.orders.in_cart.where(product_id: @order.product_id).first
+    if another_order
+      another_order.quantity += @order.quantity
+      @order = another_order
+    end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -61,8 +84,26 @@ class OrdersController < ApplicationController
     end
   end
 
-  def checkout
+  def checkout1
     @orders = current_user.orders.in_cart
+  end
+
+  def checkout2
+    orders = current_user.orders.in_cart
+    ts = Time.now
+    orders.each do |o|
+      o.checkout_at = ts
+      o.status = "ordered"
+      o.save
+    end
+  end
+
+  def history
+    @orders = current_user.checkout_histories
+  end
+
+  def n_in_cart
+    render plain: "#{current_user.orders.in_cart.count}"
   end
 
   private
@@ -73,6 +114,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:user_id, :slip_id, :product_id, :amount, :status)
+      params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
     end
 end

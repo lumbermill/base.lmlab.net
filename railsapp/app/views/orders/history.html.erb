@@ -1,0 +1,33 @@
+<%- model_class = Order -%>
+<div class="page-header">
+  <h1><span class="fa fa-shopping-cart"></span><%= t("History") %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t("datetime") %></th>
+      <th><%= t("status") %></th>
+      <th><%= t("quantity") %></th>
+      <th><%= t("price") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @orders.length == 0 %>
+      <tr>
+        <td colspan="5"><%= t("No orders") %></td>
+      </tr>
+    <% else
+         total = 0
+         @orders.each do |order| %>
+      <tr>
+        <td><%= l(order.checkout_at) %></td>
+        <td><%= t(order.status) %></td>
+        <td><%= order.quantity %></td>
+        <td><%= order.price %></td>
+        <td><%= link_to t("detail"), orders_path(checkout_at: order.checkout_at), class: "btn btn-default btn-sm" %></td>
+      </tr>
+      <% end
+       end %>
+  </tbody>
+</table>

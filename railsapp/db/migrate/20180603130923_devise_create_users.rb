@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
 
       t.string   :name, default: '', null: false
       t.string   :message, default: '', null: false
+      t.string   :message4payment, default: '', null: false # message for payment and delivery (for distributor)
       t.integer  :gender, default: 0, null: false
       t.string   :tel,  default: '', null: false
       t.string   :line_id, default: '', null: false
@@ -42,6 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string   :prefecture, default: '', null: false
       t.string   :address, default: '', null: false
       t.string   :street, default: '', null: false
+      t.integer  :parent_user_id, default: 1, null: true # distributor's id
 
       t.timestamps null: false
     end

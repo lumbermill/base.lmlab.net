@@ -4,8 +4,50 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+admin:
+  id: 1
+  email: 'admin@lmlab.net'
+  name: AdminUser
+
+dist1:
+  id: 2
+  email: 'dist1@lmlab.net'
+  name: Dist1
+  parent: 1
+
+child11:
+  id: 3
+  email: 'child11@lmlab.net'
+  name: Child11
+  parent: 2
+
+child12:
+  id: 4
+  email: 'child12@lmlab.net'
+  name: Child12
+  parent: 2
+
+gchild121:
+  id: 5
+  email: 'gchild121@lmlab.net'
+  name: Gchild121
+  parent: 4
+
+child13:
+  id: 6
+  email: 'child13@lmlab.net'
+  name: Child13
+  parent: 2
+
+dist2:
+  id: 7
+  email: 'dist2@lmlab.net'
+  name: Dist2
+  parent: 1
+
+child21:
+  id: 8
+  email: 'child21@lmlab.net'
+  name: Child21
+  parent: 7

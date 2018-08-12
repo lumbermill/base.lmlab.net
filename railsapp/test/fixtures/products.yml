@@ -2,7 +2,7 @@
 
 one:
   user_id: 1
-  code: 
+  code: 1
   maker: MyString
   name: MyString
   size: MyString
@@ -14,7 +14,7 @@ one:
 
 two:
   user_id: 1
-  code: 
+  code: 2
   maker: MyString
   name: MyString
   size: MyString

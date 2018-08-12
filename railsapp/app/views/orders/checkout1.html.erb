@@ -22,19 +22,12 @@ function remove_from_cart(order_id,b){
       $("#n-in-cart").load("/orders/n-in-cart");
     })
     .fail(function(d){
-      alert("<%= t("Can not process the order.") %>");
+      alert("Can not process the order.");
     });
 }
 </script>
 <div class="page-header">
-  <% if @checkout_at %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Order") %></h1>
-    <p><%= l(@checkout_at) %> <%= t(@orders.first.status) %>
-      <%= link_to t("back"), orders_history_path, class: "btn btn-default btn-sm" %>
-    </p>
-  <% else %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Cart") %></h1>
-  <% end %>
+  <h1><span class="fa fa-credit-card"></span><%= t("Checkout") %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -44,13 +37,12 @@ function remove_from_cart(order_id,b){
       <th><%= t("Price") %></th>
       <th><%= t("Quantity") %></th>
       <th><%= t("Subtotal") %></th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% if @orders.count == 0 %>
       <tr>
-        <td colspan="6"><%= t("Cart is empty") %></td>
+        <td colspan="6">Cart is empty.</td>
       </tr>
     <% else
          total = 0
@@ -61,21 +53,19 @@ function remove_from_cart(order_id,b){
         <td><%= order.product.price %></td>
         <td><%= order.quantity %></td>
         <td class="subtotal"><%= order.product.price * order.quantity %></td>
-        <td><%= link_to t("Remove"), "javascript:void(0)", onclick: "remove_from_cart(#{order.id},this)", class: "btn btn-danger btn-xs" %></td>
-        <% total += order.product.price * order.quantity %>
       </tr>
       <% end
        end %>
     <tr>
       <th colspan="4" style="text-aling: right"><%= t("Total") +":" %></td>
-      <td colspan="2" id="total"><%= total %></td>
+      <td colspan="1" id="total"><%= total %></td>
     </tr>
   </tbody>
 </table>
 
-<% if @checkout_at %>
-<% elsif @orders.count == 0 %>
-  <button class="btn btn-primary" disabled="disabled"><%= t("Proceed to checkout") %></button>
+<% if @orders.count == 0 %>
+  <button class="btn btn-primary" disabled="disabled"><%= t("Place the order") %></button>
 <% else %>
-  <%= link_to t('Proceed to checkout'), orders_checkout1_path, class: 'btn btn-primary' %>
+  <%= link_to t('Place the order'), orders_checkout2_path, class: 'btn btn-primary' %>
+  <%= link_to t('Back'), orders_path, class: 'btn btn-default' %>
 <% end %>

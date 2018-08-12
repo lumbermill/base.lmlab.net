@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :authenticate_user!, except: [:about, :root]
+
   def about
   end
 
@@ -7,7 +9,8 @@ class PagesController < ApplicationController
 
   def dashboard
     @messages = [] # from distributor, from admin
-    @histories = [] # TODO:
+    @tags = Tag.all.order(:code)
+    @recents = current_user.recent_products
   end
 
   def users

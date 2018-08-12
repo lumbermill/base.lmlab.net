@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
 
   # GET /tags
   # GET /tags.json
@@ -58,6 +59,17 @@ class TagsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def picture
+    code = params[:code]
+    f = Tag.picture_realpath(code)
+    if File.file? f
+      send_file(f, type: 'image/jpeg', disposition: "inline")
+    else
+      head 404
+      send_file(Rails.root.join('app', 'assets', 'images', 'no-photo.png'), type: 'image/jpeg', disposition: "inline", status: 404)
     end
   end
 

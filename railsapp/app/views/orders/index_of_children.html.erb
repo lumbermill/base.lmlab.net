@@ -1,31 +1,9 @@
 <%- model_class = Order -%>
-<script>
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-  }
-});
 
-function remove_from_cart(order_id,b){
-  var tr = b.parentNode.parentNode;
-  $(tr).fadeOut();
-  $("#total").fadeOut();
-  $.ajax({url:"/orders/"+order_id+".json", type: "delete"})
-    .done(function(d){
-      console.log(d);
-      var sum = 0;
-      $(tr).remove();
-      $(".subtotal").each(function(){
-        sum += Number($(this).text());
-      });
-      $("#total").text(sum).fadeIn();
-      $("#n-in-cart").load("/orders/n-in-cart");
-    })
-    .fail(function(d){
-      alert("<%= t("Can not process the order.") %>");
-    });
-}
-</script>
+TODO: 子どもの注文一覧
+ここからamwayliveで実際の商品を発注する
+手渡ししたらステータスを更新する
+
 <div class="page-header">
   <% if @checkout_at %>
     <h1><span class="fa fa-shopping-cart"></span><%= t("Order") %></h1>
