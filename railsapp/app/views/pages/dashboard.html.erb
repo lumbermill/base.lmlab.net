@@ -44,7 +44,7 @@
   <h3><%= t("for_distributor") %></h3>
   <div class="row" style="padding: 24px 0">
     <div class="col-sm-12">
-      <%= link_to t("orders_of_children")+" <span class='badge'>1</span>".html_safe, orders_of_children_path, class: "btn btn-default" %>
+      <%= link_to "<span class='badge'>1</span>".html_safe + t("orders_of_children"), orders_of_children_path, class: "btn btn-default" %>
       TODO: for distributor
     </div>
   </div>
