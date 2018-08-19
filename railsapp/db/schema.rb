@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -86,10 +86,11 @@ ActiveRecord::Schema.define(version: 20180628115016) do
     t.string "prefecture", default: "", null: false
     t.string "address", default: "", null: false
     t.string "street", default: "", null: false
-    t.integer "parent_user_id", default: 1
+    t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -105,4 +106,5 @@ ActiveRecord::Schema.define(version: 20180628115016) do
 
   add_foreign_key "product_tags", "products"
   add_foreign_key "product_tags", "tags"
+  add_foreign_key "users", "users", column: "parent_id"
 end

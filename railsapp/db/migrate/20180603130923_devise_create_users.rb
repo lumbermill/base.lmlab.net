@@ -2,7 +2,7 @@
 
 class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
-    create_table :users do |t|
+    create_table :users, id: :integer do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -43,13 +43,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string   :prefecture, default: '', null: false
       t.string   :address, default: '', null: false
       t.string   :street, default: '', null: false
-      t.integer  :parent_user_id, default: 1, null: true # distributor's id
+      t.integer  :parent_id, null: true # distributor's id
 
       t.timestamps null: false
     end
-
+    add_foreign_key :users, :users, column: :parent_id, primary_key: :id
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
+    add_index :users, :parent_id
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
