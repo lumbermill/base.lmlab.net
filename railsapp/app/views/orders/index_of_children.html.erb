@@ -11,12 +11,15 @@ TODO: 子どもの注文一覧
       <%= link_to t("back"), orders_history_path, class: "btn btn-default btn-sm" %>
     </p>
   <% else %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Cart") %></h1>
+    <h1><span class="fa fa-shopping-cart"></span><%= "TODO" %></h1>
   <% end %>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><%= t("User Name") %></th>
+      <th><%= t("Status") %></th>
+      <th><%= t("Updated date") %></th>
       <th><%= t("Picture") %></th>
       <th><%= t("Name") %></th>
       <th><%= t("Price") %></th>
@@ -34,6 +37,9 @@ TODO: 子どもの注文一覧
          total = 0
          @orders.each do |order| %>
       <tr>
+        <td><%= order.user.name %></td>
+        <td><%= order.status %></td>
+        <td><%= order.updated_at %></td>
         <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
         <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
         <td><%= order.product.price %></td>
@@ -45,7 +51,7 @@ TODO: 子どもの注文一覧
       <% end
        end %>
     <tr>
-      <th colspan="4" style="text-aling: right"><%= t("Total") +":" %></td>
+      <th colspan="6" style="text-aling: right"><%= t("Total") +":" %></td>
       <td colspan="2" id="total"><%= total %></td>
     </tr>
   </tbody>

@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def index_of_children
+    status = params[:status]
     # 自分の子どものordersでstatusがorderedの商品
     @checkout_at = nil
     @children = current_user.children
