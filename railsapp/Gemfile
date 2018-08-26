@@ -4,8 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
-
+# gem 'database_cleaner', github: 'DatabaseCleaner/database_cleaner', ref: 'b8edac6bd04fb89a267201fa8d47066d511fd9de'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use mysql as the database for Active Record

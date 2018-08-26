@@ -13,7 +13,8 @@ admin:
 dist1:
   id: 2
   email: 'dist1@lmlab.net'
-  name: Dist1
+  name: 'Dist1'
+  confirmed_at: <%= Time.now %>
   parent_id: 1
 
 child11:

@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def index_of_children
+    status = params[:status]
     # 自分の子どものordersでstatusがorderedの商品
     @checkout_at = nil
     @children = current_user.children
@@ -51,7 +52,7 @@ class OrdersController < ApplicationController
     end
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, notice: t('Order') + t('was successfully created') }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -65,7 +66,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: t('Order') + t('was successfully updated') }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -79,7 +80,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: t('Order') + t('was successfully destroyed') }
       format.json { head :no_content }
     end
   end
@@ -107,13 +108,13 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
+  end
 end

@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 1
+  user_id: 0
   product_id: 1
   quantity: 1
   price: 1
+  checkout_at: <%= Time.now %>
   status: MyString
 
 two:
-  user_id: 1
+  user_id: 0
   product_id: 1
   quantity: 1
   price: 1
+  checkout_at: <%= Time.now %>
   status: MyString
