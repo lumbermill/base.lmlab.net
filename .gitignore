@@ -238,3 +238,4 @@ build-iPhoneSimulator/
 
 
 # End of https://www.gitignore.io/api/node,ruby,rails,vagrant
+.idea
