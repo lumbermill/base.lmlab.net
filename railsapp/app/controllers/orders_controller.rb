@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+
   # GET /orders
   # GET /orders.json
   def index
@@ -46,13 +47,14 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user_id = current_user.id if @order.user_id == 0
     another_order = current_user.orders.in_cart.where(product_id: @order.product_id).first
+
     if another_order
       another_order.quantity += @order.quantity
       @order = another_order
     end
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: t('Order') + t('was successfully created') }
+        format.html { redirect_to @order, notice: ('Order was successfully created') }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -66,8 +68,9 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: t('Order') + t('was successfully updated') }
+        format.html { redirect_to @order, notice: ('Order was successfully updated') }
         format.json { render :show, status: :ok, location: @order }
+
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
