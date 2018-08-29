@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+
   # GET /orders
   # GET /orders.json
   def index
@@ -46,13 +47,14 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user_id = current_user.id if @order.user_id == 0
     another_order = current_user.orders.in_cart.where(product_id: @order.product_id).first
+
     if another_order
       another_order.quantity += @order.quantity
       @order = another_order
     end
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: t('Order') + t('was successfully created') }
+        format.html { redirect_to @order, notice: t('Order was successfully created') }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -66,8 +68,9 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: t('Order') + t('was successfully updated') }
+        format.html { redirect_to @order, notice: t('Order was successfully updated') }
         format.json { render :show, status: :ok, location: @order }
+
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -80,7 +83,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t('Order') + t('was successfully destroyed') }
+      format.html { redirect_to orders_url, notice: t('Order was successfully destroyed') }
       format.json { head :no_content }
     end
   end
@@ -108,13 +111,13 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def order_params
+    params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
+  end
 end
