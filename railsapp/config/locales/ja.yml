@@ -59,7 +59,7 @@ ja:
   user_id: "ユーザ"
   User Name: "名前"
   Updated date: "更新日"
-  name,code or tag:name: "キーワード"
+  name,code or tag:name: "名前,コード"
   was successfully created: "を登録しました"
   was successfully updated: "を更新しました"
   was successfully destroyed: "を削除しました"
