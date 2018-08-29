@@ -18,7 +18,7 @@ class PagesController < ApplicationController
       if current_user.admin?
         @users = User.all
       else
-        render status: 403
+        @users = current_user.children
       end
     else
       render status: 403

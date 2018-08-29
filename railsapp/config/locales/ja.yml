@@ -63,6 +63,7 @@ ja:
   was successfully created: "を登録しました"
   was successfully updated: "を更新しました"
   was successfully destroyed: "を削除しました"
+  children: "フロント一覧"
   time:
     formats:
       default: "%Y/%m/%d %H:%M"
