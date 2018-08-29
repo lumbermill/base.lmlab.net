@@ -25,3 +25,42 @@ two:
   picture_id: 1
   copy: MyString
   memo: MyString
+
+three:
+  id: 3
+  user_id: 7
+  code: 0003
+  maker: MyString
+  name: MyString
+  size: MyString
+  price: 120
+  cost: 100
+  picture_id: 3
+  copy: MyString
+  memo: MyString
+
+four:
+  id: 4
+  user_id: 7
+  code: 0004
+  maker: MyString
+  name: MyString
+  size: MyString
+  price: 10000
+  cost: 9000
+  picture_id: 4
+  copy: MyString
+  memo: MyString
+
+five:
+  id: 5
+  user_id: 2
+  code: 0005
+  maker: MyString
+  name: MyString
+  size: MyString
+  price: 1180
+  cost: 1000
+  picture_id: 5
+  copy: MyString
+  memo: MyString

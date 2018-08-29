@@ -29,3 +29,39 @@ three:
   quantity: 3
   price: 3
   status: ordered
+
+four:
+  id: 4
+  user_id: 3
+  checkout_at: <%= Time.now + 1.days %>
+  product_id: 2
+  quantity: 3
+  price: 3
+  status: shipping
+
+five:
+  id: 5
+  user_id: 3
+  checkout_at: <%= Time.now + 2.days %>
+  product_id: 5
+  quantity: 3
+  price: 3
+  status: arrived
+
+six:
+  id: 6
+  user_id: 4
+  checkout_at: <%= Time.now + 1.days %>
+  product_id: 3
+  quantity: 1
+  price: 2
+  status: canceled
+
+seven:
+  id: 7
+  user_id: 4
+  checkout_at: <%= Time.now - 1.days %>
+  product_id: 4
+  quantity: 3
+  price: 3
+  status: in-cart
