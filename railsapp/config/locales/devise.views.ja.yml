@@ -92,3 +92,4 @@ ja:
       already_authenticated: "既にログインしています"
       user:
         not_found_in_database: "ユーザが見つかりません"
+        unauthenticated: "認証されていません"
