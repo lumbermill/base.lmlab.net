@@ -64,6 +64,8 @@ ja:
   was successfully updated: "を更新しました"
   was successfully destroyed: "を削除しました"
   children: "フロント一覧"
+  mark_as_shipping: "発注済み(配送中)にする"
+  mark_as_arrived: "配達済みにする"
   time:
     formats:
       default: "%Y/%m/%d %H:%M"

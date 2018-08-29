@@ -23,13 +23,17 @@ class OrdersController < ApplicationController
     @checkout_at = nil
     @children = current_user.children
     if status == "ordered"
+      @title = "orders_of_children"
       @orders = Order.ordered.where(user_id: @children.map { |c| c.id })
     elsif status == "shipping"
+      @title = "shipping_of_children"
       @orders = []
       @children.each do |child|
         @orders += child.orders.shipping
       end
     else
+      # TODO: history.html.erb 使ったほうが良い？
+      @title = "history_of_children"
       @orders = Order.all
     end
   end
@@ -77,7 +81,6 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
         format.html { redirect_to @order, notice: t('Order was successfully updated') }
         format.json { render :show, status: :ok, location: @order }
-
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }

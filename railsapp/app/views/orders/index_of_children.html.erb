@@ -1,18 +1,38 @@
 <%- model_class = Order -%>
+<script>
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
-TODO: 子どもの注文一覧
-ここからamwayliveで実際の商品を発注する
-手渡ししたらステータスを更新する
+function update_order_status(status){
+  $("#total").fadeOut();
+  $("input[name=orders]:checked").each(function(){
+      var order_id = $(this).val();
+      if(!order_id) return;
+      var tr = $("#row-"+order_id);
+      $(tr).fadeOut();
+      $.ajax({url:"/orders/"+order_id+".json",type: "patch",
+        data: {"order[id]": order_id, "order[status]": status}})
+        .done(function(d){
+          console.log(d);
+          var sum = 0;
+          $(tr).remove();
+          $(".subtotal").each(function(){
+            sum += Number($(this).text());
+          });
+          $("#total").text(sum).fadeIn();
+        })
+        .fail(function(d){
+          alert("<%= "Can not change status of order." %>");
+        });
+  });
+}
 
+</script>
 <div class="page-header">
-  <% if @checkout_at %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Order") %></h1>
-    <p><%= l(@checkout_at) %> <%= t(@orders.first.status) %>
-      <%= link_to t("back"), orders_history_path, class: "btn btn-default btn-sm" %>
-    </p>
-  <% else %>
-    <h1><span class="fa fa-shopping-cart"></span><%= "TODO" %></h1>
-  <% end %>
+  <h1><span class="fa fa-list"></span> <%= t(@title) %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -35,7 +55,7 @@ TODO: 子どもの注文一覧
     <% else
          total = 0
          @orders.each do |order| %>
-      <tr>
+      <tr id="row-<%= order.id %>">
         <td><%= order.user.name %></td>
         <td><%= order.updated_at %></td>
         <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
@@ -43,13 +63,24 @@ TODO: 子どもの注文一覧
         <td><%= order.product.price %></td>
         <td><%= order.quantity %></td>
         <td class="subtotal"><%= order.product.price * order.quantity %></td>
+        <td><%= check_box_tag :orders, order.id %></td>
         <% total += order.product.price * order.quantity %>
       </tr>
       <% end
        end %>
     <tr>
       <th colspan="6" style="text-aling: right"><%= t("Total") +":" %></td>
-      <td colspan="1" id="total"><%= total %></td>
+      <td colspan="2" id="total"><%= total %></td>
     </tr>
   </tbody>
 </table>
+<div id="message">
+
+</div>
+<% if @title == "orders_of_children" %>
+  <p><a href="https://www.amwaylive.com/">Amwaylive</a>で発注した商品にチェックを入れてください</p>
+  <button class='btn btn-primary' onclick="update_order_status('shipping')"><%= t("mark_as_shipping") %></button>
+<% elsif @title == "shipping_of_children" %>
+  <p>お客様に手渡しした商品にチェックを入れてください</p>
+  <button class='btn btn-primary' onclick="update_order_status('arrived')"><%= t("mark_as_arrived") %></button>
+<% end %>
