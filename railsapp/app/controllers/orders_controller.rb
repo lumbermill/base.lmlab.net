@@ -18,12 +18,19 @@ class OrdersController < ApplicationController
 
   def index_of_children
     status = params[:status]
-    # 自分の子どものordersでstatusがorderedの商品
+    # 自分の子どものordersでstatusがorderedの商品(商品ごと)
+    # 自分の子どものordersでstatusがshippingの商品(ユーザごと)
     @checkout_at = nil
     @children = current_user.children
-    @orders = []
-    @children.each do |child|
-      @orders += child.orders.ordered
+    if status == "ordered"
+      @orders = Order.ordered.where(user_id: @children.map { |c| c.id })
+    elsif status == "shipping"
+      @orders = []
+      @children.each do |child|
+        @orders += child.orders.shipping
+      end
+    else
+      @orders = Order.all
     end
   end
 

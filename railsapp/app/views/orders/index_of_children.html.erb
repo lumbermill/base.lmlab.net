@@ -18,7 +18,6 @@ TODO: 子どもの注文一覧
   <thead>
     <tr>
       <th><%= t("User Name") %></th>
-      <th><%= t("Status") %></th>
       <th><%= t("Updated date") %></th>
       <th><%= t("Picture") %></th>
       <th><%= t("Name") %></th>
@@ -31,35 +30,26 @@ TODO: 子どもの注文一覧
   <tbody>
     <% if @orders.count == 0 %>
       <tr>
-        <td colspan="6"><%= t("Cart is empty") %></td>
+        <td colspan="7"><%= t("Nothing to show here") %></td>
       </tr>
     <% else
          total = 0
          @orders.each do |order| %>
       <tr>
         <td><%= order.user.name %></td>
-        <td><%= order.status %></td>
         <td><%= order.updated_at %></td>
         <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
         <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
         <td><%= order.product.price %></td>
         <td><%= order.quantity %></td>
         <td class="subtotal"><%= order.product.price * order.quantity %></td>
-        <td><%= link_to t("Remove"), "javascript:void(0)", onclick: "remove_from_cart(#{order.id},this)", class: "btn btn-danger btn-xs" %></td>
         <% total += order.product.price * order.quantity %>
       </tr>
       <% end
        end %>
     <tr>
       <th colspan="6" style="text-aling: right"><%= t("Total") +":" %></td>
-      <td colspan="2" id="total"><%= total %></td>
+      <td colspan="1" id="total"><%= total %></td>
     </tr>
   </tbody>
 </table>
-
-<% if @checkout_at %>
-<% elsif @orders.count == 0 %>
-  <button class="btn btn-primary" disabled="disabled"><%= t("Proceed to checkout") %></button>
-<% else %>
-  <%= link_to t('Proceed to checkout'), orders_checkout1_path, class: 'btn btn-primary' %>
-<% end %>
