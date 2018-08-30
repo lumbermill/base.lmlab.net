@@ -28,12 +28,12 @@ function remove_from_cart(order_id,b){
 </script>
 <div class="page-header">
   <% if @checkout_at %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Order") %></h1>
+    <h1><span class="fa fa-shopping-cart"></span> <%= t("Order") %></h1>
     <p><%= l(@checkout_at) %> <%= t(@orders.first.status) %>
       <%= link_to t("back"), orders_history_path, class: "btn btn-default btn-sm" %>
     </p>
   <% else %>
-    <h1><span class="fa fa-shopping-cart"></span><%= t("Cart") %></h1>
+    <h1><span class="fa fa-shopping-cart"></span> <%= t("Cart") %></h1>
   <% end %>
 </div>
 <table class="table table-striped">

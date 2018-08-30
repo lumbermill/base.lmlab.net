@@ -18,12 +18,23 @@ class OrdersController < ApplicationController
 
   def index_of_children
     status = params[:status]
-    # 自分の子どものordersでstatusがorderedの商品
+    # 自分の子どものordersでstatusがorderedの商品(商品ごと)
+    # 自分の子どものordersでstatusがshippingの商品(ユーザごと)
     @checkout_at = nil
     @children = current_user.children
-    @orders = []
-    @children.each do |child|
-      @orders += child.orders.ordered
+    if status == "ordered"
+      @title = "orders_of_children"
+      @orders = Order.ordered.where(user_id: @children.map { |c| c.id })
+    elsif status == "shipping"
+      @title = "shipping_of_children"
+      @orders = []
+      @children.each do |child|
+        @orders += child.orders.shipping
+      end
+    else
+      # TODO: history.html.erb 使ったほうが良い？
+      @title = "history_of_children"
+      @orders = Order.all
     end
   end
 
@@ -54,7 +65,7 @@ class OrdersController < ApplicationController
     end
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: ('Order was successfully created') }
+        format.html { redirect_to @order, notice: t('Order was successfully created') }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -68,9 +79,8 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: ('Order was successfully updated') }
+        format.html { redirect_to @order, notice: t('Order was successfully updated') }
         format.json { render :show, status: :ok, location: @order }
-
       else
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -83,7 +93,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t('Order') + t('was successfully destroyed') }
+      format.html { redirect_to orders_url, notice: t('Order was successfully destroyed') }
       format.json { head :no_content }
     end
   end

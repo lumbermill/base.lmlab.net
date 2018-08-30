@@ -44,8 +44,10 @@
   <h3><%= t("for_distributor") %></h3>
   <div class="row" style="padding: 24px 0">
     <div class="col-sm-12">
-      <%= link_to t("orders_of_children")+" <span class='badge'>1</span>".html_safe, orders_of_children_path, class: "btn btn-default" %>
-      TODO: for distributor
+      <%= link_to (t("orders_of_children") + " <span class='badge' id='orders_of_children'>-</span>").html_safe, orders_of_children_path(status: 'ordered'), class: "btn btn-default" %>
+      <%= link_to (t("shipping_of_children") + " <span class='badge' id='shipping_of_children'>-</span>").html_safe, orders_of_children_path(status: 'shipping'), class: "btn btn-default" %>
+      <%= link_to (t("history_of_children") + " <span class='badge' id='history_of_children'>-</span>").html_safe, orders_of_children_path(status: 'history'), class: "btn btn-default" %>
+      <%= link_to (t("children") + " <span class='badge' id='history_of_children'>-</span>").html_safe, pages_users_path(status: 'history'), class: "btn btn-default" %>
     </div>
   </div>
 <% end %>

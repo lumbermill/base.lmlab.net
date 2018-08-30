@@ -1,21 +1,67 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# user:  2: distributor 3,4: customers
+# product:  1: ? 2: ?
+
 one:
   id: 1
-  user_id: 2
+  user_id: 3
+  checkout_at: <%= Time.now %>
   product_id: 1
   quantity: 1
   price: 1
-  checkout_at: <%= Time.now %>
-  status: MyString
-
+  status: ordered
 
 two:
   id: 2
-  user_id: 2
-  product_id: 1
-  quantity: 1
-  price: 1
+  user_id: 3
   checkout_at: <%= Time.now %>
-  status: MyString
+  product_id: 2
+  quantity: 2
+  price: 2
+  status: ordered
 
+three:
+  id: 3
+  user_id: 4
+  checkout_at: <%= Time.now %>
+  product_id: 1
+  quantity: 3
+  price: 3
+  status: ordered
+
+four:
+  id: 4
+  user_id: 3
+  checkout_at: <%= Time.now + 1.days %>
+  product_id: 2
+  quantity: 3
+  price: 3
+  status: shipping
+
+five:
+  id: 5
+  user_id: 3
+  checkout_at: <%= Time.now + 2.days %>
+  product_id: 5
+  quantity: 3
+  price: 3
+  status: arrived
+
+six:
+  id: 6
+  user_id: 4
+  checkout_at: <%= Time.now + 1.days %>
+  product_id: 3
+  quantity: 1
+  price: 2
+  status: canceled
+
+seven:
+  id: 7
+  user_id: 4
+  checkout_at: <%= Time.now - 1.days %>
+  product_id: 4
+  quantity: 3
+  price: 3
+  status: in-cart
