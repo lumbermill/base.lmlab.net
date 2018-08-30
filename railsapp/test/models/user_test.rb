@@ -3,11 +3,26 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   test "number of children" do
     assert_equal 8, User.count
-    # FIXME: The number of admin user's chindren should be 2. But it returns 1..
     assert_equal 2, User.find(1).children.count
     assert_equal 3, User.find(2).children.count
     assert_equal 0, User.find(3).children.count
     assert_equal 1, User.find(4).children.count
+
+    assert_equal [2,7], User.find(1).children.map {|c| c.id }
+    assert_equal [3,4,6], User.find(2).children.map {|c| c.id }
   end
 
+  test "checkout_histories" do
+    u2 = User.find(2)
+    assert_equal [3,4,6], u2.children.map {|c| c.id }
+    oc2 = u2.checkout_histories_of_children
+    assert_equal 6, oc2.to_a.count
+
+    u3 = User.find(3)
+    o3 = u3.checkout_histories
+    assert_equal 3, o3.to_a.count
+
+    oc3 = u3.checkout_histories_of_children
+    assert_equal [], oc3.to_a
+  end
 end
