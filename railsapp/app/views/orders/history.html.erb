@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th><%= t("datetime") %></th>
-      <th><%= t("user_id") %></th>
       <th><%= t("status") %></th>
       <th><%= t("quantity") %></th>
       <th><%= t("price") %></th>
@@ -23,7 +22,6 @@
          @orders.each do |order| %>
       <tr>
         <td><%= l(order.checkout_at) %></td>
-        <td><%= order.user.name %></td>
         <td><%= t(order.status) %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>

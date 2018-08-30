@@ -109,7 +109,7 @@ class OrdersController < ApplicationController
   end
 
   def history
-    if params[:children]
+    if params[:chinldren]
       @orders = current_user.checkout_histories_of_children
     else
       @orders = current_user.checkout_histories
