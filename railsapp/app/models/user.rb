@@ -29,4 +29,12 @@ class User < ApplicationRecord
       .group(:checkout_at,:status).having("checkout_at is not null")
       .order("checkout_at desc")
   end
+
+  def checkout_histories_of_children
+    ids = children.map { |c| c.id }
+    Order.select("user_id,checkout_at,sum(quantity) as quantity,sum(price) as price,status")
+      .where(user_id: ids)
+      .group(:user_id,:checkout_at,:status).having("checkout_at is not null")
+      .order("checkout_at desc")
+  end
 end

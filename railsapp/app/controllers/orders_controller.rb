@@ -31,10 +31,6 @@ class OrdersController < ApplicationController
       @children.each do |child|
         @orders += child.orders.shipping
       end
-    else
-      # TODO: history.html.erb 使ったほうが良い？
-      @title = "history_of_children"
-      @orders = Order.all
     end
   end
 
@@ -113,7 +109,11 @@ class OrdersController < ApplicationController
   end
 
   def history
-    @orders = current_user.checkout_histories
+    if params[:chinldren]
+      @orders = current_user.checkout_histories_of_children
+    else
+      @orders = current_user.checkout_histories
+    end
   end
 
   def n_in_cart
