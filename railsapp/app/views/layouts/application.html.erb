@@ -21,9 +21,6 @@
         </button>
         <%= link_to " &nbsp;&nbsp;&nbsp; ".html_safe, root_path, class: "navbar-brand" %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to t("about"), pages_about_path  %></li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to "<span class='fa fa-shopping-cart'></span> <span id='n-in-cart' class='badge'>0</span>".html_safe, orders_path %></li>

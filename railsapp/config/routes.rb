@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :tags
   devise_for :users
 
-  get 'pages/about'
   get 'pages/dashboard'
   get 'pages/users'
   root to: 'pages#root'
