@@ -6,4 +6,10 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 2, Order.count
   end
 
+  test "paper trail test" do
+    order = Order.find(1)
+
+    puts order.versions.length
+  end
+
 end
