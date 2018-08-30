@@ -14,6 +14,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "checkout_histories" do
     u2 = User.find(2)
+    o2 = u2.checkout_histories
+    assert_equal 0, o2.to_a.count
     assert_equal [3,4,6], u2.children.map {|c| c.id }
     oc2 = u2.checkout_histories_of_children
     assert_equal 6, oc2.to_a.count
@@ -21,6 +23,12 @@ class UserTest < ActiveSupport::TestCase
     u3 = User.find(3)
     o3 = u3.checkout_histories
     assert_equal 3, o3.to_a.count
+    o3.each do |o|
+      # NameError: uninitialized constant UserTest::MissingAttributeError
+      assert_raises NameError do
+        o.user_id
+      end
+    end
 
     oc3 = u3.checkout_histories_of_children
     assert_equal [], oc3.to_a
