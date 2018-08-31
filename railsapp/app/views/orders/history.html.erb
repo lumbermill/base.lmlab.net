@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th><%= t("datetime") %></th>
+      <th><%= t("user_id") if @title == "history_of_children"  %></th>
       <th><%= t("status") %></th>
       <th><%= t("quantity") %></th>
       <th><%= t("price") %></th>
@@ -22,6 +23,7 @@
          @orders.each do |order| %>
       <tr>
         <td><%= l(order.checkout_at) %></td>
+        <td><%= order.user.name if @title == "history_of_children" %></td>
         <td><%= t(order.status) %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>
