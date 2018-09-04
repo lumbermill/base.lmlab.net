@@ -65,6 +65,9 @@ See also railsapp/config/routes.rb
 ## Database
 See railsapp/db/schemas.rb
 
+To set up initial products table.
+See the content of `lib/tasks/import-products.rb`.
+You can import items from Google Spreadsheet. 
 
 ## Gems
 - bootstrap - for responsible layouts.
