@@ -7,7 +7,7 @@ require 'csv'
 
 f = ARGV[0]
 unless f && File.file?(f)
-  puts "USAGE: rails runner /base.lmlab.net/railsapp/lib/tasks/import-products.rb tsvfile"
+  puts "USAGE: rails runner lib/tasks/import-products.rb tsvfile"
   exit 1
 end
 
