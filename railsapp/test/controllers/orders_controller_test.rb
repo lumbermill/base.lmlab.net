@@ -4,8 +4,8 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @order = orders(:one)
-  end
 
+  end
 
 
   test "should get index" do
@@ -55,5 +55,39 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to orders_url
   end
+
+  test "test paper trail update history on order" do
+    order = Order.find(1)
+    with_versioning do
+      previous_versions_count = order.versions.count
+      order.price = 50
+      order.save
+      current_versions_count = order.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+
+    end
+  end
+
+  test "test paper trail destroy history on order" do
+    order = Order.find(1)
+
+    with_versioning do
+      previous_versions_count = order.versions.count
+      order.destroy
+      current_versions_count = order.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+    end
+  end
+
+  test "test paper trail create history on order" do
+
+    with_versioning do
+      order = Order.create(user_id: 2, product_id: 1)
+      puts order.errors.full_messages
+      assert_equal 1, order.versions.count
+    end
+  end
+
+
 
 end

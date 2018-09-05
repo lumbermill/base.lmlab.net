@@ -120,6 +120,10 @@ class OrdersController < ApplicationController
     render plain: "#{current_user.orders.in_cart.count}"
   end
 
+  def database_change_history
+    @versions = PaperTrail::Version.order("created_at DESC")
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_order

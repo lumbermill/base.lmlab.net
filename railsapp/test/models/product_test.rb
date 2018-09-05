@@ -5,6 +5,6 @@ class ProductTest < ActiveSupport::TestCase
   #   assert true
   # end
   test "count " do
-    assert_equal 2, Product.count
+    assert_equal 5, Product.count
   end
 end

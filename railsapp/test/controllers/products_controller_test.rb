@@ -53,4 +53,52 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to products_url
   end
+
+  test "test paper trail update history on product" do
+    product = Product.find(1)
+    with_versioning do
+      previous_versions_count = product.versions.count
+      product.name = 'MyStrings'
+      product.save
+      current_versions_count = product.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+    end
+  end
+
+  test "test paper trail destroy history on product" do
+    product = Product.find(1)
+
+    with_versioning do
+      previous_versions_count = product.versions.count
+      product.destroy
+      current_versions_count = product.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+    end
+  end
+
+  test "test paper trail create history on product" do
+
+    with_versioning do
+       product = Product.create(user_id: 2)
+      assert_equal 1, product.versions.count
+    end
+  end
+
+  test "test paper trail whodunnit" do
+    # sign_in users(:dist1)
+    product = Product.find(1)
+    with_versioning do
+
+      PaperTrail.request.whodunnit = users(:dist1).email
+      product.name = 'Mystring'
+      product.save
+      # puts users(:dist1).id
+      puts product.versions.last.whodunnit
+      assert_equal users(:dist1).email, product.versions.last.whodunnit
+    end
+  end
+
+
+
 end
+

@@ -11,10 +11,5 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 1, Order.canceled.count
   end
 
-  test "paper trail test" do
-    order = Order.find(1)
-
-    puts order.versions.length
-  end
 
 end
