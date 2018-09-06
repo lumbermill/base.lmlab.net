@@ -92,9 +92,50 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       PaperTrail.request.whodunnit = users(:dist1).email
       product.name = 'Mystring'
       product.save
-      # puts users(:dist1).id
-      puts product.versions.last.whodunnit
       assert_equal users(:dist1).email, product.versions.last.whodunnit
+    end
+  end
+
+  test "test paper trail return previous version on update product" do
+    product = Product.find(1)
+
+    with_versioning do
+      before_update = product.name
+      product.name = 'Changed version'
+      product.save
+      after_update = product.paper_trail.previous_version.name
+      assert_equal before_update, after_update
+
+    end
+  end
+
+  test "test paper trail return correct event name on update product" do
+    product = Product.find(1)
+    product.versions
+    with_versioning do
+      product.name = 'Changed version'
+      product.save
+      v = product.versions.last
+      assert 'Update', v.event
+    end
+  end
+
+  test "test paper trail return correct event name on delete product" do
+    product = Product.find(1)
+    product.versions
+    with_versioning do
+      product.destroy
+      v = product.versions.last
+      assert 'Delete', v.event
+    end
+  end
+
+  test "test paper trail return correct event name on create product" do
+    with_versioning do
+      product = Product.create(user_id: 2)
+      product.versions
+      v = product.versions.last
+      assert 'Create', v.event
     end
   end
 
