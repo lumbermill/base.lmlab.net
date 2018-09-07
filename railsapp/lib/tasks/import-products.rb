@@ -16,11 +16,12 @@ tsv = CSV.read(f,col_sep: "\t", headers: true, encoding: "utf-8")
 tsv.each do |row|
   product = Product.find_by(code: row[0])
   size = row[2] == nil ? "" : row[2]
+  price = row[3].gsub(",", "")
   if product
-    product.update(name: row[1], size: size, price: row[3], copy: row[4])
+    product.update(name: row[1], size: size, price: price, copy: row[4])
     updated += 1
   else
-    product = Product.create(code: row[0], name: row[1], size: size, price: row[3], copy: row[4], user_id: 1)
+    product = Product.create(code: row[0], name: row[1], size: size, price: price, copy: row[4], user_id: 1)
     inserted += 1
   end
   if product.errors.count > 0
