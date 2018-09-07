@@ -16,13 +16,6 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label t(:user_id), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :user_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:user_id) %>
-  </div>
-  <div class="form-group">
     <%= f.label t(:code), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :code, :class => 'form-control' %>
@@ -65,11 +58,12 @@
     <%=f.error_span(:cost) %>
   </div>
   <div class="form-group">
-    <%= f.label t(:picture_id), :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :picture_id, :class => 'form-control' %>
+  <%= f.label t(:picture), class: 'control-label col-lg-2' %>
+    <div class='col-lg-10'>
+      <%= image_tag(@product.picture_path, class: 'img-responsive') %>
+      <%= f.file_field :picture_id %>
     </div>
-    <%=f.error_span(:picture_id) %>
+    <%= f.error_span(:picture_id) %>
   </div>
   <div class="form-group">
     <%= f.label t(:copy), :class => 'control-label col-lg-2' %>
@@ -85,7 +79,18 @@
     </div>
     <%=f.error_span(:memo) %>
   </div>
-
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <p class="text-muted">
+        <%= (@product.user.name + " " + @product.updated_at.to_s) if @product.id != nil %>
+      </p>
+      <h4>注意事項</h4>
+      <ul>
+        <li>仕入れ値と製造者は空欄でも大丈夫です。</li>
+        <li>価格はDCを入れます。</li>
+      </ul>
+    </div>
+  </div>
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
