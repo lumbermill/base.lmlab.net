@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :product_tags
   has_many :tags, through: :product_tags
   has_paper_trail
+  mount_uploader :picture, PictureUploader
 
   def picture_path(suffix="main")
     Product.picture_path(code,suffix)
