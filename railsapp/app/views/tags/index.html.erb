@@ -1,14 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tags</h1>
+<h1><%= t("Tags") %></h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Copy</th>
-      <th>Memo</th>
+      <th><%= t("Code") %></th>
+      <th><%= t("Name") %></th>
+      <th style="width: 120px"><%= t("Picture") %></th>
+      <th><%= t("Copy") %></th>
+      <th><%= t("Memo") %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,11 +19,12 @@
       <tr>
         <td><%= tag.code %></td>
         <td><%= tag.name %></td>
+        <td><%= image_tag(tag.picture_path, class: "img-responsive") %></td>
         <td><%= tag.copy %></td>
         <td><%= tag.memo %></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', tag, class: "btn btn-xs btn-default" %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag), class: "btn btn-xs btn-default" %></td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to t('New Tag'), new_tag_path, class: "btn btn-primary" %>

@@ -11,27 +11,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code, id: :tag_code %>
+  <div class="form-group">
+    <%= form.label :code, class: 'control-label col-lg-2' %>
+    <%= form.text_field :code, id: :tag_code, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :tag_name %>
+  <div class="form-group">
+    <%= form.label :name, class: 'control-label col-lg-2' %>
+    <%= form.text_field :name, id: :tag_name, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :copy %>
-    <%= form.text_field :copy, id: :tag_copy %>
+  <div class="form-group">
+  <%= form.label t(:picture), class: 'control-label col-lg-2' %>
+    <div class='col-lg-10'>
+      <%= image_tag(@tag.picture_path, class: 'img-responsive') %>
+      <%= form.file_field :picture %>
+    </div>
+    <%= form.error_span(:picture) %>
   </div>
 
-  <div class="field">
-    <%= form.label :memo %>
-    <%= form.text_field :memo, id: :tag_memo %>
+  <div class="form-group">
+    <%= form.label :copy, class: 'control-label col-lg-2' %>
+    <%= form.text_field :copy, id: :tag_copy, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.label :memo, class: 'control-label col-lg-2' %>
+    <%= form.text_field :memo, id: :tag_memo, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <ul class="text-muted">
+        <li>画像は最大600px程度、JPEG形式のものを登録してください。</li>
+        <li>コードは半角アルファベットで登録します。</li>
+      </ul>
+      <%= form.submit nil, class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

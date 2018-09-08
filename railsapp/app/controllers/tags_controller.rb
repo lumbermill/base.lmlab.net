@@ -29,6 +29,9 @@ class TagsController < ApplicationController
 
     respond_to do |format|
       if @tag.save
+        if File.file? tmpfile4picture
+          FileUtils.mv(tmpfile4picture,Tag.picture_realpath(@tag.code))
+        end
         format.html { redirect_to @tag, notice: t('Tag') + t('was successfully created') }
         format.json { render :show, status: :created, location: @tag }
       else
@@ -43,6 +46,9 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
+        if File.file? tmpfile4picture
+          FileUtils.mv(tmpfile4picture,Tag.picture_realpath(@tag.code))
+        end
         format.html { redirect_to @tag, notice: t('Tag') + t('was successfully updated') }
         format.json { render :show, status: :ok, location: @tag }
       else
@@ -81,6 +87,19 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:code, :name, :copy, :memo)
+      pp =  params.require(:tag).permit(:code, :name, :copy, :memo, :picture)
+      if pp[:picture]
+        File.open(tmpfile4picture, 'w+b') do |fp|
+          fp.write pp[:picture].read
+        end
+        # TODO: if the image is not jpg, convert it to jpg.
+        # TODO: if the size is too large, smallen it.
+        pp.delete(:picture)
+      end
+      pp
+    end
+
+    def tmpfile4picture
+      TAG_IMAGES_DIR+"/"+ session[:session_id] +".jpg"
     end
 end
