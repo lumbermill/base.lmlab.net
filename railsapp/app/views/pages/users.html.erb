@@ -8,10 +8,18 @@
   </tr>
   <% @users.each do |u| %>
   <tr>
-    <td><%= u.name %></td>
+    <% if u.id == current_user.id %>
+      <td><%= u.name %></td>
+    <% else %>
+      <td><%= link_to u.name, sign_in_as_path(id: u.id) %></td>
+    <% end %>
     <td><%= u.email %></td>
     <td><%= u.confirmed? ? ('<span class="fa fa-check" title="'+u.confirmed_at.to_s+'"></span>').html_safe : "" %></td>
     <td><%= u.last_sign_in_at %></td>
   </tr>
   <% end %>
 </table>
+<ul class="text-muted">
+  <li>ユーザ名のリンクをクリックすると、そのユーザとしてログインします。
+  ログイン履歴が残りますので、必ず事前に当該ユーザの承諾を得て作業してください。</li>
+</ul>

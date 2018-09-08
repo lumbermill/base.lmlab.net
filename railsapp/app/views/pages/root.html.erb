@@ -1,3 +1,8 @@
 <h1>Pages#root</h1>
 <p>Find me in app/views/pages/root.html.erb <span class="fa fa-user"></span></p>
-<%= link_to t('Sign in'), new_user_session_path, class: "btn btn-success" %>
+
+<% if user_signed_in? %>
+  <%= link_to t('Dashboard'), pages_dashboard_path, class: "btn btn-success" %>
+<% else %>
+  <%= link_to t('Sign in'), new_user_session_path, class: "btn btn-success" %>
+<% end %>
