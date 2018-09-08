@@ -1,4 +1,11 @@
 ja:
+  activerecord:
+    errors:
+      models:
+        product:
+          attributes:
+            code:
+              taken: "同一のコードが既に登録されています"
   hello: "こんにちは、"
   search: "検索"
   Search: "検索"

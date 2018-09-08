@@ -44,9 +44,11 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
     respond_to do |format|
       if @product.save
+        if File.file? tmpfile4picture
+          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code))
+        end
         format.html { redirect_to @product, notice: t('Product') + t('was successfully created') }
         format.json { render :show, status: :created, location: @product }
       else
@@ -61,6 +63,9 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        if File.file? tmpfile4picture
+          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code))
+        end
         format.html { redirect_to @product, notice: t('Product') + t('was successfully updated') }
         format.json { render :show, status: :ok, location: @product }
       else
@@ -99,6 +104,20 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:user_id, :code, :maker, :name, :size, :price, :cost, :picture_id, :copy, :memo)
+      pp = params.require(:product).permit(:user_id, :code, :maker, :name, :size, :price, :cost, :picture, :copy, :memo)
+      if pp[:picture]
+        File.open(tmpfile4picture, 'w+b') do |fp|
+          fp.write pp[:picture].read
+        end
+        # TODO: if the image is not jpg, convert it to jpg.
+        # TODO: if the size is too large, smallen it.
+        pp.delete(:picture)
+      end
+      pp[:user_id] = current_user.id
+      return pp
+    end
+
+    def tmpfile4picture
+      PRODUCT_IMAGES_DIR+"/"+ session[:session_id] +".jpg"
     end
 end

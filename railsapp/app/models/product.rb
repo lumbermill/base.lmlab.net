@@ -4,6 +4,9 @@ class Product < ApplicationRecord
   has_many :tags, through: :product_tags
   has_paper_trail
 
+  validates :code, uniqueness: true
+  validates :name, presence: true
+
   def picture_path(suffix="main")
     Product.picture_path(code,suffix)
   end
