@@ -44,10 +44,11 @@
   <h3><%= t("for_distributor") %></h3>
   <div class="row" style="padding: 24px 0">
     <div class="col-sm-12">
-      <%= link_to ("<span class='fa fa-shopping-cart'></span> "+t("orders_of_children") + " <span class='badge' id='orders_of_children'>-</span>").html_safe, orders_of_children_path(status: 'ordered'), class: "btn btn-default" %>
-      <%= link_to ("<span class='fa fa-truck'></span> "+t("shipping_of_children") + " <span class='badge' id='shipping_of_children'>-</span>").html_safe, orders_of_children_path(status: 'shipping'), class: "btn btn-default" %>
-      <%= link_to ("<span class='fa fa-list'></span> "+t("history_of_children") + " <span class='badge' id='history_of_children'>-</span>").html_safe, orders_history_path(children: 'true'), class: "btn btn-default" %>
-      <%= link_to ("<span class='fa fa-users'></span> "+t("children") + " <span class='badge' id='history_of_children'>-</span>").html_safe, pages_users_path(status: 'history'), class: "btn btn-default" %>
+      <% children_id = User.where(parent_id: current_user) %>
+      <%= link_to ("<span class='fa fa-shopping-cart'></span> "+t("orders_of_children") + " <span class='badge' id='orders_of_children'>" + Order.where(status: 'ordered').count.to_s + "</span>").html_safe, orders_of_children_path(status: 'ordered'), class: "btn btn-default" %>
+      <%= link_to ("<span class='fa fa-truck'></span> "+t("shipping_of_children") + " <span class='badge' id='shipping_of_children'>" + Order.where(status: 'shipping').count.to_s + "</span>").html_safe, orders_of_children_path(status: 'shipping'), class: "btn btn-default" %>
+      <%= link_to ("<span class='fa fa-list'></span> "+t("history_of_children") + " <span class='badge' id='history_of_children'>" + Order.where(user_id: children_id).count.to_s + "</span>").html_safe, orders_history_path(children: 'true'), class: "btn btn-default" %>
+      <%= link_to ("<span class='fa fa-users'></span> "+t("children") + " <span class='badge' id='history_of_children'>" + children_id.count.to_s + "</span>").html_safe, pages_users_path(status: 'history'), class: "btn btn-default" %>
     </div>
   </div>
 <% end %>
