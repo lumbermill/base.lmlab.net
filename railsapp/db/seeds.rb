@@ -10,7 +10,7 @@ now = Time.now
 admin = User.create(name: "Admin", email: "info@lmlab.net", password: "secret",parent: User.new, confirmed_at: now)
 
 # The mkdir_p may fail, then run the following command.
-# sudo mkdir /var/www/base.lmlab.net && sudo chown vagrant:vagrant /var/www/base.lmlab.net
+# sudo mkdir /var/www/base && sudo chown vagrant:vagrant /var/www/base
 FileUtils.mkdir_p(PRODUCT_IMAGES_DIR)
 FileUtils.mkdir_p(TAG_IMAGES_DIR)
 
