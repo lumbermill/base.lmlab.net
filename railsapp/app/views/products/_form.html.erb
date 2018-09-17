@@ -19,6 +19,7 @@
     <%= f.label t(:code), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :code, :class => 'form-control' %>
+      <small><a href="https://www1.amwaylive.com/search/Search?keyword=<%= @product.code %>&x=0&y=0" target="amwaylive">AmwayLiveを検索</a></small>
     </div>
     <%=f.error_span(:code) %>
   </div>
