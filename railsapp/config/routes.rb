@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'pages/dashboard'
+  get 'pages/dashboard-count' => 'pages#dashboard_count'
   get 'pages/users'
   get 'pages/sign-in-as' => 'pages#sign_in_as', as: :sign_in_as
   root to: 'pages#root'

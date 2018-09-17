@@ -10,6 +10,28 @@ class PagesController < ApplicationController
     @recents = current_user.recent_products
   end
 
+  def dashboard_count
+    key = params[:key]
+    # $("#orders_of_children").load("dashboard-count?key=orders_of_children");
+    # $("#shipping_of_children").load("dashboard-count?key=shipping_of_children");
+    # $("#history_of_children").load("dashboard-count?key=history_of_children");
+    # $("#number_of_children").load("dashboard-count?key=number_of_children");
+    children = current_user.children.map { |c| c.id }
+    case key
+    when "orders_of_children" then
+      v = Order.ordered.where(user_id: children).count
+    when "shipping_of_children" then
+      v = Order.shipping.where(user_id: children).count
+    when "history_of_children" then
+      v = "-" # not implemented
+    when "number_of_children" then
+      v = current_user.children.count
+    else
+      v = key
+    end
+    render plain: v
+  end
+
   def users
     if user_signed_in?
       if current_user.admin?
