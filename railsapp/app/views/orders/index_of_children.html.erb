@@ -78,9 +78,11 @@ function update_order_status(status){
 
 </div>
 <% if @title == "orders_of_children" %>
-  <p><a href="https://www.amwaylive.com/">Amwaylive</a>で発注した商品にチェックを入れてください</p>
+  <p>
+    あなたのフロントからの注文と、あなた自身の注文がリストアップされています。<br/>
+    <a href="https://www.amwaylive.com/">Amwaylive</a>で発注した商品にチェックを入れてください。</p>
   <button class='btn btn-primary' onclick="update_order_status('shipping')"><%= t("mark_as_shipping") %></button>
 <% elsif @title == "shipping_of_children" %>
-  <p>お客様に手渡しした商品にチェックを入れてください</p>
+  <p>お客様に手渡しした（または自分で受け取った）商品にチェックを入れてください。</p>
   <button class='btn btn-primary' onclick="update_order_status('arrived')"><%= t("mark_as_arrived") %></button>
 <% end %>

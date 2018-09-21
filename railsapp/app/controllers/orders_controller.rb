@@ -110,8 +110,10 @@ class OrdersController < ApplicationController
 
   def history
     if params[:children]
+      @title = "history_of_children"
       @orders = current_user.checkout_histories_of_children
     else
+      @title = "history"
       @orders = current_user.checkout_histories
     end
   end
