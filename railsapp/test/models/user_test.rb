@@ -33,4 +33,12 @@ class UserTest < ActiveSupport::TestCase
     oc3 = u3.checkout_histories_of_children
     assert_equal [], oc3.to_a
   end
+
+  test "users4order" do
+    # children - distributors + self
+    assert_equal 2 - 2 + 1, User.find(1).users4order.count
+    assert_equal 3 - 1 + 1, User.find(2).users4order.count
+    assert_equal 0 - 0 + 1, User.find(3).users4order.count
+    assert_equal 1 - 0 + 1, User.find(4).users4order.count
+  end
 end

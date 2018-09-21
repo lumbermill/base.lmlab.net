@@ -19,6 +19,12 @@ class User < ApplicationRecord
     id == 1
   end
 
+  # Returns array of users which the user should takes care of their orders.
+  # It's always include the user oneself.
+  def users4order
+    [self] + children.select { |child| child.children.count == 0 }
+  end
+
   def recent_products
     ids = orders.select("product_id").order("updated_at desc").map { |o| o.product_id }.uniq[0,4]
     ids.map { |id| Product.find(id) }
