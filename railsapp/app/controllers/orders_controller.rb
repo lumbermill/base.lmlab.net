@@ -21,14 +21,14 @@ class OrdersController < ApplicationController
     # 自分の子どものordersでstatusがorderedの商品(商品ごと)
     # 自分の子どものordersでstatusがshippingの商品(ユーザごと)
     @checkout_at = nil
-    @children = current_user.children
+    children = current_user.users4order
     if status == "ordered"
       @title = "orders_of_children"
-      @orders = Order.ordered.where(user_id: @children.map { |c| c.id })
+      @orders = Order.ordered.where(user_id: children.map { |c| c.id })
     elsif status == "shipping"
       @title = "shipping_of_children"
       @orders = []
-      @children.each do |child|
+      children.each do |child|
         @orders += child.orders.shipping
       end
     end
