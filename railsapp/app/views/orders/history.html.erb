@@ -27,7 +27,11 @@
         <td><%= t(order.status) %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>
-        <td><%= link_to t("detail"), orders_path(checkout_at: order.checkout_at), class: "btn btn-default btn-sm" %></td>
+        <% if @title == "history_of_children" %>
+          <td><%= link_to t("detail"), orders_path(checkout_at: order.checkout_at,user_id: order.user.id), class: "btn btn-default btn-sm" %></td>
+        <% else %>
+          <td><%= link_to t("detail"), orders_path(checkout_at: order.checkout_at), class: "btn btn-default btn-sm" %></td>
+        <% end %>
       </tr>
       <% end
        end %>

@@ -11,8 +11,10 @@ class OrdersController < ApplicationController
       @checkout_at = nil
       @orders = current_user.orders.in_cart
     else
+      u = User.find(params[:user_id]) if params[:user_id]
+      u = current_user unless u
       @checkout_at = Time.parse(ts)
-      @orders = current_user.orders.where(checkout_at: @checkout_at)
+      @orders = u.orders.where(checkout_at: @checkout_at)
     end
   end
 
