@@ -34,7 +34,8 @@ class PagesController < ApplicationController
 
   def users
     if user_signed_in?
-      if current_user.admin?
+      @all = params[:all] != nil
+      if @all && current_user.admin?
         @users = User.all
       else
         @users = current_user.children

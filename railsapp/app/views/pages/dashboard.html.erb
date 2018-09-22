@@ -47,7 +47,7 @@
       <%= link_to ("<span class='fa fa-shopping-cart'></span> "+t("orders_of_children") + " <span class='badge' id='orders_of_children'>-</span>").html_safe, orders_of_children_path(status: 'ordered'), class: "btn btn-default" %>
       <%= link_to ("<span class='fa fa-truck'></span> "+t("shipping_of_children") + " <span class='badge' id='shipping_of_children'>-</span>").html_safe, orders_of_children_path(status: 'shipping'), class: "btn btn-default" %>
       <%= link_to ("<span class='fa fa-list'></span> "+t("history_of_children")).html_safe, orders_history_path(children: 'true'), class: "btn btn-default" %>
-      <%= link_to ("<span class='fa fa-users'></span> "+t("children") + " <span class='badge' id='number_of_children'>-</span>").html_safe, pages_users_path(status: 'history'), class: "btn btn-default" %>
+      <%= link_to ("<span class='fa fa-users'></span> "+t("children") + " <span class='badge' id='number_of_children'>-</span>").html_safe, pages_users_path, class: "btn btn-default" %>
     </div>
   </div>
   <script>
@@ -59,7 +59,7 @@
 <% if current_user.admin? %>
   <div class="row">
     <div class="col-xs-12 admin">
-        <%= link_to ("<span class='fa fa-users'></span> "+t("Users")).html_safe, pages_users_path, class: "btn btn-default" %>
+        <%= link_to ("<span class='fa fa-users'></span> "+t("Users")).html_safe, pages_users_path(all: true), class: "btn btn-default" %>
         <%= link_to ("<span class='fa fa-gift'></span> "+t("Products")).html_safe, products_path(search: ""), class: "btn btn-default" %>
         <%= link_to ("<span class='fa fa-tag'></span> "+t("Tags")).html_safe, tags_path(search: ""), class: "btn btn-default" %>
         <%= link_to "<span class='fa fa-github'></span> GitHub".html_safe, "https://github.com/lumbermill/base.lmlab.net", target: "_blank" %>
