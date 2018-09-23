@@ -48,10 +48,15 @@
         </div>
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <h3>Sidebar</h3>
+            <h3>Links</h3>
             <ul class="nav nav-list">
-              <li class="nav-header">Links</li>
-              <li><%= link_to "Amway(jp)", "https://www.amwaylive.com/", target: "_blank"  %></li>
+              <li class="nav-header"><%= t("Suppliers") %></li>
+              <% MAKERS.each do |k,v| %>
+                <li><%= link_to v[:name], v[:url], target: k %></li>
+              <% end %>
+              <li class="nav-header"><%= t("360") %></li>
+              <li><%= link_to "360 Dojos", "https://dojo.lmlab.net", target: "_blank" %></li>
+              <li><%= link_to "360 Places", "https://places.lmlab.net", target: "_blank" %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

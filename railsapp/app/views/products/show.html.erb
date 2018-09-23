@@ -41,6 +41,9 @@
       </tr><tr>
       <th><%= model_class.human_attribute_name(t(:price)) %>:</th>
       <td><%= @product.price %></td>
+      </tr><tr>
+      <th></th>
+      <td><%= makers_url(@product).html_safe %></td>
       </tr>
     </table>
     <form class="form-inline">
@@ -52,13 +55,16 @@
   </div>
 </div>
 
-<p class="admin">
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_product_path(@product), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              product_path(@product),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</p>
+<% if current_user.admin? %>
+  <br/>
+  <p class="admin">
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_product_path(@product), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                product_path(@product),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+  </p>
+<% end %>
 <div id="product-<%= @product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>

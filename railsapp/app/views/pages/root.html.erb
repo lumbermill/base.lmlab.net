@@ -1,5 +1,7 @@
-<h1>Pages#root</h1>
-<p>Find me in app/views/pages/root.html.erb <span class="fa fa-user"></span></p>
+<div class="page-header">
+<h1>360 Base</h1>
+</div>
+<p>360で販売している商品の受注サイトです。利用にはユーザ登録が必要です。</p>
 
 <% if user_signed_in? %>
   <%= link_to t('Dashboard'), pages_dashboard_path, class: "btn btn-success" %>
