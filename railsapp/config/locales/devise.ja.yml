@@ -68,6 +68,7 @@ ja:
         unhappy: "気に入りません"
         update: "更新"
         we_need_your_current_password_to_confirm_your_changes: "変更を反映するには現在のパスワードを入力してください"
+        characters_minimum: "文字以上に設定してください"
       new:
         sign_up: "アカウント登録"
     sessions:
