@@ -35,6 +35,7 @@ ja:
         resend_confirmation_instructions: "アカウント確認メール再送"
       user:
         send_instructions: "確認メールを送信しました。"
+        confirmed: "アカウントを確認しました。"
     mailer:
       confirmation_instructions:
         action: "アカウント確認"
