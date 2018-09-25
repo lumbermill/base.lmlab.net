@@ -6,6 +6,14 @@ ja:
           attributes:
             code:
               taken: "同一のコードが既に登録されています"
+        user:
+          attributes:
+            email:
+              taken: "このアドレスは既に登録されています"
+              not_found: "アドレスが見つかりませんでした"
+  errors:
+    messages:
+      not_saved: "保存されませんでした"
   hello: "こんにちは、"
   search: "検索"
   Search: "検索"
