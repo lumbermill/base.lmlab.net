@@ -114,6 +114,8 @@ class ProductsController < ApplicationController
         pp.delete(:picture)
       end
       pp[:user_id] = current_user.id
+      pp[:price].gsub!(",","")
+      pp[:cost].gsub!(",","")
       return pp
     end
 

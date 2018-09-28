@@ -6,6 +6,8 @@ class Product < ApplicationRecord
 
   validates :code, uniqueness: {scope: :maker}
   validates :name, presence: true
+  validates :price, format: { with: /^[0-9,]+$/,　message: "半角数字のみが使用できます" }
+  validates :cost, format: { with: /^[0-9,]+$/,　message: "半角数字のみが使用できます" }
 
   def picture_path(suffix="main")
     Product.picture_path(code,suffix)
