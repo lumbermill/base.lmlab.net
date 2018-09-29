@@ -27,6 +27,18 @@ ja:
         origin_site: 登録サイト
         confirmed?: メール確認
         confirmed_at: メール確認日時
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "入力されていません"
+              not_locked: "ロックされていません"
+              already_confirmed: "既に確認されています"
+            unlock_token:
+              blank: "ロックトークンが存在しません"
+            current_password:
+              blank: "を入力してください"
     models:
       user: "ユーザ"
   devise:
@@ -74,6 +86,9 @@ ja:
         characters_minimum: "文字以上に設定してください"
       new:
         sign_up: "アカウント登録"
+      user:
+        signed_up_but_unconfirmed: "アカウント登録確認のメールを送信しました。"
+        updated: "ユーザ情報を更新しました。"
     sessions:
       new:
         sign_in: "ログイン"
@@ -97,3 +112,4 @@ ja:
       user:
         not_found_in_database: "ユーザが見つかりません"
         unauthenticated: "認証されていません"
+        invalid: "アカウントが不正です"
