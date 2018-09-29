@@ -10,4 +10,6 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 1, Order.arrived.count
     assert_equal 1, Order.canceled.count
   end
+
+
 end

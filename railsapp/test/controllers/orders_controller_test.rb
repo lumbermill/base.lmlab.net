@@ -4,8 +4,8 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @order = orders(:one)
-  end
 
+  end
 
 
   test "should get index" do
@@ -55,5 +55,94 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to orders_url
   end
+
+  test "test paper trail update history on order" do
+    order = Order.find(1)
+    with_versioning do
+      previous_versions_count = order.versions.count
+      order.price = 50
+      order.save
+      current_versions_count = order.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+
+    end
+  end
+
+  test "test paper trail destroy history on order" do
+    order = Order.find(1)
+
+    with_versioning do
+      previous_versions_count = order.versions.count
+      order.destroy
+      current_versions_count = order.versions.count
+      assert_equal previous_versions_count+1, current_versions_count
+    end
+  end
+
+  test "test paper trail create history on order" do
+
+    with_versioning do
+      order = Order.create(user_id: 2, product_id: 1)
+      puts order.errors.full_messages
+      assert_equal 1, order.versions.count
+    end
+  end
+
+  test "test paper trail whodunnit" do
+
+    order = Order.find(1)
+    with_versioning do
+
+      PaperTrail.request.whodunnit = users(:dist1).email
+      order.price = 100
+      order.save
+      assert_equal users(:dist1).email, order.versions.last.whodunnit
+    end
+  end
+
+  test "test paper trail return previous version on update product" do
+    product = Product.find(1)
+
+    with_versioning do
+      before_update = product.name
+      product.name = 'Changed version'
+      product.save
+      after_update = product.paper_trail.previous_version.name
+      assert_equal before_update, after_update
+
+    end
+  end
+  #
+  test "test paper trail return correct event name on update order" do
+    order = Order.find(1)
+    order.versions
+    with_versioning do
+      order.price = 100
+      order.save
+      v = order.versions.last
+      assert 'Update', v.event
+    end
+  end
+  #
+  test "test paper trail return correct event name on delete order" do
+    order = Order.find(1)
+    order.versions
+    with_versioning do
+      order.destroy
+      v = order.versions.last
+      assert 'Delete', v.event
+    end
+  end
+  #
+  test "test paper trail return correct event name on create order" do
+    with_versioning do
+      order = Order.create(user_id: 2, product_id: 1)
+      order.versions
+      v = order.versions.last
+      assert 'Create', v.event
+    end
+  end
+
+
 
 end

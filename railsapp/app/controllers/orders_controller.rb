@@ -124,6 +124,7 @@ class OrdersController < ApplicationController
     render plain: "#{current_user.orders.in_cart.count}"
   end
 
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_order
