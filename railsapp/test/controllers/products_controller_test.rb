@@ -21,7 +21,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should create product" do
     sign_in users(:dist1)
     assert_difference('Product.count') do
-      post products_url, params: { product: { code: @product.code, copy: @product.copy, cost: @product.cost, maker: @product.maker, memo: @product.memo, name: @product.name, picture_id: @product.picture_id, price: @product.price, size: @product.size, user_id: @product.user_id } }
+      post products_url, params: { product: { code: 123, copy: @product.copy, cost: @product.cost, maker: @product.maker, memo: @product.memo, name: @product.name, picture_id: @product.picture_id, price: @product.price, size: @product.size, user_id: @product.user_id } }
     end
 
     assert_redirected_to product_url(Product.last)
@@ -79,7 +79,9 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "test paper trail create history on product" do
 
     with_versioning do
-       product = Product.create(user_id: 2)
+
+      product = Product.create(user_id: 2, name: 'New Name')
+      puts product.errors.full_messages
       assert_equal 1, product.versions.count
     end
   end
@@ -132,13 +134,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "test paper trail return correct event name on create product" do
     with_versioning do
-      product = Product.create(user_id: 2)
+      product = Product.create(user_id: 2, name: 'New Name')
       product.versions
       v = product.versions.last
       assert 'Create', v.event
     end
   end
-
 
 
 end
