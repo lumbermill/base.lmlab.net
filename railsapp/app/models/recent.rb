@@ -1,0 +1,2 @@
+class Recent < ApplicationRecord
+end

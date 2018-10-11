@@ -26,11 +26,15 @@
 </div>
 <h3><%= t("recent") %></h3>
 <div class="row" style="padding: 24px 0">
+
   <% @recents.each do |product| %>
     <div class="col-sm-3">
       <figure>
-        <%= link_to image_tag(product.picture_path, class: "img-thumbnail img-responsive"), product_path(product) %>
+        <%#= link_to image_tag(product.picture_path, class: "img-thumbnail img-responsive"), product_path(product) %>
+
         <figcaption><%= product.name %></figcaption>
+        <figcaption><%= product.product_code %></figcaption>
+        <figcaption><%= product.picture_id %></figcaption>
       </figure>
     </div>
   <% end %>

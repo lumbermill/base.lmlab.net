@@ -28,6 +28,8 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.find(params[:id])
+    @recent_view = Recent.create(:product_code => @product.code , :viewed => Time.now, :picture_id => @product.picture_id, :name => @product.name)
   end
 
   # GET /products/new
@@ -97,6 +99,7 @@ class ProductsController < ApplicationController
   end
 
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -119,6 +122,7 @@ class ProductsController < ApplicationController
       pp[:cost].gsub!(",","")
       return pp
     end
+
 
     def tmpfile4picture
       PRODUCT_IMAGES_DIR+"/"+ session[:session_id] +".jpg"

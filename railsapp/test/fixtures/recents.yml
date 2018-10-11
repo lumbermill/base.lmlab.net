@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_code: 1
+  viewed: 2018-10-10 05:37:10
+
+two:
+  product_code: 1
+  viewed: 2018-10-10 05:37:10

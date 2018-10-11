@@ -141,6 +141,24 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "product code can not be nil" do
+    sign_in users(:dist1)
+    assert_not_nil(@product.code)
+  end
+
+  test "product code must be unique" do
+    sign_in users(:dist1)
+    duplicate_code = @product.dup
+    assert_not duplicate_code.valid?
+  end
+
+  test "product should have name" do
+    sign_in users(:dist1)
+    assert_not_nil(@product.name)
+
+  end
+
+
 
 end
 
