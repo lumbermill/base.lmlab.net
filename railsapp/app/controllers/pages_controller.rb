@@ -8,9 +8,7 @@ class PagesController < ApplicationController
     @messages = [] # from distributor, from admin
     @tags = Tag.all.order(:code)
     # @recents = current_user.recent_products
-    @recents = Recent.order('viewed DESC').limit(4)
-
-
+    @recents = Recent.joins(:product).order('viewed_time DESC').limit(4)
 
   end
 
@@ -64,3 +62,4 @@ class PagesController < ApplicationController
     redirect_to root_path, notice: "Signed in as: #{u.name}(id:#{u.id})"
   end
 end
+

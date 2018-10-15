@@ -158,6 +158,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   end
 
+  test "price precision test" do
+    sign_in users(:dist1)
+    assert_match(/\A[0-9,]+\z/, @product.price.to_s,"Matched with the regular expression")
+
+  end
+
 
 
 end

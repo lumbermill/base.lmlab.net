@@ -29,10 +29,17 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @recent_view = Recent.create(:product_code => @product.code , :viewed => Time.now, :picture_id => @product.picture_id, :name => @product.name)
+    if Recent.exists?(product_id: @product.id)
+      @recent = Recent.find_by(product_id: @product.id )
+      @recent.viewed_time = Time.now
+      @recent.save
+    else
+      @recent_view = Recent.create(:product_id => @product.id , :viewed_time => Time.now)
+    end
+
   end
 
-  # GET /products/new
+  # GET /productrais/new
   def new
     @product = Product.new
     @product.user = current_user
