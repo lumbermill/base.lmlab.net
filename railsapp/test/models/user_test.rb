@@ -46,4 +46,12 @@ class UserTest < ActiveSupport::TestCase
     u1 = User.create(name: "☀️", email: "user1@lmlab.net", password: "secret", parent: nil, confirmed_at: Time.now)
     assert_equal "☀️", u1.name
   end
+
+  test "recents" do
+    u2 = User.find(2)
+    assert_equal 0, u2.recent_viewed_products.count
+
+    u3 = User.find(3)
+    assert_equal 2, u3.recent_viewed_products.count
+  end
 end
