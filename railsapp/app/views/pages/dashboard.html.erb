@@ -26,13 +26,16 @@
 </div>
 <h3><%= t("recent") %></h3>
 <div class="row" style="padding: 24px 0">
-  <% @recents.each do |product| %>
+  <% @recents.each do |recent| %>
+
+    <% if current_user.id == recent.user_id  %>
     <div class="col-sm-3">
       <figure>
-        <%= link_to image_tag(product.picture_path, class: "img-thumbnail img-responsive"), product_path(product) %>
-        <figcaption><%= product.name %></figcaption>
+        <%= link_to image_tag(recent.product.picture_path, class: "img-thumbnail img-responsive"), product_path(recent.product) %>
+        <figcaption><%= recent.product.name %></figcaption>
       </figure>
     </div>
+      <% end %>
   <% end %>
 </div>
 <div class="row" style="padding: 24px 0">

@@ -28,9 +28,22 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.find(params[:id])
+    user = current_user
+     @recents = Recent.where(user_id: user.id, product_id: @product.id)
+    # @recents = Recent.where(user_id: user.id).where(product_id: @product.id)
+    if @recents.exists?
+      @recent = @recents.first
+      @recent.viewed_time= Time.now
+      @recent.save
+    else
+      @recent_view = Recent.create(:product_id => @product.id , :viewed_time => Time.now, :user_id => user.id)
+    end
+
   end
 
-  # GET /products/new
+
+  # GET /productrais/new
   def new
     @product = Product.new
     @product.user = current_user
@@ -97,6 +110,7 @@ class ProductsController < ApplicationController
   end
 
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -119,6 +133,7 @@ class ProductsController < ApplicationController
       pp[:cost].gsub!(",","")
       return pp
     end
+
 
     def tmpfile4picture
       PRODUCT_IMAGES_DIR+"/"+ session[:session_id] +".jpg"

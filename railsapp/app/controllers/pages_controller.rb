@@ -7,7 +7,12 @@ class PagesController < ApplicationController
   def dashboard
     @messages = [] # from distributor, from admin
     @tags = Tag.all.order(:code)
-    @recents = current_user.recent_products
+    # @recents = current_user.recent_products
+    # @recents = Recent.joins(:product).order('viewed_time DESC').limit(4)
+    user = current_user
+    @recents = Recent.joins(:product).where(user_id: user.id).order('viewed_time DESC').limit(4)
+    # @recents = Recent.joins(:product).order('viewed_time DESC').limit(4)
+
   end
 
   def dashboard_count
@@ -60,3 +65,4 @@ class PagesController < ApplicationController
     redirect_to root_path, notice: "Signed in as: #{u.name}(id:#{u.id})"
   end
 end
+

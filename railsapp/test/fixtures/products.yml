@@ -20,7 +20,7 @@ two:
   maker: MyString
   name: MyString
   size: MyString
-  price: 1
+  price: 003
   cost: 9.99
   picture_id: 1
   copy: MyString
@@ -29,7 +29,7 @@ two:
 three:
   id: 3
   user_id: 7
-  code: 0003
+  code: 003
   maker: MyString
   name: MyString
   size: MyString
