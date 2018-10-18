@@ -7,7 +7,8 @@ class PagesController < ApplicationController
   def dashboard
     @messages = [] # from distributor, from admin
     @tags = Tag.all.order(:code)
-    @recents = current_user.recent_viewed_products
+    @recent_views = current_user.recent_viewed_products
+    @recent_orders = current_user.recent_ordered_products
   end
 
   def dashboard_count

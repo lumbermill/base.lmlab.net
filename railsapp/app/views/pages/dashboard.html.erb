@@ -24,9 +24,9 @@
     </div>
   <% end %>
 </div>
-<h3><%= t("recent") %></h3>
+<h3><%= t("recent_view") %></h3>
 <div class="row" style="padding: 24px 0">
-  <% @recents.each do |recent| %>
+  <% @recent_views.each do |recent| %>
 
     <% if current_user.id == recent.user_id  %>
     <div class="col-sm-3">
@@ -38,6 +38,21 @@
       <% end %>
   <% end %>
 </div>
+<h3><%= t("recent_order") %></h3>
+<div class="row" style="padding: 24px 0">
+  <% @recent_orders.each do |recent| %>
+
+    <% if current_user.id == recent.user_id  %>
+    <div class="col-sm-3">
+      <figure>
+        <%= link_to image_tag(recent.product.picture_path, class: "img-thumbnail img-responsive"), product_path(recent.product) %>
+        <figcaption><%= recent.product.name %></figcaption>
+      </figure>
+    </div>
+      <% end %>
+  <% end %>
+</div>
+
 <div class="row" style="padding: 24px 0">
   <div class="col-sm-12">
     <%= link_to ("<span class='fa fa-list'></span> "+t("order_history")).html_safe, orders_history_path, class: "btn btn-default" %>
