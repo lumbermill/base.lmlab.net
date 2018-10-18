@@ -41,4 +41,9 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0 - 0 + 1, User.find(3).users4order.count
     assert_equal 1 - 0 + 1, User.find(4).users4order.count
   end
+
+  test "emoji" do
+    u1 = User.create(name: "☀️", email: "user1@lmlab.net", password: "secret", parent: nil, confirmed_at: Time.now)
+    assert_equal "☀️", u1.name
+  end
 end
