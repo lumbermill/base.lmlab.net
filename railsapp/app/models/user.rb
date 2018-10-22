@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable
   has_many :products
   has_many :orders
+  has_many :recents
   # belongs_to :parent, :class_name => "User", :foreign_key => "parent_user_id"
   belongs_to :parent, :class_name => "User", optional: true
   has_many :children, :class_name => "User", :foreign_key => "parent_id"
