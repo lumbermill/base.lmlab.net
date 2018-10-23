@@ -6,7 +6,7 @@
 # Example:
 #
 # set :output, "/path/to/my/cron_log.log"
-#set :output, "/log/cron_log.log"
+
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
@@ -20,9 +20,9 @@
 # Learn more: http://github.com/javan/whenever
 
 set :environment, 'development'
-#ENV['RAILS_ENV'] = 'development'
+
 set :output, "whenever.log"
-# every '* * * * *' do
+
 every 1.day do
   rake "recents:delete_30_days_old"
 end
