@@ -10,7 +10,7 @@ class User < ApplicationRecord
   # belongs_to :parent, :class_name => "User", :foreign_key => "parent_user_id"
   belongs_to :parent, :class_name => "User", optional: true
   has_many :children, :class_name => "User", :foreign_key => "parent_id"
-  # has_many :children, :class_name => "User", :foreign_key => "parent_id"
+  
 
   def distributor?
     children.count > 0
@@ -26,8 +26,12 @@ class User < ApplicationRecord
     [self] + children.select { |child| child.children.count == 0 }
   end
 
-  def recent_products
-    ids = orders.select("product_id").order("updated_at desc").map { |o| o.product_id }.uniq[0,4]
+  def recent_viewed_products(len=4)
+    Recent.joins(:product).where(user_id: self.id).order('viewed_time desc').limit(len)
+  end
+
+  def recent_ordered_products(len=4)
+    ids = orders.select("product_id").order("updated_at desc").map { |o| o.product_id }.uniq[0,len]
     ids.map { |id| Product.find(id) }
   end
 

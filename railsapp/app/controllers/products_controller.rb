@@ -30,18 +30,15 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     user = current_user
-     @recents = Recent.where(user_id: user.id, product_id: @product.id)
-    # @recents = Recent.where(user_id: user.id).where(product_id: @product.id)
-    if @recents.exists?
-      @recent = @recents.first
-      @recent.viewed_time= Time.now
-      @recent.save
+    recents = Recent.where(user_id: user.id, product_id: @product.id)
+    if recents.exists?
+      recent = recents.first
+      recent.viewed_time= Time.now
+      recent.save
     else
-      @recent_view = Recent.create(:product_id => @product.id , :viewed_time => Time.now, :user_id => user.id)
+      Recent.create(:product_id => @product.id , :viewed_time => Time.now, :user_id => user.id)
     end
-
   end
-
 
   # GET /productrais/new
   def new
