@@ -4,7 +4,6 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @order = orders(:one)
-
   end
 
 
