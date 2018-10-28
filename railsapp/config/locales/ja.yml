@@ -6,6 +6,8 @@ ja:
           attributes:
             code:
               taken: "同一のコードが既に登録されています"
+            name:
+              blank: "商品名を入力してください"
         user:
           attributes:
             email:
