@@ -27,6 +27,8 @@ class PagesController < ApplicationController
       v = "-" # not implemented
     when "number_of_children" then
       v = current_user.children.count
+    when "orders" then
+      v = Order.where(user_id: current_user.id,status: ["ordered","shipping"]).count
     else
       v = key
     end
