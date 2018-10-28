@@ -39,6 +39,11 @@ ja:
               blank: "ロックトークンが存在しません"
             current_password:
               blank: "を入力してください"
+            password:
+              too_short: "が短すぎます"
+              blank: "を入力してください"
+            password_confirmation:
+              confirmation: "が一致しません"
     models:
       user: "ユーザ"
   devise:
