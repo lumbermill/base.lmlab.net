@@ -3,13 +3,14 @@
     <p><%= t("hello") %> <b><%= current_user.name %></b>!
       <%= link_to ("<span class='fa fa-user'></span> "+t("edit_user")).html_safe, edit_user_registration_path, class: "btn btn-xs btn-default" %>
     </p>
+    <p>下記の検索フィールドにお探しの商品名か商品コードを入力してください。</p>
   </div>
 </div>
-<div class="row" style="padding: 24px 0">
+<div class="row" style="padding: 60px 0;">
   <div class="col-xs-12">
     <form method="get" action="<%= products_path %>" class="form-inline search">
-      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name")%>
-      <%= submit_tag t('search'), class: 'btn btn-primary' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name"), size: 60 %>
+      <%= button_tag ('<span class="fa fa-search"></span> '.+t('search')).html_safe, class: 'btn btn-primary ' %>
     </form>
   </div>
 </div>
