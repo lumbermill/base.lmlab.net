@@ -84,7 +84,7 @@
   <div class="form-group">
     <%= f.label t(:tags), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <% @tags.each do |tag| %>
+      <% Tag.order("code").each do |tag| %>
         <%= f.check_box :tags, {id: "tag-"+tag.code, multiple: true, checked: @product.has_tag?(tag)}, tag.code, nil %>
         <label for="<%= "tag-"+tag.code %>"><%= tag.name %></label> &nbsp;
       <% end %>
