@@ -22,12 +22,17 @@
     $(b).removeClass('disabled');
     $("div#product-"+id).fadeOut();
   }
+
+  function clear_search_field(){
+    $("#search").val("");
+  }
 </script>
 <div class="page-header">
   <form method="get" action="<%= products_path %>" class="form-inline search">
     <%= text_field_tag :search, @keyword, class: 'form-control', placeholder: t("name,code or tag:name")%>
-    <%= submit_tag t('Search'), class: 'btn btn-primary' %>
-    <%= link_to t('Back'), pages_dashboard_path, class: 'btn btn-default' %>
+    <%= button_tag "<span class='fa fa-search'></span> ".html_safe+t('Search'), class: 'btn btn-primary' %>
+    <%= link_to "<span class='fa fa-eraser'></span> ".html_safe+t('Clear'), "javascript:void(0)",class: 'btn btn-default', type: "reset", onclick: "clear_search_field()" %>
+    <%= link_to "<span class='fa fa-home'></span> ".html_safe+t('Back'), pages_dashboard_path, class: 'btn btn-default' %>
   </form>
 </div>
 <table class="table table-striped">
