@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :orders
   resources :products
   resources :tags
-  devise_for :users
+  devise_for :users, controllers: {
+      registrations: 'users/registrations'
+  }
 
   get 'pages/dashboard'
   get 'pages/dashboard-count' => 'pages#dashboard_count'

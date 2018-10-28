@@ -54,4 +54,8 @@ class UserTest < ActiveSupport::TestCase
     u3 = User.find(3)
     assert_equal 2, u3.recent_viewed_products.count
   end
+
+  test "parent_by_token" do
+    assert_equal 2, User.parent_by_token("dist1").id
+  end
 end

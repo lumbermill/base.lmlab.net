@@ -117,4 +117,5 @@ ja:
       user:
         not_found_in_database: "ユーザが見つかりません"
         unauthenticated: "認証されていません"
+        unconfirmed: "アカウントが確認されていません"
         invalid: "アカウントが不正です"
