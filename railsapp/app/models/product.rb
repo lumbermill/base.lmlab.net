@@ -21,4 +21,12 @@ class Product < ApplicationRecord
   def self.picture_path(code,suffix="main")
     "/products/picture?code=#{code}&suffix=#{suffix}"
   end
+
+  def has_tag?(tag)
+    code = (tag.is_a? Tag) ? tag.code : tag
+    tags.each do |t|
+      return true if t.code == code
+    end
+    return false
+  end
 end

@@ -112,6 +112,7 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
+      @tags = Tag.order("code")
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -128,6 +129,7 @@ class ProductsController < ApplicationController
       pp[:user_id] = current_user.id
       pp[:price].gsub!(",","")
       pp[:cost].gsub!(",","")
+      pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
       return pp
     end
 
