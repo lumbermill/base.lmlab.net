@@ -135,7 +135,9 @@ class ProductsController < ApplicationController
       pp[:user_id] = current_user.id
       pp[:price].gsub!(",","")
       pp[:cost].gsub!(",","")
-      pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
+      if params[:product][:tags]
+        pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
+      end
       return pp
     end
 
