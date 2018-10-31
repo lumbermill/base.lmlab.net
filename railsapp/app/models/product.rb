@@ -21,4 +21,11 @@ class Product < ApplicationRecord
   def self.picture_path(code,suffix="main")
     "/products/picture?code=#{code}&suffix=#{suffix}"
   end
+
+  scope :available, -> { where(status: "available") }
+  scope :will_be_available, -> { where(status: "will-be-available") }
+  scope :out_of_stock, -> { where(status: "out-of-stock") }
+  scope :no_longer_available, -> { where(status: "no-longer-available") }
+
+
 end

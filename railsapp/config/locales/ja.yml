@@ -95,3 +95,5 @@ ja:
     submit:
       create: 登録する
       update: 更新する
+
+  You can not delete this product because it is in cart / ordered: "この商品はカートまたは注文履歴に含まれているため削除できません"
