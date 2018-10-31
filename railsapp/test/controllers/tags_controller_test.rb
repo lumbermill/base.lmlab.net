@@ -21,7 +21,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
   test "should create tag" do
     sign_in users(:dist1)
     assert_difference('Tag.count') do
-      post tags_url, params: { tag: { code: @tag.code, copy: @tag.copy, memo: @tag.memo, name: @tag.name } }
+      post tags_url, params: { tag: { code: "dummy", copy: @tag.copy, memo: @tag.memo, name: @tag.name } }
     end
 
     assert_redirected_to tag_url(Tag.last)

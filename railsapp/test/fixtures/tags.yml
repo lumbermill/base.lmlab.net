@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  code: MyString
-  name: MyString
-  copy: MyString
+  code: food
+  name: 食品
+  copy: 猫まっしぐら
   memo: MyString
 
 two:
-  code: MyString
-  name: MyString
-  copy: MyString
+  code: detergent
+  name: 洗剤
+  copy: 柄まで落ちる！
   memo: MyString
