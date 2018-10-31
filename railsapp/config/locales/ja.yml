@@ -102,3 +102,4 @@ ja:
       update: 更新する
   Back to dashboard: "買い物を続ける"
   Confirm checkout: "注文の確認"
+  You can not delete this product because it is in cart / ordered: "この商品はカートまたは注文履歴に含まれているため削除できません"

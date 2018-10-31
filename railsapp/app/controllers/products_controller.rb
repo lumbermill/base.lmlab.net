@@ -30,6 +30,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.where(code: @keyword.to_i)
     end
+
   end
 
   # GET /products/1
@@ -86,10 +87,17 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: t('Product') + t('was successfully destroyed') }
-      format.json { head :no_content }
+      product_cart = Order.joins(:product).where(product_id: @product.id).in_cart
+      product_order = Order.joins(:product).where(product_id: @product.id).ordered
+      if product_cart.exists? || product_order.exists?
+        format.html { redirect_to products_url, notice: t('You can not delete this product because it is in cart / ordered') }
+        format.json { head :no_content }
+      else
+        @product.destroy
+        format.html { redirect_to products_url, notice: t('Product') + t('was successfully destroyed') }
+        format.json { head :no_content }
+      end
     end
   end
 
