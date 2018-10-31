@@ -49,6 +49,7 @@
       <td><%= makers_url(@product).html_safe %></td>
       </tr>
     </table>
+    <% if user_signed_in? %>
     <form class="form-inline">
       <input type="number" value="1" id="quantity" name="quantity" class="form-control"/>
       <%= link_to "<span class='fa fa-plus'></span> ".html_safe + t("Add to cart"), "javascript:void(0)", class: "btn btn-success", onclick: "btn_clicked(#{@product.id}, this)" %>
@@ -56,10 +57,11 @@
     <p>&nbsp;</p>
     <p>      <%= link_to t('.back', :default => t("helpers.links.back")),
                       products_path, :class => 'btn btn-default'  %></p>
+    <% end %>
   </div>
 </div>
 
-<% if current_user.admin? %>
+<% if user_signed_in? && current_user.admin? %>
   <br/>
   <p class="admin">
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
