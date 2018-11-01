@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: []
+  before_action :authenticate_user!, except: [:show,:picture]
 
   # GET /products
   # GET /products.json
@@ -36,17 +36,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.find(params[:id])
-    user = current_user
-    recents = Recent.where(user_id: user.id, product_id: @product.id)
-    if recents.exists?
-      recent = recents.first
-      recent.viewed_time= Time.now
-      recent.save
-    else
-      Recent.create(:product_id => @product.id , :viewed_time => Time.now, :user_id => user.id)
-    end
-
+    Recent.append(current_user,@product) if user_signed_in?
   end
 
   # GET /productrais/new
@@ -144,7 +134,9 @@ class ProductsController < ApplicationController
       pp[:user_id] = current_user.id
       pp[:price].gsub!(",","")
       pp[:cost].gsub!(",","")
-      pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
+      if params[:product][:tags]
+        pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
+      end
       return pp
     end
 

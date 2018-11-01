@@ -1,18 +1,19 @@
 require 'test_helper'
 
 class RecentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "append" do
+    u1 = User.find(1)
+    u2 = User.find(2)
+    p1 = Product.find(1)
+    p2 = Product.find(2)
 
-  test "count" do
-  assert_equal 4, Recent.count
+    assert_equal 2, Recent.count
+    Recent.append(u1,p1)
+    Recent.append(u2,p1)
+    Recent.append(u2,p2)
+    Recent.append(u2,p2)
+    Recent.append(u2,p1)
+    assert_equal 5, Recent.count
   end
-
-  test "return correct user_id" do
-    recent = Recent.find(4)
-    assert_equal 3, recent.user_id
-  end
-
 end
 
