@@ -39,6 +39,11 @@ ja:
               blank: "ロックトークンが存在しません"
             current_password:
               blank: "を入力してください"
+            password:
+              too_short: "が短すぎます"
+              blank: "を入力してください"
+            password_confirmation:
+              confirmation: "が一致しません"
     models:
       user: "ユーザ"
   devise:
@@ -112,4 +117,5 @@ ja:
       user:
         not_found_in_database: "ユーザが見つかりません"
         unauthenticated: "認証されていません"
+        unconfirmed: "アカウントが確認されていません"
         invalid: "アカウントが不正です"

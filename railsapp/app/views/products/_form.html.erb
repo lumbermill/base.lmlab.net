@@ -82,6 +82,16 @@
     <%=f.error_span(:memo) %>
   </div>
   <div class="form-group">
+    <%= f.label t(:tags), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <% Tag.order("code").each do |tag| %>
+        <%= f.check_box :tags, {id: "tag-"+tag.code, multiple: true, checked: @product.has_tag?(tag)}, tag.code, nil %>
+        <label for="<%= "tag-"+tag.code %>"><%= tag.name %></label> &nbsp;
+      <% end %>
+    </div>
+    <%=f.error_span(:tags) %>
+  </div>
+  <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <p class="text-muted">
         <%= (@product.user.name + " " + @product.updated_at.to_s) if @product.id != nil %>

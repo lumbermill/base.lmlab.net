@@ -3,13 +3,14 @@
     <p><%= t("hello") %> <b><%= current_user.name %></b>!
       <%= link_to ("<span class='fa fa-user'></span> "+t("edit_user")).html_safe, edit_user_registration_path, class: "btn btn-xs btn-default" %>
     </p>
+    <p>下記の検索フィールドにお探しの商品名か商品コードを入力してください。</p>
   </div>
 </div>
-<div class="row" style="padding: 24px 0">
+<div class="row" style="padding: 60px 0;">
   <div class="col-xs-12">
     <form method="get" action="<%= products_path %>" class="form-inline search">
-      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name")%>
-      <%= submit_tag t('search'), class: 'btn btn-primary' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name"), size: 60 %>
+      <%= button_tag ('<span class="fa fa-search"></span> '.+t('search')).html_safe, class: 'btn btn-primary ' %>
     </form>
   </div>
 </div>
@@ -27,37 +28,39 @@
 <h3><%= t("recent_view") %></h3>
 <div class="row" style="padding: 24px 0">
   <% @recent_views.each do |recent| %>
-
-    <% if current_user.id == recent.user_id  %>
     <div class="col-sm-3">
       <figure>
         <%= link_to image_tag(recent.product.picture_path, class: "img-thumbnail img-responsive"), product_path(recent.product) %>
         <figcaption><%= recent.product.name %></figcaption>
       </figure>
     </div>
-      <% end %>
   <% end %>
 </div>
 <h3><%= t("recent_order") %></h3>
 <div class="row" style="padding: 24px 0">
-  <% @recent_orders.each do |recent| %>
-
-    <% if current_user.id == recent.user_id  %>
+  <% @recent_orders.each do |product| %>
     <div class="col-sm-3">
       <figure>
-        <%= link_to image_tag(recent.product.picture_path, class: "img-thumbnail img-responsive"), product_path(recent.product) %>
-        <figcaption><%= recent.product.name %></figcaption>
+        <%= link_to image_tag(product.picture_path, class: "img-thumbnail img-responsive"), product_path(product) %>
+        <figcaption><%= product.name %></figcaption>
       </figure>
     </div>
-      <% end %>
   <% end %>
 </div>
 
 <div class="row" style="padding: 24px 0">
   <div class="col-sm-12">
-    <%= link_to ("<span class='fa fa-list'></span> "+t("order_history")).html_safe, orders_history_path, class: "btn btn-default" %>
+    <%= link_to ("<span class='fa fa-list'></span> "+t("order_history") + " <span class='badge' id='orders'>-</span>").html_safe, orders_history_path, class: "btn btn-default" %>
+    <% if current_user.parent %>
+      <%= link_to "ディストリビュータ: " + current_user.parent.name, "#", class: "btn btn-default", disabled: "disabled" %>
+    <% else %>
+      <small>管理ユーザとしてログイン中です。</small>
+    <% end %>
   </div>
 </div>
+<script type="text/javascript">
+  $("#orders").load("dashboard-count?key=orders");
+</script>
 <% if current_user.distributor? %>
   <h3><%= t("for_distributor") %></h3>
   <div class="row" style="padding: 24px 0">

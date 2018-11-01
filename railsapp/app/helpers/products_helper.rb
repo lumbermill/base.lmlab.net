@@ -20,4 +20,12 @@ module ProductsHelper
     end
     return html
   end
+
+  def tags_as_labels(product)
+    return "" if product.tags.count == 0
+    html = product.tags.map do |v|
+      "<span class='label label-default' title='#{v.code}'>#{v.name}</span>"
+    end.join(" ")
+    return html.html_safe
+  end
 end

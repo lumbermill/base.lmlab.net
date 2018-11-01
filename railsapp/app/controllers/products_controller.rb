@@ -17,7 +17,14 @@ class ProductsController < ApplicationController
       @products = Product.all
     elsif @keyword.start_with? "tag:"
       tag = @keyword.sub("tag:","").strip
-      @products = Tag.where(code:tag).first.products
+      if tag.blank?
+        # 管理用の裏技　タグ名の指定がないときはタグが登録されていない商品をだす
+        # ちょっと重たくなるかも
+        @products = Product.all.select { |v| v.tags.count == 0 }
+      else
+        tag = Tag.where(code:tag).first
+        @products = tag ? tag.products : []
+      end
     elsif @keyword.to_i == 0
       @products = Product.where("name like ? or size like ?", "%"+@keyword+"%", "%"+@keyword+"%")
     else
@@ -137,6 +144,7 @@ class ProductsController < ApplicationController
       pp[:user_id] = current_user.id
       pp[:price].gsub!(",","")
       pp[:cost].gsub!(",","")
+      pp[:tags] = params[:product][:tags].map { |t| Tag.find_by(code: t)}
       return pp
     end
 

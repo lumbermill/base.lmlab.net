@@ -22,10 +22,11 @@ class Product < ApplicationRecord
     "/products/picture?code=#{code}&suffix=#{suffix}"
   end
 
-  scope :available, -> { where(status: "available") }
-  scope :will_be_available, -> { where(status: "will-be-available") }
-  scope :out_of_stock, -> { where(status: "out-of-stock") }
-  scope :no_longer_available, -> { where(status: "no-longer-available") }
-
-
+  def has_tag?(tag)
+    code = (tag.is_a? Tag) ? tag.code : tag
+    tags.each do |t|
+      return true if t.code == code
+    end
+    return false
+  end
 end

@@ -6,6 +6,8 @@ ja:
           attributes:
             code:
               taken: "同一のコードが既に登録されています"
+            name:
+              blank: "商品名を入力してください"
         user:
           attributes:
             email:
@@ -17,9 +19,11 @@ ja:
   hello: "こんにちは、"
   search: "検索"
   Search: "検索"
+  Clear: "条件をクリア"
   back: "戻る"
   Back: "戻る"
   detail: "詳細"
+  Dashboard: "ダッシュボード"
   arrived: "納品済み"
   History: "注文履歴"
   history: "注文履歴"
@@ -74,6 +78,7 @@ ja:
   size: "サイズ"
   Status: "ステータス"
   Subtotal: "小計"
+  tags: "カテゴリ"
   Tag: "カテゴリ"
   Tags: "カテゴリ一覧"
   Total: "合計"

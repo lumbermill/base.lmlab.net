@@ -10,7 +10,7 @@ class User < ApplicationRecord
   # belongs_to :parent, :class_name => "User", :foreign_key => "parent_user_id"
   belongs_to :parent, :class_name => "User", optional: true
   has_many :children, :class_name => "User", :foreign_key => "parent_id"
-  
+
 
   def distributor?
     children.count > 0
@@ -47,5 +47,16 @@ class User < ApplicationRecord
       .where(user_id: ids)
       .group(:user_id,:checkout_at,:status).having("checkout_at is not null")
       .order("checkout_at desc")
+  end
+
+  def self.parent_by_token(token)
+    return nil if token.nil?
+    t = connection.quote(token+"%")
+    rows = User.where("email LIKE #{t}")
+    if rows.count == 1
+      return rows.first
+    else
+      return nil
+    end
   end
 end

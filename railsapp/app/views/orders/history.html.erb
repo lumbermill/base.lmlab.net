@@ -39,6 +39,6 @@
 </table>
 <% if @title == "history_of_children" %>
 <p><%= link_to '自分自身の注文履歴', orders_history_path, class: "btn btn-default" %></p>
-<% else %>
+<% elsif current_user.children.count > 0 %>
 <p><%= link_to 'フロントの注文履歴', orders_history_path(children: true), class: "btn btn-default" %></p>
 <% end %>
