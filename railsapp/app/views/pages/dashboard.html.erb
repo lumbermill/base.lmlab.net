@@ -50,12 +50,20 @@
 
 <div class="row" style="padding: 24px 0">
   <div class="col-sm-12">
+    <p>
     <%= link_to ("<span class='fa fa-list'></span> "+t("order_history") + " <span class='badge' id='orders'>-</span>").html_safe, orders_history_path, class: "btn btn-default" %>
     <% if current_user.parent %>
-      <%= link_to "ディストリビュータ: " + current_user.parent.name, "#", class: "btn btn-default", disabled: "disabled" %>
+      <%= link_to "<span class='fa fa-slack'></span> ".html_safe+"ご意見・ご要望", "https://360cw.slack.com/messages/CD34HGR6D/", class: "btn btn-default", target: "_blank" %>
+      <%= link_to "<span class='fa fa-paper-plane'></span> ".html_safe+"お問い合わせ", messages_path, class: "btn btn-default" %>
+      <small> あなたのディストリビュータは <%= current_user.parent.name %> さんです。</small>
     <% else %>
-      <small>管理ユーザとしてログイン中です。</small>
+      <small> 管理ユーザとしてログイン中です。</small>
     <% end %>
+    </p>
+    <p>「こんな商品も扱って欲しい」「こんな使い方がしたい」等のご意見、ご要望を気軽にお寄せください。
+      上記「ご意見・ご要望」リンクはSlackのチャネルになっており、別途アカウント登録が必要です。
+      アカウントのない方は、「お問い合わせ」から管理者あてにメッセージを送信することが可能です。
+    </p>
   </div>
 </div>
 <script type="text/javascript">

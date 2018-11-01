@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sender_id: 1
+  receiver_id: 2
+  type:
+  body: Hello!
+  opened: false
+
+two:
+  sender_id: 2
+  receiver_id: 1
+  type:
+  body: Nece to meet you!
+  opened: false
+
+three:
+  sender_id: 1
+  receiver_id: 3
+  type:
+  body: Good night.
+  opened: false

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :products
   resources :tags
+  resources :messages
   devise_for :users, controllers: {
       registrations: 'users/registrations'
   }
