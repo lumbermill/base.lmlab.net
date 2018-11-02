@@ -8,11 +8,10 @@
 <% @messages.each do |message| %>
   <div class="row">
     <% cls = message.sender_id == current_user.id ? "col-xs-offset-2 col-xs-10" : "col-xs-10"%>
-    <% fg = message.sender_id == current_user.id ? "white" : "black"%>
-    <% bg = message.sender_id == current_user.id ? "white" : "rgb(227, 227, 227)"%>
+    <% bg = message.sender_id == current_user.id ? "" : "background-color: rgb(227, 227, 227)"%>
     <div class="<%= cls %>">
       <div class="panel panel-default">
-        <div class="panel-body" style="background-color: <%= bg %>">
+        <div class="panel-body" style="<%= bg %>">
           <%= message.body %>
         </div>
       </div>
