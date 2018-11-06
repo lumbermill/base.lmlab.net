@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     when "number_of_children" then
       v = current_user.children.count
     when "orders" then
-      v = Order.where(user_id: current_user.id,status: ["ordered","shipping"]).count
+      v = current_user.active_orders.length
     else
       v = key
     end

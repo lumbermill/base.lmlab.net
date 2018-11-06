@@ -49,6 +49,12 @@ class User < ApplicationRecord
       .order("checkout_at desc")
   end
 
+  def active_orders
+    Order.select("checkout_at,sum(quantity) as quantity,sum(price) as price,status")
+      .where(user_id: id,status: ["ordered","shipping"])
+      .group(:checkout_at, :status)
+  end
+
   def self.parent_by_token(token)
     return nil if token.nil?
     t = connection.quote(token+"%")
