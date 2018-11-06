@@ -6,8 +6,8 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     if current_user.admin?
-      # TODO: 要修正 adminのときは宛先を選択可能にする とりあえず3固定
-      receiver_id = 3
+      # adminのときは宛先を選択可能にする
+      receiver_id = params[:sender_id].to_i
     else
       # 一般ユーザ
       receiver_id = 1
@@ -18,6 +18,17 @@ class MessagesController < ApplicationController
     @message.receiver_id = receiver_id # admin
     @message.type = ''
     @message.opened = false
+  end
+
+  def index_by_users
+    raise "not implemented" unless current_user.admin?
+    # adminだけが使える
+    @users = User.order(:id)
+    @new_arrives = {}
+    @users.each do |u|
+      # TODO: 新着件数を表示したい
+      @new_arrives[u.id] = 0
+    end
   end
 
   # GET /messages/1
