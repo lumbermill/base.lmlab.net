@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   def index
     if current_user.admin?
       # adminのときは宛先を選択可能にする
-      receiver_id = params[:sender_id].to_i
+      receiver_id = params[:receiver_id].to_i
     else
       # 一般ユーザ
       receiver_id = 1
@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     @messages = Message.find_by_users(current_user,User.find(receiver_id))
     @message = Message.new
     @message.sender_id = current_user.id
-    @message.receiver_id = receiver_id # admin
+    @message.receiver_id = receiver_id
     @message.type = ''
     @message.opened = false
   end
@@ -52,7 +52,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to messages_url, notice: 'Message was successfully created.' }
+        format.html { redirect_to messages_url(receiver_id: @message.receiver_id), notice: 'Message was successfully created.' }
         format.json { render :no_content }
       else
         format.html { render :new }

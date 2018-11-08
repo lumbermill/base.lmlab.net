@@ -5,7 +5,7 @@
 <table class="table">
 <% @users.each do |user| %>
 <tr>
-  <td><%= link_to user.name+" "+user.id.to_s+"", messages_path(sender_id: user.id)  %></td>
+  <td><%= link_to user.name+" "+user.id.to_s+"", messages_path(receiver_id: user.id)  %></td>
 </tr>
 <% end %>
 </table>
