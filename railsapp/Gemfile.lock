@@ -188,6 +188,7 @@ GEM
     selenium-webdriver (3.14.1)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    slack-notifier (2.3.2)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -250,6 +251,7 @@ DEPENDENCIES
   rails (~> 5.1.6)
   sass-rails (~> 5.0)
   selenium-webdriver
+  slack-notifier (~> 2.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
@@ -259,4 +261,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.16.5
+   1.16.6
