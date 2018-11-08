@@ -1,7 +1,8 @@
 module ApplicationHelper
   def self.slack_init
-    # return if Rails.env.test?
-    url = 'https://hooks.slack.com/services/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'
+    return if Rails.env.test?
+    url = ENV["BASE_SLACK_WEBHOOK_URL"]
+    return if url.blank?
     notifier = Slack::Notifier.new(url)
     yield(notifier)
   end

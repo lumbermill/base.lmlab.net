@@ -52,6 +52,10 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        if @message.receiver_id == 1
+          u = User.find(@message.sender_id)
+          ApplicationHelper.slack_ping("#{u.name}様(id:#{u.id})からお問い合わせがありました。\nhttps://base.lmlab.net")
+        end
         format.html { redirect_to messages_url(receiver_id: @message.receiver_id), notice: 'Message was successfully created.' }
         format.json { render :no_content }
       else
