@@ -67,9 +67,18 @@ See railsapp/db/schemas.rb
 
 To set up initial products table.
 See the content of `lib/tasks/import-products.rb`.
-You can import items from Google Spreadsheet. 
+You can import items from Google Spreadsheet.
 
 ## Gems
 - bootstrap - for responsible layouts.
 - devise - for authenticate users.
 - paper_trail - for versioning.
+- slack-notifier -  for Slack notifications.
+
+## Installation
+If you want to use notifications for Slack.
+Obtain incoming webhook URL of your workspace(channel), and set it as an environment variable like below.
+
+```
+SetEnv BASE_SLACK_WEBHOOK_URL https://hooks.slack.com/services/(yourtokens)
+```
