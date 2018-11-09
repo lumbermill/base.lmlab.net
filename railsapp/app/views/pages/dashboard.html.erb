@@ -58,7 +58,11 @@
       <small> あなたのディストリビュータは <%= current_user.parent.name %> さんです。</small>
     <% else %>
     <%= link_to "<span class='fa fa-paper-plane'></span> ".html_safe+"お問い合わせ", messages_by_users_path, class: "btn btn-default" %>
-      <small> 管理ユーザとしてログイン中です。</small>
+      <% if current_user.admin? %>
+        <small> 管理ユーザとしてログイン中です。</small>
+      <% else %>
+        <small style="color: red"> ディストリビュータ不在</small>
+      <% end %>
     <% end %>
     </p>
     <p>「こんな商品も扱って欲しい」「こんな使い方がしたい」等のご意見、ご要望を気軽にお寄せください。
