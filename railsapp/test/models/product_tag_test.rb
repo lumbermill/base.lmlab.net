@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class ProductTagTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "count " do
+    assert_equal 2, ProductTag.count
+  end
+
 end

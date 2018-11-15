@@ -3,7 +3,7 @@ require 'test_helper'
 class TagsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @tag = tags(:one)
+    @tag = tags(:food)
   end
 
   test "should get index" do
@@ -47,6 +47,8 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy tag" do
     sign_in users(:dist1)
+    product_tag = ProductTag.find_by(tag: @tag)
+    product_tag.destroy
     assert_difference('Tag.count', -1) do
       delete tag_url(@tag)
 
