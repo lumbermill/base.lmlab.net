@@ -38,11 +38,12 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    head :no_content
   end
 
   # GET /messages/1/edit
   def edit
+    head :no_content
   end
 
   # POST /messages

@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
+    sign_in users(:dist1)
     @message = messages(:one)
   end
 
@@ -20,7 +22,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
       post messages_url, params: { message: { body: @message.body, opened: @message.opened, receiver_id: @message.receiver_id, sender_id: @message.sender_id, type: @message.type } }
     end
 
-    assert_redirected_to message_url(Message.last)
+    assert_redirected_to messages_url(receiver_id: @message.receiver_id)
   end
 
   test "should show message" do
@@ -30,7 +32,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     get edit_message_url(@message)
-    assert_response :success
+    assert_response 204
   end
 
   test "should update message" do
