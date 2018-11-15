@@ -47,6 +47,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy product" do
     sign_in users(:dist1)
+    # TODO: we have to think which one can destroy. (we should not destroy the one which is in-cart.)
     assert_difference('Product.count', -1) do
       delete product_url(@product)
     end
@@ -67,6 +68,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "test paper trail destroy history on product" do
     product = Product.find(1)
+    product_tag = ProductTag.find_by(product: product)
+    product_tag.destroy
 
     with_versioning do
       previous_versions_count = product.versions.count
@@ -124,6 +127,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "test paper trail return correct event name on delete product" do
     product = Product.find(1)
+    product_tag = ProductTag.find_by(product: product)
+    product_tag.destroy
     product.versions
     with_versioning do
       product.destroy
@@ -167,4 +172,3 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
 
 end
-
