@@ -47,11 +47,17 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy product" do
     sign_in users(:dist1)
-    # TODO: we have to think which one can destroy. (we should not destroy the one which is in-cart.)
-    assert_difference('Product.count', -1) do
+    assert_difference('Product.count', 0) do
+      # it can not be removed
       delete product_url(@product)
     end
+    assert_redirected_to products_url
 
+    new_product = products(:five)
+    assert_difference('Product.count', -1) do
+      # it can be removed because the product is not ordered yet.
+      delete product_url(new_product)
+    end
     assert_redirected_to products_url
   end
 
