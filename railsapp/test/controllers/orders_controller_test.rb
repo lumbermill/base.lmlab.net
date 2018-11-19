@@ -49,10 +49,17 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy order" do
     sign_in users(:dist1)
-    assert_difference('Order.count', -1) do
+    assert_difference('Order.count', 0) do
+      # should not be deleted
       delete order_url(@order)
     end
+    assert_redirected_to orders_url
 
+    order_in_cart = orders(:seven)
+    assert_difference('Order.count', -1) do
+      # should be deleted because it's still in cart.(not be placed)
+      delete order_url(order_in_cart)
+    end
     assert_redirected_to orders_url
   end
 

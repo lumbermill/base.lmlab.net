@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     if ts.nil?
       @checkout_at = nil
       @orders = current_user.orders.in_cart
+      @removable = true
     else
       u = User.find(params[:user_id]) if params[:user_id]
       u = current_user unless u
@@ -89,9 +90,14 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
+    if @order.status == "in-cart"
+      @order.destroy
+      m = 'Order was successfully destroyed'
+    else
+      m = 'can not destoy'
+    end
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: t('Order was successfully destroyed') }
+      format.html { redirect_to orders_url, notice: t(m) }
       format.json { head :no_content }
     end
   end

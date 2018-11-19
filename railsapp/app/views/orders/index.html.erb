@@ -48,7 +48,9 @@ function remove_from_cart(order_id,b){
       <th><%= t("Price") %></th>
       <th><%= t("Quantity") %></th>
       <th><%= t("Subtotal") %></th>
-      <th></th>
+      <% if @removable %>
+        <th></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -67,7 +69,9 @@ function remove_from_cart(order_id,b){
         <td><%= order.product.price %></td>
         <td><%= order.quantity %></td>
         <td class="subtotal"><%= order.product.price * order.quantity %></td>
-        <td><%= link_to t("Remove"), "javascript:void(0)", onclick: "remove_from_cart(#{order.id},this)", class: "btn btn-danger btn-xs" %></td>
+        <% if @removable %>
+          <td><%= link_to t("Remove"), "javascript:void(0)", onclick: "remove_from_cart(#{order.id},this)", class: "btn btn-default btn-xs" %></td>
+        <% end %>
         <% total += order.product.price * order.quantity %>
       </tr>
       <% end
