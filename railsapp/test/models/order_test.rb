@@ -11,5 +11,7 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 1, Order.canceled.count
   end
 
-
+  test "total" do
+    assert_equal 43, Order.total(Order.all)
+  end
 end

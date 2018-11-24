@@ -109,11 +109,15 @@ class OrdersController < ApplicationController
   def checkout2
     orders = current_user.orders.in_cart
     ts = Time.now
+    @n_items = 0
     orders.each do |o|
+      @n_items += o.quantity
       o.checkout_at = ts
       o.status = "ordered"
       o.save
     end
+    @checkout_at = ts
+    @total = Order.total(orders)
   end
 
   def history
