@@ -27,6 +27,7 @@ ja:
         origin_site: 登録サイト
         confirmed?: メール確認
         confirmed_at: メール確認日時
+        message4payment: フロントへのメッセージ
     errors:
       models:
         user:
@@ -39,6 +40,7 @@ ja:
               blank: "ロックトークンが存在しません"
             current_password:
               blank: "を入力してください"
+              invalid: "が一致しません"
             password:
               too_short: "が短すぎます"
               blank: "を入力してください"
