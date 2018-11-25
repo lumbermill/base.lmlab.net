@@ -13,6 +13,9 @@ makers = {
   },
   ksy: {name: "KSY", url: "https://raspberry-pi.ksyic.com/",
     url4product: "https://raspberry-pi.ksyic.com/main/index/pdp.id/{code}/pdp.open/{code}"
+  },
+  pcn: {name: "PCN", url: "https://hello002.stores.jp/",
+    url4product: "https://hello002.stores.jp/items/{code}"
   }}
 
 MAKERS = makers
