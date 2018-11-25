@@ -1,0 +1,23 @@
+<%# 作りかけです。必要になってから整形します %>
+<% total = 0 %>
+<% if params[:group_by_product] %>
+<% @orders.each do |order| %>
+<%= order.product_id %>
+<%= order.product.name %>
+<%= order.product.code %>
+<%= order.product.price %>
+<%= order.quantity %>
+<%= order.product.price * order.quantity %>
+<% end %>
+<% else %>
+<% @orders.each do |order| %>
+<%= order.id %>
+<%= order.user.name %>
+<%= order.updated_at %>
+<%= order.product.name %>
+<%= order.product.code %>
+<%= order.product.price %>
+<%= order.quantity %>
+<%= order.product.price * order.quantity %>
+<% end %>
+<% end %>

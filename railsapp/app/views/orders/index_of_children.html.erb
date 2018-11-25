@@ -30,10 +30,22 @@ function update_order_status(status){
   });
 }
 
+function update_group_by_product(){
+  $("#group_by_product_form").submit();
+}
+
+$(function(){
+  $("#group_by_product").on('change',update_group_by_product);
+});
 </script>
 <div class="page-header">
   <h1><span class="fa fa-list"></span> <%= t(@title) %></h1>
 </div>
+<form action="of-children" method="get" id="group_by_product_form">
+  <%= check_box_tag :group_by_product, "true", params[:group_by_product].present?  %>
+  <%= hidden_field_tag :status, params[:status] %>
+  <label for="group_by_product">商品ごとにグルーピングする</label>
+</form>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -48,12 +60,35 @@ function update_order_status(status){
     </tr>
   </thead>
   <tbody>
-    <% if @orders.count == 0 %>
+    <% n, total_price, total_quantity = 0, 0, 0 %>
+    <% if @orders.nil? %>
       <tr>
         <td colspan="7"><%= t("Nothing to show here") %></td>
       </tr>
+    <% elsif params[:group_by_product] %>
+      <% @orders.each do |order| %>
+        <tr id="row-<%= order.product_id %>">
+          <td></td>
+          <td></td>
+          <td><%= link_to image_tag(order.product.picture_path, style: "max-height: 64px"), product_path(order.product) %></td>
+          <td><%= order.product.name %> <small class="text-muted"><%= order.product.code %></small></td>
+          <td><%= order.product.price %></td>
+          <td><%= order.quantity %></td>
+          <td class="subtotal"><%= order.product.price * order.quantity %></td>
+          <td></td>
+          <% n += 1 %>
+          <% total_quantity += order.quantity %>
+          <% total_price += order.product.price * order.quantity %>
+        </tr>
+      <% end %>
+      <tr>
+        <th colspan="3" style="text-aling: right"><%= t("Total") +":" %></th>
+        <td colspan="2" class="text-muted"><%= 0 %>人, <%= n %>品目</td>
+        <td><%= total_quantity %></td>
+        <td colspan="2" id="total"><%= total_price %></td>
+      </tr>
     <% else
-         total = 0
+        # List of orders
          @orders.each do |order| %>
       <tr id="row-<%= order.id %>">
         <td><%= order.user.name %></td>
@@ -64,20 +99,22 @@ function update_order_status(status){
         <td><%= order.quantity %></td>
         <td class="subtotal"><%= order.product.price * order.quantity %></td>
         <td><%= check_box_tag :orders, order.id %></td>
-        <% total += order.product.price * order.quantity %>
+        <% total_price += order.product.price * order.quantity %>
       </tr>
-      <% end
-       end %>
-    <tr>
-      <th colspan="6" style="text-aling: right"><%= t("Total") +":" %></td>
-      <td colspan="2" id="total"><%= total %></td>
-    </tr>
+      <% end %>
+      <tr>
+        <th colspan="6" style="text-aling: right"><%= t("Total") +":" %></th>
+        <td colspan="2" id="total"><%= total_price %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 <div id="message">
 
 </div>
-<% if @title == "orders_of_children" %>
+<% if params[:group_by_product].present? %>
+  <p>グルーピングされたまま、「発注済み」「納品済み」に移行できません。解除してから入力してください。</p>
+<% elsif @title == "orders_of_children" %>
   <p>
     あなたのフロントからの注文と、あなた自身の注文がリストアップされています。<br/>
     <a href="https://www.amwaylive.com/">Amwaylive</a>で発注した商品にチェックを入れてください。</p>
