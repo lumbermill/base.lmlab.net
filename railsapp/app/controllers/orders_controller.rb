@@ -116,7 +116,8 @@ class OrdersController < ApplicationController
   end
 
   def checkout2
-    orders = current_user.orders.in_cart
+    u = current_user
+    orders = u.orders.in_cart
     ts = Time.now
     @n_items = 0
     orders.each do |o|
@@ -127,6 +128,7 @@ class OrdersController < ApplicationController
     end
     @checkout_at = ts
     @total = Order.total(orders)
+    SlackJob.perform_now("#{u.name}様(id:#{u.id})の注文が確定されました。\n#{ts}, #{@n_items}\nhttps://base.lmlab.net")
   end
 
   def history
