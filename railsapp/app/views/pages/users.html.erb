@@ -4,6 +4,7 @@
     <th><%= t("User Name") %></th>
     <th><%= t("Email") %></th>
     <th><%= t("Confirmed") %></th>
+    <th><%= t("Distributor") %></th>
     <th><%= t("Last signed in") %></th>
   </tr>
   <% @users.each do |u| %>
@@ -15,6 +16,7 @@
     <% end %>
     <td><%= u.email %></td>
     <td><%= u.confirmed? ? ('<span class="fa fa-check" title="'+u.confirmed_at.to_s+'"></span>').html_safe : "" %></td>
+    <td><%= u.distributor? ? ('<span class="fa fa-check" title="'+u.children.count.to_s+'"></span>').html_safe : "" %></td>
     <td><%= u.last_sign_in_at %></td>
   </tr>
   <% end %>
@@ -22,4 +24,5 @@
 <ul class="text-muted">
   <li>ユーザ名のリンクをクリックすると、そのユーザとしてログインします。
   ログイン履歴が残りますので、必ず事前に当該ユーザの承諾を得て作業してください。</li>
+  <li>フロントが存在するユーザはディストリビュータとして扱われます（あなた宛には発注が計上されなくなります）。</li>
 </ul>
