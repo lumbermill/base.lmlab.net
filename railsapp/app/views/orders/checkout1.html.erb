@@ -75,4 +75,5 @@ function remove_from_cart(order_id,b){
 <% else %>
   <%= link_to t('Place the order'), orders_checkout2_path, class: 'btn btn-primary' %>
   <%= link_to t('Back'), orders_path, class: 'btn btn-default' %>
+  <%= render 'amazon_pay' %>
 <% end %>
