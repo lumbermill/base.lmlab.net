@@ -113,6 +113,7 @@ class OrdersController < ApplicationController
 
   def checkout1
     @orders = current_user.orders.in_cart
+    @use_stripe = true
   end
 
   def checkout2
