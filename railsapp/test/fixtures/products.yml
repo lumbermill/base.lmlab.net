@@ -7,8 +7,8 @@ one:
   maker: MyString
   name: MyString
   size: MyString
-  price: 1
-  cost: 9.99
+  price: 100
+  cost: 50.99
   picture_id: 1
   copy: MyString
   memo: MyString

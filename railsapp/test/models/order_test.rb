@@ -12,6 +12,7 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   test "total" do
-    assert_equal 43, Order.total(Order.all)
+    assert_equal 900, Order.total(Order.in_cart)
+    assert_equal 2320, Order.total(Order.all)
   end
 end

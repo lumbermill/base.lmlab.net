@@ -10,7 +10,7 @@ one:
   checkout_at: <%= ts %>
   product_id: 1
   quantity: 1
-  price: 1
+  price: 100
   status: ordered
 
 two:
@@ -19,7 +19,7 @@ two:
   checkout_at: <%= ts %>
   product_id: 2
   quantity: 2
-  price: 2
+  price: 200
   status: ordered
 
 <% ts = Time.now %>
@@ -29,7 +29,7 @@ three:
   checkout_at: <%= ts %>
   product_id: 1
   quantity: 3
-  price: 3
+  price: 300
   status: ordered
 
 <% ts -= 1.days %>
@@ -67,5 +67,5 @@ seven:
   checkout_at: <%= ts %>
   product_id: 4
   quantity: 3
-  price: 3
+  price: 300
   status: in-cart

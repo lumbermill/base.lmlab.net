@@ -25,8 +25,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Order.count') do
       post orders_url, params: { order: { quantity: @order.quantity, price: @order.price, product_id: @order.product_id, checkout_at: @order.checkout_at, status: @order.status, user_id: @order.user_id } }
     end
-
-    assert_redirected_to order_url(Order.last)
+    o = Order.last
+    assert_redirected_to order_url(o)
+    assert_equal @order.price, o.price
   end
 
   test "should show order" do
@@ -96,12 +97,10 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "test paper trail whodunnit" do
-
     order = Order.find(1)
     with_versioning do
-
       PaperTrail.request.whodunnit = users(:dist1).email
-      order.price = 100
+      order.price = 120
       order.save
       assert_equal users(:dist1).email, order.versions.last.whodunnit
     end
@@ -124,7 +123,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     order = Order.find(1)
     order.versions
     with_versioning do
-      order.price = 100
+      order.price = 120
       order.save
       v = order.versions.last
       assert 'Update', v.event
