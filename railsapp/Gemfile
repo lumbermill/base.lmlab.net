@@ -58,3 +58,4 @@ gem 'font-awesome-rails', '~> 4.7'
 gem "jquery-rails"
 gem 'whenever', require: false
 gem 'slack-notifier', '~>2.3'
+gem 'stripe'

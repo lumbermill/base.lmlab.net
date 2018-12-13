@@ -7,4 +7,9 @@
   <p>注文日時: <%= l @checkout_at %>, 点数: <%= @n_items %>, 合計金額: <%= @total %></p>
   <p>ディストリビュータからのメッセージ:<br/><%= sanitize_message(current_user.parent&.message4payment) %></p>
 </div>
+<% if params[:stripeToken] %>
+  <p>Stripeで決済処理を開始致しました。</p>
+  <%# エラー処理が未実装なので、ちょっとぼかした文言にしています %>
+<% end %>
+
 <p><%= link_to t("back"), pages_dashboard_path, class: "btn btn-default" %></p>

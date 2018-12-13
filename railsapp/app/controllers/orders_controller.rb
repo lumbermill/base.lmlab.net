@@ -114,7 +114,7 @@ class OrdersController < ApplicationController
 
   def checkout1
     @orders = current_user.orders.in_cart
-    @use_stripe = true
+    @use_stripe = current_user.parent&.admin?
   end
 
   def checkout2
@@ -130,6 +130,7 @@ class OrdersController < ApplicationController
     end
     @checkout_at = ts
     @total = Order.total(orders)
+    stripe(@total) if params[:stripeToken]
     SlackJob.perform_now("#{u.name}様(id:#{u.id})の注文が確定されました。\n#{ts}, #{@n_items}\nhttps://base.lmlab.net")
   end
 
@@ -157,5 +158,18 @@ class OrdersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
     params.require(:order).permit(:user_id, :checkout_at, :product_id, :quantity, :status)
+  end
+
+  def stripe(total)
+    # Token is created using Checkout or Elements!
+    # Get the payment token ID submitted by the form:
+    token = params[:stripeToken]
+
+    charge = Stripe::Charge.create({
+        amount: total,
+        currency: 'jpy',
+        description: 'Example charge',
+        source: token,
+    })
   end
 end

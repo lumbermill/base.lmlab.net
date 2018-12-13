@@ -1,4 +1,4 @@
-<form action="checkout2" method="get">
+<form action="checkout2" method="post">
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_DfoKFBIrAGKhxBbDgP0G954e"
@@ -9,4 +9,5 @@
     data-locale="auto"
     data-currency="jpy">
   </script>
+  <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token"/>
 </form>

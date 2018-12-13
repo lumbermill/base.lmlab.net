@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'orders/checkout1'
-  get 'orders/checkout2'
+  post 'orders/checkout2'
   get 'orders/n-in-cart'
   get 'orders/history'
   get 'orders/of-children', to: 'orders#index_of_children'
