@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.where(code: @keyword.to_i)
     end
-
+    @products = @products.page(params[:page])
   end
 
   # GET /products/1

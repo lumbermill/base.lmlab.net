@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  paginates_per 20
+
   belongs_to :user
   has_many :product_tags
   has_many :tags, through: :product_tags

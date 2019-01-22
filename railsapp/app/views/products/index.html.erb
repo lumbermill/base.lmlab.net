@@ -72,6 +72,7 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @products %>
 <% if current_user.admin? %>
 <p class="admin">
 <%= link_to t('.new', :default => t("helpers.links.new")),
