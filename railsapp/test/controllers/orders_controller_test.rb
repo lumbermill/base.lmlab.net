@@ -4,7 +4,6 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @order = orders(:one)
-
   end
 
 
@@ -18,6 +17,11 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:dist1)
     get new_order_url
     assert_response :success
+  end
+
+  test "should get index_of_children" do
+      get orders_of_children_url, params: { status: "shipping", group_by_product: "true"}
+      # TODO: need to add something for test
   end
 
   test "should create order" do
