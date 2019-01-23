@@ -6,10 +6,10 @@
     }
   });
 
-  function btn_clicked(id,b){
+  function btn_clicked(id,pr,b){
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
-    $.post("/orders.json",{order: {product_id: id, quantity: 1}})
+    $.post("/orders.json",{order: {product_id: id, quantity: 1, price: pr}})
       .done(function(d){
         $("div#product-"+id).show();
       })
@@ -27,6 +27,7 @@
     $("#search").val("");
   }
 </script>
+
 <div class="page-header">
   <form method="get" action="<%= products_path %>" class="form-inline search">
     <%= text_field_tag :search, @keyword, class: 'form-control', placeholder: t("name,code or tag:name")%>
@@ -53,9 +54,9 @@
           <%= product.copy %>
           <div id="product-<%= product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
         </td>
-        <td><%= product.price %></td>
+        <td><%= product.price %></td> 
         <td>
-          <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},this)" %>
+          <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},#{product.price},this)" %>
           <% if current_user.admin? %>
           <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
