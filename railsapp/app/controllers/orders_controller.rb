@@ -35,9 +35,11 @@ class OrdersController < ApplicationController
       end
     elsif status == "shipping"
       @title = "shipping_of_children"
-      @orders = []
-      children.each do |child|
-        @orders += child.orders.shipping
+      @orders = Order.shipping.where(user_id: children.map { |c| c.id })
+      if @orders.count == 0
+        @orders = nil
+      elsif params[:group_by_product]
+        @orders = @orders.group(:product_id).select("product_id, sum(quantity) as quantity")
       end
     end
     respond_to do |format|
