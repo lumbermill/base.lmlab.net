@@ -77,7 +77,7 @@ You can import items from Google Spreadsheet.
 
 ## Steps to create a ruby project from installing Vagrant and VM for butting PUMA servers
 install vagrant and virtual box first
-X to compare >> diff love-quality-japan/vagrant vagrant X
+X to compare >> diff project_dir/vagrant vagrant X
 vagrant init ubuntu/xenial64
 X in vagrant file, comment out the private ip line and vb.memory to 2048 from 1024 X Like this: config.vm.provider "virtualbox" do |vb| # # Display the VirtualBox GUI when booting the machine # vb.gui = true # # # Customize the amount of memory on the VM: vb.memory = "2048" end
 Vagrant up
