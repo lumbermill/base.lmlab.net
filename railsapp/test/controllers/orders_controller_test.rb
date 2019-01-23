@@ -27,6 +27,8 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to order_url(Order.last)
+    assert_equal @order.quantity, Order.last.quantity
+    assert_equal @order.price, Order.last.price
   end
 
   test "should show order" do
