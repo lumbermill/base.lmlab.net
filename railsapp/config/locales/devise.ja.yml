@@ -80,6 +80,8 @@ ja:
       new:
         forgot_your_password: "パスワードを忘れましたか?"
         send_me_reset_password_instructions: "パスワードの再設定方法を送信する"
+      user:
+        send_instructions: "復旧手順を送る"
     registrations:
       edit:
         are_you_sure: "本当に良いですか?"
@@ -96,6 +98,7 @@ ja:
       user:
         signed_up_but_unconfirmed: "アカウント登録確認のメールを送信しました。"
         updated: "ユーザ情報を更新しました。"
+        update_needs_confirmation: "メールアドレスの登録確認が必要です。"
     sessions:
       new:
         sign_in: "ログイン"
