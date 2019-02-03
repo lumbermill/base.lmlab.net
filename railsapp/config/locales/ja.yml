@@ -12,7 +12,7 @@ ja:
           attributes:
             email:
               taken: "このアドレスは既に登録されています"
-              not_found: "アドレスが見つかりませんでした"
+              not_found: "が見つかりませんでした"
   errors:
     messages:
       not_saved: "保存されませんでした"
