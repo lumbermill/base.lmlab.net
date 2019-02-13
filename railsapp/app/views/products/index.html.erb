@@ -10,12 +10,15 @@
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
     $.post("/orders.json",{order: {product_id: id, quantity: 1, price: pr}})
+
       .done(function(d){
         $("div#product-"+id).show();
+            change();
       })
       .fail(function(d){
         alert("Can not process the order.");
       });
+
   }
 
   function reset_btn(id,b){
@@ -54,7 +57,7 @@
           <%= product.copy %>
           <div id="product-<%= product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
         </td>
-        <td><%= product.price %></td> 
+        <td><%= product.price %></td>
         <td>
           <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},#{product.price},this)" %>
           <% if current_user.admin? %>
