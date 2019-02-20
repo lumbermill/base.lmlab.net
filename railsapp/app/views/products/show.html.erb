@@ -13,6 +13,7 @@
     $.post("/orders.json", {order: {product_id: id, quantity: quantity}})
       .done(function(d){
         $("div#product-"+id).show();
+        $("#n-in-cart").load("/orders/n-in-cart");
       })
       .fail(function(d){
         alert(" + <%= t("Can not process the order.") %> + ");

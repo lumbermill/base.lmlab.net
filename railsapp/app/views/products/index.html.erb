@@ -10,15 +10,13 @@
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
     $.post("/orders.json",{order: {product_id: id, quantity: 1, price: pr}})
-
       .done(function(d){
         $("div#product-"+id).show();
-            change();
+        $("#n-in-cart").load("/orders/n-in-cart");
       })
       .fail(function(d){
         alert("Can not process the order.");
       });
-
   }
 
   function reset_btn(id,b){
