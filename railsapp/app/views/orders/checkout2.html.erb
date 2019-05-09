@@ -6,5 +6,7 @@
 <div class="well">
   <p>注文日時: <%= l @checkout_at %>, 点数: <%= @n_items %>, 合計金額: <%= @total %></p>
   <p>ディストリビュータからのメッセージ:<br/><%= sanitize_message(current_user.parent&.message4payment) %></p>
+
+  <%= current_user.parent&.paypal_id %>
 </div>
 <p><%= link_to t("back"), pages_dashboard_path, class: "btn btn-default" %></p>
