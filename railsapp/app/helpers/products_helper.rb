@@ -21,6 +21,20 @@ module ProductsHelper
     return html
   end
 
+  def makers_link(product)
+    return "" if product.maker.blank?
+    m = product.maker
+    "<a href='/products?search=maker:#{m}'>#{m}</a><br/>"
+  end
+
+  def makers_as_list(include_empty: true)
+    html = "<a href='/products?search=maker:'>undefined</a><br/>"
+    MAKERS.keys.each do |m|
+      html += "<a href='/products?search=maker:#{m}'>#{m}</a><br/>"
+    end
+    html.html_safe
+  end
+
   def tags_as_labels(product)
     return "" if product.tags.count == 0
     html = product.tags.map do |v|

@@ -43,6 +43,9 @@
       <th><%= model_class.human_attribute_name(t(:price)) %>:</th>
       <td><%= @product.price %></td>
       </tr><tr>
+      <th><%= model_class.human_attribute_name(t(:maker)) %>:</th>
+      <td><%= makers_link(@product).html_safe %></td>
+      </tr><tr>
       <th><%= model_class.human_attribute_name(t(:tags)) %>:</th>
       <td><%= tags_as_labels(@product) %></td>
       </tr><tr>

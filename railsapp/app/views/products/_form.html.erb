@@ -94,13 +94,12 @@
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <p class="text-muted">
-        <%= (@product.user.name + " " + @product.updated_at.to_s) if @product.id != nil %>
+        <%= (@product.user.name + " " + @product.updated_at.to_s) if @product.id != nil && @product.user %>
       </p>
       <h4>注意事項</h4>
       <ul>
         <li>画像は最大600px程度、JPEG形式のものを登録してください。</li>
-        <li>仕入れ値と製造者は空欄でも大丈夫です。</li>
-        <li>価格はDCを登録してください。（2018.09時点暫定）</li>
+        <li>[amway]価格はDCを登録してください。（2018.09時点暫定）</li>
       </ul>
     </div>
   </div>
