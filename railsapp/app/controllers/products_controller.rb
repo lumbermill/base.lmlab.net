@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
     elsif @keyword.to_i == 0
       @products = Product.where("name like ? or size like ?", "%"+@keyword+"%", "%"+@keyword+"%")
     else
-      @products = Product.where(code: @keyword.to_i)
+      @products = Product.where(code: @keyword)
     end
     @products = @products.page(params[:page])
   end
