@@ -1,0 +1,25 @@
+<%- model_class = Product -%>
+<table class="table table-striped" border="1">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(t(:picture)) %></th>
+      <th><%= model_class.human_attribute_name(t(:name)) %></th>
+      <th><%= model_class.human_attribute_name(t(:price)) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to image_tag(product.picture_path, style: "max-height: 64px"), product_path(product) %></td>
+        <td>
+          <%= link_to product.name+" "+product.size, product_path(product) %> <small class="text-muted"><%= product.code %></small><br/>
+          <%= product.copy %>
+          <div id="product-<%= product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
+        </td>
+        <td><%= product.price %></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

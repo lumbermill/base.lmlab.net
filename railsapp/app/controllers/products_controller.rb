@@ -34,6 +34,9 @@ class ProductsController < ApplicationController
       @products = Product.where(code: @keyword)
     end
     @products = @products.page(params[:page])
+    if params[:print]
+      render action: 'index4printing', layout: false
+    end
   end
 
   # GET /products/1
