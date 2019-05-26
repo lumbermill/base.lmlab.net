@@ -118,7 +118,8 @@ class OrdersController < ApplicationController
 
   def checkout1
     @orders = current_user.orders.in_cart
-    @use_stripe = current_user.parent&.admin?
+    # FIXME: 一時的にstripeは無効化(手数料・送料の問題があるため)
+    @use_stripe = false  # current_user.parent&.admin?
   end
 
   def checkout2
@@ -140,7 +141,8 @@ class OrdersController < ApplicationController
     # TODO: Need some more info for the customer.
 
     pid = u.parent&.paypal_id
-    @paypalme_url = "https://www.paypal.me/#{pid}/#{@total}jpy" if pid
+    t = (@total * 1.036 + 40).to_i
+    @paypalme_url = "https://www.paypal.me/#{pid}/#{t}jpy" if pid.present?
   end
 
   def history

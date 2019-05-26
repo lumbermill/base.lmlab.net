@@ -9,7 +9,10 @@
 
 </div>
 <% if @paypalme_url %>
-  <p>以下のリンクからPayPal経由でお支払い頂くことも可能です。</p>
+  <p>以下のリンクからPayPal経由でお支払い頂くことも可能です。
+    このシステムでは送料を加算していませんので、支払い後すぐに商品が届く訳ではありません。
+  ディストリビュータとの商品受け渡し手順が確定している場合のみ、ご利用ください。
+  Paypalの利用手数料(3.6% + 40円)が加算されています。</p>
   <p><%= link_to @paypalme_url, @paypalme_url, target: "_blank" %> </p>
 <% end %>
 <% if params[:stripeToken] %>
