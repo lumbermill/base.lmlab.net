@@ -13,6 +13,7 @@
     $.post("/orders.json", {order: {product_id: id, quantity: quantity}})
       .done(function(d){
         $("div#product-"+id).show();
+        $("#n-in-cart").load("/orders/n-in-cart");
       })
       .fail(function(d){
         alert(" + <%= t("Can not process the order.") %> + ");
@@ -41,6 +42,9 @@
       </tr><tr>
       <th><%= model_class.human_attribute_name(t(:price)) %>:</th>
       <td><%= @product.price %></td>
+      </tr><tr>
+      <th><%= model_class.human_attribute_name(t(:maker)) %>:</th>
+      <td><%= makers_link(@product).html_safe %></td>
       </tr><tr>
       <th><%= model_class.human_attribute_name(t(:tags)) %>:</th>
       <td><%= tags_as_labels(@product) %></td>

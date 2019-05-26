@@ -75,6 +75,35 @@ You can import items from Google Spreadsheet.
 - paper_trail - for versioning.
 - slack-notifier -  for Slack notifications.
 
+## Steps to create a ruby project from installing Vagrant and VM for butting PUMA servers
+install vagrant and virtual box first
+X to compare >> diff project_dir/vagrant vagrant X
+vagrant init ubuntu/xenial64
+X in vagrant file, comment out the private ip line and vb.memory to 2048 from 1024 X Like this: config.vm.provider "virtualbox" do |vb| # # Display the VirtualBox GUI when booting the machine # vb.gui = true # # # Customize the amount of memory on the VM: vb.memory = "2048" end
+Vagrant up
+vagrant ssh
+sudo -i
+X run these commands one by one X
+apt -y update
+apt -y upgrade
+apt -y install mysql-server apache2 apache2-dev libapache2-mod-passenger rsync git nodejs
+apt -y install ruby-dev libmysqlclient-dev libmagick++-dev libcurl4-openssl-dev libssl-dev
+gem install bundler mysql2 rails rmagick therubyracer passenger --no-ri --no-rdoc
+X skip the lines related to python X
+X create 2 user lmuser and vagrant user X
+mysql -e "create user 'lmuser'@'localhost'"
+mysql -e "grant all privileges on . to 'lmuser'@'localhost'"
+mysql -e "create user 'vagrant'@'localhost'"
+mysql -e "grant all privileges on . to 'lmuser'@'localhost'"
+exit
+rails new project_name —database=mysql
+cd /vagrant/
+mv project_name railsapp
+cd railsapp/
+ls
+edit username and password of database.yml file
+rails db:create
+
 ## Installation
 If you want to use notifications for Slack.
 Obtain incoming webhook URL of your workspace(channel), and set it as an environment variable like below.

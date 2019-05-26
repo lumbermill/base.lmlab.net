@@ -6,12 +6,13 @@
     }
   });
 
-  function btn_clicked(id,b){
+  function btn_clicked(id,pr,b){
     $(b).addClass('disabled');
     setTimeout(reset_btn, 5000, id,b);
-    $.post("/orders.json",{order: {product_id: id, quantity: 1}})
+    $.post("/orders.json",{order: {product_id: id, quantity: 1, price: pr}})
       .done(function(d){
         $("div#product-"+id).show();
+        $("#n-in-cart").load("/orders/n-in-cart");
       })
       .fail(function(d){
         alert("Can not process the order.");
@@ -27,6 +28,7 @@
     $("#search").val("");
   }
 </script>
+
 <div class="page-header">
   <form method="get" action="<%= products_path %>" class="form-inline search">
     <%= text_field_tag :search, @keyword, class: 'form-control', placeholder: t("name,code or tag:name")%>
@@ -55,7 +57,7 @@
         </td>
         <td><%= product.price %></td>
         <td>
-          <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},this)" %>
+          <%= link_to t("Add to cart"), "javascript:void(0)", class: "btn btn-success btn-xs", onclick: "btn_clicked(#{product.id},#{product.price},this)" %>
           <% if current_user.admin? %>
           <p class="admin">
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -72,10 +74,13 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @products %>
 <% if current_user.admin? %>
-<p class="admin">
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_product_path,
-            :class => 'btn btn-primary' %>
-</p>
+  <p class="admin">
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_product_path,
+                :class => 'btn btn-primary' %>
+    <% ps = params.permit(:search); ps[:print] = "on" %>
+    <%= link_to "発注表", products_path(ps), class: 'btn btn-default', target: "index4printing" %>
+  </p>
 <% end %>

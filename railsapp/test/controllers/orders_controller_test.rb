@@ -4,7 +4,6 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @order = orders(:one)
-
   end
 
 
@@ -20,14 +19,26 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get index_of_children" do
+      get orders_of_children_url, params: { status: "shipping", group_by_product: "true"}
+      # TODO: need to add something for test
+  end
+
   test "should create order" do
     sign_in users(:dist1)
     assert_difference('Order.count') do
       post orders_url, params: { order: { quantity: @order.quantity, price: @order.price, product_id: @order.product_id, checkout_at: @order.checkout_at, status: @order.status, user_id: @order.user_id } }
     end
+<<<<<<< HEAD
     o = Order.last
     assert_redirected_to order_url(o)
     assert_equal @order.price, o.price
+=======
+
+    assert_redirected_to order_url(Order.last)
+    assert_equal @order.quantity, Order.last.quantity
+    assert_equal @order.price, Order.last.price
+>>>>>>> master
   end
 
   test "should show order" do

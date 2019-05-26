@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  paginates_per 20
+
   belongs_to :user
   has_many :product_tags
   has_many :tags, through: :product_tags
@@ -35,4 +37,8 @@ class Product < ApplicationRecord
   scope :out_of_stock, -> { where(status: "out-of-stock") }
   scope :no_longer_available, -> { where(status: "no-longer-available") }
 
+  # See also ProductHelper.makers
+  def self.makers
+    Product.select("distinct maker").order("maker").map { |p| p.maker }
+  end
 end

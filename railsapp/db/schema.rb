@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181114064425) do
+ActiveRecord::Schema.define(version: 20190510111407) do
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "sender_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20181114064425) do
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
-    t.bigint "code", default: 0, null: false
+    t.string "code", default: "0", null: false
     t.string "maker", default: "", null: false
     t.string "name", default: "", null: false
     t.string "size", default: "", null: false
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 20181114064425) do
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "paypal_id", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

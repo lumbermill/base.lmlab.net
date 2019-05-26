@@ -6,6 +6,8 @@
 <div class="well">
   <p>注文日時: <%= l @checkout_at %>, 点数: <%= @n_items %>, 合計金額: <%= @total %></p>
   <p>ディストリビュータからのメッセージ:<br/><%= sanitize_message(current_user.parent&.message4payment) %></p>
+
+  <%= current_user.parent&.paypal_id %>
 </div>
 <% if params[:stripeToken] %>
   <p>Stripeで決済処理を開始致しました。</p>
