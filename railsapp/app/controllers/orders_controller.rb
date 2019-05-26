@@ -138,6 +138,9 @@ class OrdersController < ApplicationController
     SlackJob.perform_now("#{u.name}様(id:#{u.id})の注文が確定されました。\n#{ts}, #{@n_items}\nhttps://base.lmlab.net")
     Mailer.simple(nil,u.email,'注文確定','注文が確定されました。').deliver
     # TODO: Need some more info for the customer.
+
+    pid = u.parent&.paypal_id
+    @paypalme_url = "https://www.paypal.me/#{pid}/#{@total}jpy" if pid
   end
 
   def history

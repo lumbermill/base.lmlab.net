@@ -76,6 +76,6 @@ function remove_from_cart(order_id,b){
   <%= render "stripe", { total: total } %>
   <br/>
 <% else %>
-  <%= link_to t('Place the order'), orders_checkout2_path, class: 'btn btn-primary' %>
+  <%= link_to t('Place the order'), orders_checkout2_path, method: :post, class: 'btn btn-primary' %>
 <% end %>
 <%= link_to t('Back'), orders_path, class: 'btn btn-default' %>
