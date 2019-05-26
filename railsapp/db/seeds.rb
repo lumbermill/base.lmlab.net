@@ -15,7 +15,7 @@ FileUtils.mkdir_p(PRODUCT_IMAGES_DIR)
 FileUtils.mkdir_p(TAG_IMAGES_DIR)
 
 if Rails.env == "development"
-  d1 = User.create(name: "Distributor1", email: "dist@lmlab.net", password: "secret", parent: admin, confirmed_at: now)
+  d1 = User.create(name: "Distributor1", email: "dist@lmlab.net", password: "secret", paypal_id: "lmlab", parent: admin, confirmed_at: now)
   u1 = User.create(name: "User1", email: "user1@lmlab.net", password: "secret", parent: d1, confirmed_at: now)
   u2 = User.create(name: "User2", email: "user2@lmlab.net", password: "secret", parent: d1, confirmed_at: now)
 
