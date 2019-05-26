@@ -29,16 +29,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Order.count') do
       post orders_url, params: { order: { quantity: @order.quantity, price: @order.price, product_id: @order.product_id, checkout_at: @order.checkout_at, status: @order.status, user_id: @order.user_id } }
     end
-<<<<<<< HEAD
     o = Order.last
     assert_redirected_to order_url(o)
     assert_equal @order.price, o.price
-=======
-
-    assert_redirected_to order_url(Order.last)
-    assert_equal @order.quantity, Order.last.quantity
-    assert_equal @order.price, Order.last.price
->>>>>>> master
   end
 
   test "should show order" do
