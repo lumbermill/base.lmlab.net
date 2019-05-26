@@ -80,7 +80,7 @@
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_product_path,
                 :class => 'btn btn-primary' %>
-    <% ps = params.permit(:keyword); ps[:print] = "on" %>
+    <% ps = params.permit(:search); ps[:print] = "on" %>
     <%= link_to "発注表", products_path(ps), class: 'btn btn-default', target: "index4printing" %>
   </p>
 <% end %>

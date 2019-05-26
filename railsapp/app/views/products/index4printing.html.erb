@@ -1,25 +1,203 @@
 <%- model_class = Product -%>
-<table class="table table-striped" border="1">
+<html>
+<head>
+  <style>
+        body {
+            /*  A4 Paper of 100 dpi */
+            height: 1169px;
+            width: 827px;
+            margin: 8px auto 8px auto;
+            border: 1px solid #000;
+
+
+            color: #333;
+            font-family: sans-serif;
+            font-size: 11pt;
+            line-height: 1.3em;
+        }
+
+        @media print{
+            body{
+                margin: auto;
+                border: none;
+                zoom: 100%;
+            }
+        }
+
+        footer{
+            position: absolute;
+            top: 1139px;
+            height: 30px;
+            width: 827px;
+            text-align: center;
+        }
+
+        /* アドレスボックス width=647 */
+        table#address{
+            clear: both;
+            margin: 0 90px 16px 90px;
+            border-collapse: collapse;
+        }
+
+        table#address th{
+            border: 1px solid #666;
+            font-weight: normal;
+            height: 28px;
+        }
+
+        table#address td{
+            border: 1px solid #666;
+        }
+
+        /* 明細テーブル width=647 */
+        table#main_table{
+            clear: both;
+            margin: 0 90px 16px 90px;
+            border-collapse: collapse;
+            line-height: 19px;
+        }
+
+        table#main_table th{
+            border: 1px solid #666;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+
+        table#main_table td{
+            border: 1px solid #666;
+            height: 19px;
+            line-height: 19px;
+        }
+
+        table#main_table td.right{
+            text-align: right;
+        }
+        table#main_table td.small{
+            font-size: 12px;
+        }
+
+        /* 見出し */
+        span.bold{
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        p.left{
+            margin: auto 90px 16px 90px;
+        }
+
+        p.right{
+            margin: auto 90px 16px 90px;
+            text-align: right;
+        }
+
+        p.center{
+            margin: auto 90px 16px 90px;
+            text-align: center;
+        }
+
+        #list{
+            margin: 48px 190px 48px 190px;
+            width: 447px;
+            border-collapse: collapse;
+        }
+
+        #list td.left{
+            width: 50%;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #list td.right{
+            width: 50%;
+            text-align: right;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #from_address{
+            position: relative;
+            left: 458px;
+            top: 16px;
+            width: 279px;
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+
+        /* mm に 3.937 を掛けて px に変換します */
+  </style>
+</head>
+<body>
+
+<table style="width: 100%">
+  <tr>
+    <td>発注表</td>
+    <td style="text-align: right; color: #ccc; font-size: smaller">r:<%= Time.now.strftime("%y%m%d%H%M") %> p:<%= params[:search] %></td>
+  </tr>
+</table>
+<br/><br/>
+
+<table id="address">
+  <tr>
+    <th>氏名</th><td style="width: 410px"></td>
+  </tr>
+  <tr>
+    <th>住所</th><td></td>
+  </tr>
+  <tr>
+    <th>電話番号</th><td></td>
+  </tr>
+  <tr>
+    <th>連絡先(email)</th><td></td>
+  </tr>
+  <tr>
+    <th>発注日</th><td>______ / ______ / ______</td>
+  </tr>
+</table>
+
+<table id="main_table">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(t(:picture)) %></th>
       <th><%= model_class.human_attribute_name(t(:name)) %></th>
-      <th><%= model_class.human_attribute_name(t(:price)) %></th>
+      <th>価格(税抜?)</th>
+      <th>注文数</th>
+      <th>合計(税抜)</th>
     </tr>
   </thead>
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to image_tag(product.picture_path, style: "max-height: 64px"), product_path(product) %></td>
-        <td>
+        <td><%= link_to image_tag(product.picture_path, style: "max-height: 64px; max-width: 64px"), product_path(product) %></td>
+        <td class="small">
           <%= link_to product.name+" "+product.size, product_path(product) %> <small class="text-muted"><%= product.code %></small><br/>
           <%= product.copy %>
           <div id="product-<%= product.id %>" class="alert alert-success" role="alert" style="display: none; margin-top: 6px;"><%= link_to "カート", {:controller => :orders} %> に追加しました。</div>
         </td>
-        <td><%= product.price %></td>
+        <td class="right"><%= product.price %></td>
         <td></td>
         <td></td>
       </tr>
     <% end %>
+    <tr>
+      <td colspan="2" rowspan="3"></td>
+      <th>小計</th>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>消費税</th>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <th>税込合計</th>
+      <td colspan="2"></td>
+    </tr>
   </tbody>
 </table>
+
+<p>
+
+
+</p>
+</body>
+</html>
