@@ -77,6 +77,7 @@ ja:
         change_your_password: "パスワードを変更"
         confirm_new_password: "確認用新しいパスワード"
         new_password: "新しいパスワード"
+        characters_minimum: "文字以上に設定してください"
       new:
         forgot_your_password: "パスワードを忘れましたか?"
         send_me_reset_password_instructions: "パスワードの再設定方法を送信する"
@@ -102,6 +103,7 @@ ja:
     sessions:
       new:
         sign_in: "ログイン"
+        remember_me: "覚えている"
       user:
         signed_in: "ログインしました"
         signed_out: "ログアウトしました"
