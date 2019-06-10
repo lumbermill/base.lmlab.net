@@ -23,14 +23,14 @@ if Rails.env == "development"
   tag2 = Tag.create(code: "food", name: "食品")
 
   p1 = Product.create(code: "5050", name: "トリプルＸ（レフィル）", copy: "究極の活性酸素対策！",
-    price: 10000, user: admin, tags: [tag1], keywords: "")
-  p2 = Product.create(code: "0029", name: "ハーブラスト", copy: "究極ののど飴！", price: 120, user: admin, tags: [tag2])
-  p3 = Product.create(code: "0581", name: "ハーブラスト", size: "１０本入り", price: 1180, user: admin, tags: [tag2])
-  p4 = Product.create(code: "5070", name: "プロテイン シェーカー", copy: "", user: admin)
-  p5 = Product.create(code: "5165", name: "ニュートリ プロテイン （オールプラント）", user: admin)
-  Product.create(code: "5910", name: "ニュートリ プロテイン （オールプラント）", size: "お徳用", user: admin)
-  Product.create(code: "5441", name: "ＸＳ エナジードリンク エクストラバーン リモンチェッロ パイレーツブラスト", size: "６本入り", user: admin)
-  Product.create(code: "5414", name: "ＸＳ エナジードリンク エクストラバーン ミックスベリーブラスト", size: "６本入り", user: admin)
+    price: 10000, user: admin, tags: [tag1], keywords: "",maker: "amway")
+  p2 = Product.create(code: "0029", name: "ハーブラスト", copy: "究極ののど飴！", price: 120, user: admin, tags: [tag2],maker: "amway")
+  p3 = Product.create(code: "0581", name: "ハーブラスト", size: "１０本入り", price: 1180, user: admin, tags: [tag2],maker: "amway")
+  p4 = Product.create(code: "5070", name: "プロテイン シェーカー", copy: "", user: admin,maker: "KSN")
+  p5 = Product.create(code: "5165", name: "ニュートリ プロテイン （オールプラント）", user: admin,maker: "KSN")
+  Product.create(code: "5910", name: "ニュートリ プロテイン （オールプラント）", size: "お徳用", user: admin,maker: "amway")
+  Product.create(code: "5441", name: "ＸＳ エナジードリンク エクストラバーン リモンチェッロ パイレーツブラスト", size: "６本入り", user: admin,maker: "PCN")
+  Product.create(code: "5414", name: "ＸＳ エナジードリンク エクストラバーン ミックスベリーブラスト", size: "６本入り", user: admin,maker: "amway")
   FileUtils.cp Dir.glob("db/seeds/products/*.*"), PRODUCT_IMAGES_DIR
   FileUtils.cp Dir.glob("db/seeds/tags/*.*"), TAG_IMAGES_DIR
 

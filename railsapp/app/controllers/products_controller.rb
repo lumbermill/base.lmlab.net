@@ -62,7 +62,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         if File.file? tmpfile4picture
-          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code))
+          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code,@product.maker))
         end
         format.html { redirect_to @product, notice: t('Product') + t('was successfully created') }
         format.json { render :show, status: :created, location: @product }
@@ -79,7 +79,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.update(product_params)
         if File.file? tmpfile4picture
-          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code))
+          FileUtils.mv(tmpfile4picture,Product.picture_realpath(@product.code,@product.maker))
         end
         format.html { redirect_to @product, notice: t('Product') + t('was successfully updated') }
         format.json { render :show, status: :ok, location: @product }
@@ -109,7 +109,8 @@ class ProductsController < ApplicationController
 
   def picture
     code = params[:code]
-    f = Product.picture_realpath(code)
+    maker = params[:maker]
+    f = Product.picture_realpath(code,maker)
     if File.file? f
       send_file(f, type: 'image/jpeg', disposition: "inline")
     else
