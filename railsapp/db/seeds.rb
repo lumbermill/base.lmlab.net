@@ -31,6 +31,7 @@ if Rails.env == "development"
   Product.create(code: "5910", name: "ニュートリ プロテイン （オールプラント）", size: "お徳用", user: admin,maker: "amway")
   Product.create(code: "5441", name: "ＸＳ エナジードリンク エクストラバーン リモンチェッロ パイレーツブラスト", size: "６本入り", user: admin,maker: "PCN")
   Product.create(code: "5414", name: "ＸＳ エナジードリンク エクストラバーン ミックスベリーブラスト", size: "６本入り", user: admin,maker: "amway")
+  Product.create(code: "1", name: "bottle", size: "６本入り", user: admin,maker: "amway")
   FileUtils.cp Dir.glob("db/seeds/products/*.*"), PRODUCT_IMAGES_DIR
   FileUtils.cp Dir.glob("db/seeds/tags/*.*"), TAG_IMAGES_DIR
 
