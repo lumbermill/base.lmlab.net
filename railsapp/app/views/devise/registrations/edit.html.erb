@@ -35,6 +35,22 @@
     <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
   </div>
 
+
+  <div class="form-group">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "電話番号" %>  <br />
+    <%= f.text_field :phone_no, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "メモ" %><br />
+    <%= f.text_field :memo, class: "form-control" %>
+  </div>
+
   <div class="form-group">
     <%= f.label :message4payment %>
     <%= f.text_area :message4payment, class: "form-control", rows: 3 %>

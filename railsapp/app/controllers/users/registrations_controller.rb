@@ -22,6 +22,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:message4payment,:paypal_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:message4payment,:paypal_id,:address, :birthdate, :phone_no, :memo])
   end
 end
