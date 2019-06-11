@@ -103,7 +103,7 @@ ja:
     sessions:
       new:
         sign_in: "ログイン"
-        remember_me: "覚えている"
+        remember_me: "ログイン状態を保存する"
       user:
         signed_in: "ログインしました"
         signed_out: "ログアウトしました"
