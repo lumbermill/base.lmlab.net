@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     parent = User.parent_by_token(params[:token])
-    pa = params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    pa = params.require(:user).permit(:name, :email, :password, :password_confirmation,:address, :phone_no, :birthdate, :memo)
     @user = User.new(pa)
     @user.parent = parent
     respond_to do |format|

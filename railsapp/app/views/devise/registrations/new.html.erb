@@ -27,6 +27,26 @@
   </div>
 
   <div class="form-group">
+    <%= f.label "お誕生日" %><br />
+    <%= f.date_field :birthdate, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone_no %><br />
+    <%= f.text_field :phone_no, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :memo %><br />
+    <%= f.text_field :memo, autocomplete: "off", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <label>担当ディストリビュータID</label>
     <%= text_field_tag :token, "", class: "form-control" %>
     <small>担当のディストリビュータから伝えられたID(全て半角文字)を入力してください。</small>
