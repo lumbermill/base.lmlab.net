@@ -1,4 +1,4 @@
-<h2>Log in</h2>
+<h2> <%= t('devise.sessions.new.sign_in') %> </h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">
@@ -15,13 +15,13 @@
     <div class="checkbox">
       <label>
       <%= f.check_box :remember_me %>
-      Remember me
+      覚えている
       </label>
     </div>
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in",class: "btn btn-primary" %>
+    <%= f.submit t('devise.sessions.new.sign_in'),class: "btn btn-primary" %>
   </div>
 <% end %>
 
