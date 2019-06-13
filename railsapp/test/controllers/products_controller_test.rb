@@ -175,6 +175,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   end
 
+  test "should test picture method" do
+    sign_in users(:dist1)
+    get "/products/picture?maker=#{@product.maker}&code=#{@product.code}&suffix=main"
+    assert_response :success
+  end
+
 
 
 end

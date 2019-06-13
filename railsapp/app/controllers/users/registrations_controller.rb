@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     parent = User.parent_by_token(params[:token])
-    pa = params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    pa = params.require(:user).permit(:name, :email, :password, :password_confirmation,:address, :phone_no, :birthdate, :memo)
     @user = User.new(pa)
     @user.parent = parent
     respond_to do |format|
@@ -22,6 +22,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:message4payment,:paypal_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:message4payment,:paypal_id,:address, :birthdate, :phone_no, :memo])
   end
 end

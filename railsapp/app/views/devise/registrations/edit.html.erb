@@ -36,6 +36,26 @@
   </div>
 
   <div class="form-group">
+    <%= f.label "お誕生日" %><br />
+    <%= f.date_field :birthdate, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %><br />
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "電話番号" %>  <br />
+    <%= f.text_field :phone_no, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "メモ" %><br />
+    <%= f.text_field :memo, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :message4payment %>
     <%= f.text_area :message4payment, class: "form-control", rows: 3 %>
     <em>注文確定後にユーザに表示されるメッセージです。</em>

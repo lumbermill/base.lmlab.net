@@ -12,16 +12,16 @@ class Product < ApplicationRecord
   validates :cost, format: { with: /\A[0-9,]+\z/,　message: "半角数字のみが使用できます" }
 
   def picture_path(suffix="main")
-    Product.picture_path(code,suffix)
+    Product.picture_path(code,suffix,maker)
   end
 
-  def self.picture_realpath(code,suffix="main")
+  def self.picture_realpath(code,maker,suffix="main")
     # ad hoc: how to use picture_id field?
-    PRODUCT_IMAGES_DIR+"/#{code}-#{suffix}.jpg"
+    PRODUCT_IMAGES_DIR+"/#{maker}-#{code}-#{suffix}.jpg"
   end
 
-  def self.picture_path(code,suffix="main")
-    "/products/picture?code=#{code}&suffix=#{suffix}"
+  def self.picture_path(code,suffix="main",maker)
+    "/products/picture?maker=#{maker}&code=#{code}&suffix=#{suffix}"
   end
 
   def has_tag?(tag)
