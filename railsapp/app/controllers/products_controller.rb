@@ -33,7 +33,9 @@ class ProductsController < ApplicationController
     else
       @products = Product.where(code: @keyword)
     end
-    @products = @products.page(params[:page])
+    if(@products.count > 0)
+      @products = @products.page(params[:page])
+    end
     if params[:print]
       render action: 'index4printing', layout: false
     end
