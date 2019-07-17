@@ -104,4 +104,4 @@ ja:
   Back to dashboard: "買い物を続ける"
   Confirm checkout: "注文の確認"
   You can not delete this product because it is in cart / ordered: "この商品はカートまたは注文履歴に含まれているため削除できません"
-  can not be deleted: "削除できません"
+  only when there is no product which has the category, the category can be removed: "カテゴリを持つ商品がない場合のみ、カテゴリを削除できます"

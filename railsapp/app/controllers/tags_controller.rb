@@ -63,7 +63,7 @@ class TagsController < ApplicationController
   def destroy
     respond_to do |format|
       if @tag.products.present?
-        format.html { redirect_to tags_url, notice: t('Tag') + t('can not be deleted') }
+        format.html { redirect_to tags_url, notice: t('Tag') + t('only when there is no product which has the category, the category can be removed') }
         format.json { head :no_content }
       else 
         @tag.destroy
