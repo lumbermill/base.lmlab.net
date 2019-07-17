@@ -16,7 +16,8 @@ class ProductsController < ApplicationController
     if @keyword.blank?
       @products = Product.all
     elsif @keyword.start_with? "tag:"
-      tag = @keyword.sub("tag:","").strip
+      tag = @keyword.sub("tag:","").split(' ', 2)[0].strip
+      tag_suffix = @keyword.sub("tag:","").split(' ', 2)[1]
       if tag.blank?
         # 管理用の裏技　タグ名の指定がないときはタグが登録されていない商品をだす
         # ちょっと重たくなるかも
@@ -24,6 +25,9 @@ class ProductsController < ApplicationController
       else
         tag = Tag.where(code:tag).first
         @products = tag ? tag.products : []
+        if(tag_suffix.present?)
+          @products = @products.where("name like ?","%#{tag_suffix}%").or(@products.where("copy like ?","%#{tag_suffix}%"))
+        end
       end
     elsif @keyword.start_with? "maker:"
       maker = @keyword.sub("maker:","").strip
