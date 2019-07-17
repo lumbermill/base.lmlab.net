@@ -62,7 +62,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1.json
   def destroy
     respond_to do |format|
-      if @tag.products
+      if @tag.products.present?
         format.html { redirect_to tags_url, notice: t('Tag') + t('can not be deleted') }
         format.json { head :no_content }
       else 
