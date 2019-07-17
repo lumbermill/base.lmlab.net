@@ -61,10 +61,15 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: t('Tag') + t('was successfully destroyed') }
-      format.json { head :no_content }
+      if @tag.products
+        format.html { redirect_to tags_url, notice: t('Tag') + t('can not be deleted') }
+        format.json { head :no_content }
+      else 
+        @tag.destroy
+        format.html { redirect_to tags_url, notice: t('Tag') + t('was successfully destroyed') }
+        format.json { head :no_content }
+      end
     end
   end
 
