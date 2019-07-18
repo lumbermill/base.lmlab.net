@@ -26,14 +26,14 @@ class ProductsController < ApplicationController
         tag = Tag.where(code:tag).first
         @products = tag ? tag.products : []
         if(tag_suffix.present?)
-          @products = @products.where("name like ?","%#{tag_suffix}%").or(@products.where("copy like ?","%#{tag_suffix}%"))
+           @products = @products.where("name like ?","%#{tag_suffix}%").or(@products.where("copy like ?","%#{tag_suffix}%")).or(@products.where("size like ?","%#{tag_suffix}%"))
         end
       end
     elsif @keyword.start_with? "maker:"
       maker = @keyword.sub("maker:","").strip
       @products = Product.where("maker = '#{maker}'")
     elsif @keyword.to_i == 0
-      @products = Product.where("name like ? or size like ?", "%"+@keyword+"%", "%"+@keyword+"%")
+      @products = Product.where("name like ?","%#{@keyword}%").or(Product.where("copy like ?","%#{@keyword}%")).or(Product.where("size like ?","%#{@keyword}%"))
     else
       @products = Product.where(code: @keyword)
     end
