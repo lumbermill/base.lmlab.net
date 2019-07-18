@@ -2,7 +2,7 @@ class Tag < ApplicationRecord
   has_many :product_tags
   has_many :products, through: :product_tags
 
-  validates :code, uniqueness: true
+  validates :code, uniqueness: true, format: {with: /^[\S]+$/, multiline: true, message: 'Code can not have spaces' }
   validates :name, presence: true
 
   def picture_path
