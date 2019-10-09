@@ -13,7 +13,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: ubuntu
+  username: lmuser
   password:
   socket: /var/run/mysqld/mysqld.sock
 
@@ -50,4 +50,3 @@ test:
 production:
   <<: *default
   database: base_lmlab_net_production
-  password: <%= ENV['BASE_LMLAB_NET_DATABASE_PASSWORD'] %>

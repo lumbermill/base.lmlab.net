@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "base"
-set :repo_url, "git@github.com-base:lumbermill/base.lmlab.net.git"
+set :repo_url, "git@github.com:lumbermill/base.lmlab.net.git"
 set :repo_tree, 'railsapp'
 # **Notice** githubではrsa鍵を複数プロジェクトで使い回せないため、.ssh/configに細工をしています
 
