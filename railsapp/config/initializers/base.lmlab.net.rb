@@ -9,7 +9,7 @@ I18n.default_locale = :ja
 # They are like suppliers.
 makers = {
   amway: {name: "Amway", url: "https://amwaylive.com",
-    url4product: "https://www1.amwaylive.com/search/Search?keyword={code}"
+    url4product: "https://www.amwaylive.com/search/?text={code}"
   },
   ksy: {name: "KSY", url: "https://raspberry-pi.ksyic.com/",
     url4product: "https://raspberry-pi.ksyic.com/main/index/pdp.id/{code}/pdp.open/{code}"
