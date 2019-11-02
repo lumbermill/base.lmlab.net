@@ -16,6 +16,9 @@ makers = {
   },
   pcn: {name: "PCN", url: "https://hello002.stores.jp/",
     url4product: "https://hello002.stores.jp/items/{code}"
+  },
+  uchiwa: {name: "Uchiwa", url: "https://uchiwa8.thebase.in/",
+    url4product: "https://uchiwa8.thebase.in/items/{code}"
   }}
 
 MAKERS = makers
