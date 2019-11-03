@@ -21,11 +21,20 @@
       </tr>
     <% else
          total = 0
-         @orders.each do |order| %>
+         @orders.each do |order|
+           style_status = ""
+           style_checkout_at = ""
+           if ["shipping","ordered"].include? order.status
+             style_status = "font-weight: bold"
+             if order.checkout_at < (Time.now - 7.days)
+               style_checkout_at = "color: red"
+             end
+           end
+    %>
       <tr>
-        <td><%= l(order.checkout_at) %></td>
+        <td style="<%= style_checkout_at %>"><%= l(order.checkout_at) %></td>
         <td><%= order.user.name if @title == "history_of_children" %></td>
-        <td><%= t(order.status) %></td>
+        <td style="<%= style_status %>"><%= t(order.status) %></td>
         <td><%= order.quantity %></td>
         <td><%= order.price %></td>
         <% if @title == "history_of_children" %>
@@ -43,3 +52,6 @@
 <% elsif current_user.children.count > 0 %>
 <p><%= link_to 'フロントの注文履歴', orders_history_path(children: true), class: "btn btn-default" %></p>
 <% end %>
+<ul class="text-muted">
+  <li>注文後 <%= 7 %> 日経過すると日時が赤字で表示されます。</li>
+</ul>
