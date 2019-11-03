@@ -97,6 +97,10 @@
     $("#shipping_of_children").load("dashboard-count?key=shipping_of_children");
     $("#number_of_children").load("dashboard-count?key=number_of_children");
   </script>
+  <p>メッセージ</p>
+  <pre><%= current_user.message %></pre>
+  <p>注文完了後に表示されるメッセージ <%= link_to "編集", edit_user_registration_path, class: "btn btn-default btn-xs" %></p>
+  <pre><%= current_user.message4payment %></pre>
 <% end %>
 <% if current_user.admin? %>
   <div class="row">
