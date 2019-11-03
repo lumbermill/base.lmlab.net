@@ -28,9 +28,9 @@ module ProductsHelper
   end
 
   def makers_as_list(include_empty: true)
-    html = "<a href='/products?search=maker:'>undefined</a><br/>"
+    html = "<a href='/products?search=maker:' class='btn btn-default btn-xs'>undefined <span class='text-muted' id='n-maker-undefined'>0</span></a> "
     MAKERS.keys.each do |m|
-      html += "<a href='/products?search=maker:#{m}'>#{m}</a><br/>"
+      html += "<a href='/products?search=maker:#{m}' class='btn btn-default btn-xs'>#{m} <span class='text-muted' id='n-maker-#{m}'>0</small></a> "
     end
     html.html_safe
   end

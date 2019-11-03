@@ -12,8 +12,6 @@
       <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: t("name,code or tag:name"), size: 60 %>
       <%= button_tag ('<span class="fa fa-search"></span> '.+t('search')).html_safe, class: 'btn btn-primary ' %>
     </form>
-  </div>
-  <div class="col-sm-4">
     <%= makers_as_list %>
   </div>
 </div>
@@ -23,7 +21,7 @@
     <div class="col-sm-4 col-md-2">
       <figure>
         <%= link_to image_tag(tag.picture_path, class: "img-thumbnail"), products_path(search: "tag:"+tag.code) %>
-        <figcaption><%= tag.name %></figcaption>
+        <figcaption><%= tag.name %> <span class="text-muted" id="n-tag-<%= tag.code %>"></span></figcaption>
       </figure>
     </div>
   <% end %>
@@ -96,6 +94,10 @@
     $("#orders_of_children").load("dashboard-count?key=orders_of_children");
     $("#shipping_of_children").load("dashboard-count?key=shipping_of_children");
     $("#number_of_children").load("dashboard-count?key=number_of_children");
+    $("#n-maker-undefined").load("dashboard-count?key=n-maker");
+    <% MAKERS.keys.each do |m| %>
+    $("#n-maker-<%= m %>").load("dashboard-count?key=n-maker&maker=<%= m %>");
+    <% end %>
   </script>
   <p>メッセージ</p>
   <pre><%= current_user.message %></pre>

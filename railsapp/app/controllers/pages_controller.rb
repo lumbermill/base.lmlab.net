@@ -29,6 +29,9 @@ class PagesController < ApplicationController
       v = current_user.children.count
     when "orders" then
       v = current_user.active_orders.length
+    when "n-maker" then
+      m = params[:maker]
+      v = Product.where(maker: m).count
     else
       v = key
     end
