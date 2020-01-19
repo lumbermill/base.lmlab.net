@@ -1,7 +1,8 @@
 <h2>Amway Price Lookup</h2>
 <div class="row">
   <div class="col-sm-8">
-    <%= text_field_tag :code, "", class: 'form-control', onchange: 'lookup()', onfocus: 'this.select()' %>
+    <%= text_field_tag :code, "", class: 'form-control', placeholder: 'コードをスキャンしてください',
+     onchange: 'lookup()', onfocus: 'this.select()' %>
   </div>
   <div>
     <%= button_tag 'リセット', onclick: 'reset()', class: 'btn btn-warning' %>
@@ -10,7 +11,7 @@
 <br/>
 <div class="panel panel-default">
   <div class="panel-body">
-    税込合計: <span id="total">0</span>
+    税込合計: <span id="total">0</span>円
   </div>
 </div><table id="result" class="table">
 </table>
@@ -20,19 +21,20 @@
   function update_total(t){
     total = t;
     $("#total").text(total);
+    $("#code").focus();
   }
 
   function reset(){
     console.log("reset");
     $("#result tr").remove();
-    $("#result").append("<tr><th>code</th><th>name</th><th>price</th></tr>");
+    $("#result").append("<tr><th>コード</th><th>商品名</th><th>価格</th></tr>");
     update_total(0);
   }
 
   function lookup(){
     var code = $("#code").val();
     $.getJSON('pos.json',{"maker":"amway","code":code},function(d){
-      $("#result").append("<tr><td>"+code+"</td><td>"+d.name+"</td><td>"+d.price+"</td></tr>");
+      $("#result tr:first").after("<tr><td>"+code+"</td><td>"+d.name+"</td><td>"+d.price+"</td></tr>");
       $("#code").val("");
       total += d.price;
       update_total(total);
