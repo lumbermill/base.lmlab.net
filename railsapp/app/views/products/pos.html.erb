@@ -4,7 +4,8 @@
     <%= text_field_tag :code, "", class: 'form-control', placeholder: 'コードをスキャンしてください',
      onchange: 'lookup()', onfocus: 'this.select()' %>
   </div>
-  <div>
+  <div class="col-sm-4">
+    <%= button_tag '検索', class: 'btn btn-success' %>
     <%= button_tag 'リセット', onclick: 'reset()', class: 'btn btn-warning' %>
   </div>
 </div>
@@ -27,14 +28,23 @@
   function reset(){
     console.log("reset");
     $("#result tr").remove();
-    $("#result").append("<tr><th>コード</th><th>商品名</th><th>価格</th></tr>");
+    $("#result").append("<tr><th>コード</th><th></th><th>商品名</th><th>価格</th></tr>");
     update_total(0);
   }
 
   function lookup(){
     var code = $("#code").val();
     $.getJSON('pos.json',{"maker":"amway","code":code},function(d){
-      $("#result tr:first").after("<tr><td>"+code+"</td><td>"+d.name+"</td><td>"+d.price+"</td></tr>");
+      html = "<tr><td>"+code+"</td>";
+      if(d.id == 0){
+        html += "<td></td>";
+        html += "<td colspan='2' class='text-muted'>not found</td>";
+      } else {
+        html += "<td><img src='products/picture?id="+d.id+"' alt='' style='max-height: 32px'/></td>";
+        html += "<td><a href='products/"+d.id+"'>"+d.name+"</a></td><td>"+d.price+"</td>";
+      }
+      html += "</tr>";
+      $("#result tr:first").after(html);
       $("#code").val("");
       total += d.price;
       update_total(total);

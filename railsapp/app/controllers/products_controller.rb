@@ -116,6 +116,11 @@ class ProductsController < ApplicationController
   def picture
     code = params[:code]
     maker = params[:maker]
+    unless code && params[:id]
+      pr = Product.find(params[:id])
+      code = pr&.code
+      maker = pr&.maker
+    end
     f = Product.picture_realpath(code,maker)
     if File.file? f
       send_file(f, type: 'image/jpeg', disposition: "inline")
@@ -135,7 +140,8 @@ class ProductsController < ApplicationController
         pr = Product.find_by(maker: m, code4plu: c)
         name = pr&.name || "not found"
         price = pr&.price || 0
-        render json: {code: c, name: name, price: price}
+        id = pr&.id || 0
+        render json: {code: c, name: name, price: price, id: id}
       end
     end
   end
