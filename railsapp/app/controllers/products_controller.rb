@@ -131,10 +131,11 @@ class ProductsController < ApplicationController
       format.json do
         m = params[:maker] || 'amway'
         c = params[:code]
-        pr = Product.find_by(maker: m, code: c)
+        # いまのところamway専用、code4plu列を検索します
+        pr = Product.find_by(maker: m, code4plu: c)
         name = pr&.name || "not found"
         price = pr&.price || 0
-        render json: {code: 123, name: name, price: price}
+        render json: {code: c, name: name, price: price}
       end
     end
   end

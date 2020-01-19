@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   has_paper_trail
 
   validates :code, uniqueness: {scope: :maker}
+  validates :code4plu, uniqueness: {scope: :maker}
   validates :name, presence: true
   validates :price, format: { with: /\A[0-9,]+\z/,　message: "半角数字のみが使用できます" }
   validates :cost, format: { with: /\A[0-9,]+\z/,　message: "半角数字のみが使用できます" }
