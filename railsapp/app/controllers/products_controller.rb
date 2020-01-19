@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show,:picture]
+  before_action :authenticate_user!, except: [:show,:picture,:pos]
 
   # GET /products
   # GET /products.json
@@ -125,7 +125,19 @@ class ProductsController < ApplicationController
     end
   end
 
-
+  def pos
+    respond_to do |format|
+      format.html
+      format.json do
+        m = params[:maker] || 'amway'
+        c = params[:code]
+        pr = Product.find_by(maker: m, code: c)
+        name = pr&.name || "not found"
+        price = pr&.price || 0
+        render json: {code: 123, name: name, price: price}
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

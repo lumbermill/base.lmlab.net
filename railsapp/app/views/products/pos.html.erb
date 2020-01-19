@@ -1,0 +1,43 @@
+<h2>Amway Price Lookup</h2>
+<div class="row">
+  <div class="col-sm-8">
+    <%= text_field_tag :code, "", class: 'form-control', onchange: 'lookup()', onfocus: 'this.select()' %>
+  </div>
+  <div>
+    <%= button_tag 'リセット', onclick: 'reset()', class: 'btn btn-warning' %>
+  </div>
+</div>
+<br/>
+<div class="panel panel-default">
+  <div class="panel-body">
+    税込合計: <span id="total">0</span>
+  </div>
+</div><table id="result" class="table">
+</table>
+<script>
+  var total;
+
+  function update_total(t){
+    total = t;
+    $("#total").text(total);
+  }
+
+  function reset(){
+    console.log("reset");
+    $("#result tr").remove();
+    $("#result").append("<tr><th>code</th><th>name</th><th>price</th></tr>");
+    update_total(0);
+  }
+
+  function lookup(){
+    var code = $("#code").val();
+    $.getJSON('pos.json',{"maker":"amway","code":code},function(d){
+      $("#result").append("<tr><td>"+code+"</td><td>"+d.name+"</td><td>"+d.price+"</td></tr>");
+      $("#code").val("");
+      total += d.price;
+      update_total(total);
+    });
+  }
+
+  reset();
+</script>

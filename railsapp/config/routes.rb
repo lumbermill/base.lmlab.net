@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   get 'pages/users'
   get 'pages/sign-in-as' => 'pages#sign_in_as', as: :sign_in_as
   root to: 'pages#root'
+
+  get 'pos' => 'products#pos', as: :pos
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
