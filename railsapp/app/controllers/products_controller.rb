@@ -116,7 +116,7 @@ class ProductsController < ApplicationController
   def picture
     code = params[:code]
     maker = params[:maker]
-    unless code && params[:id]
+    if code.blank? && params[:id]
       pr = Product.find(params[:id])
       code = pr&.code
       maker = pr&.maker
