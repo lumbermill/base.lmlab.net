@@ -24,6 +24,14 @@
     <%=f.error_span(:code) %>
   </div>
   <div class="form-group">
+    <%= f.label t(:code4plu), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :code4plu, :class => 'form-control' %>
+      <small class="text-muted">Amwayのみ</small>
+    </div>
+    <%=f.error_span(:code) %>
+  </div>
+  <div class="form-group">
     <%= f.label t(:maker), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :maker, :class => 'form-control' %>
@@ -100,6 +108,7 @@
       <ul>
         <li>画像は最大600px程度、JPEG形式のものを登録してください。</li>
         <li>価格は消費税込(Amwayの場合、DC)を登録してください。</li>
+        <li>Amwayの場合のみ、PLU（バーコード上のコード）登録も必要です。</li>
       </ul>
     </div>
   </div>

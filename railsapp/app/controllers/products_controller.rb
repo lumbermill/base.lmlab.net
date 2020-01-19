@@ -148,7 +148,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      pp = params.require(:product).permit(:user_id, :code, :maker, :name, :size, :price, :cost, :picture, :copy, :memo)
+      pp = params.require(:product).permit(:user_id, :code, :code4plu, :maker, :name, :size, :price, :cost, :picture, :copy, :memo)
       if pp[:picture]
         File.open(tmpfile4picture, 'w+b') do |fp|
           fp.write pp[:picture].read

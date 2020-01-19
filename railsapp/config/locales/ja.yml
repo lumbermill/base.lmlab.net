@@ -53,6 +53,7 @@ ja:
   No orders: "注文はありません"
   Can not process the order: "注文を確定できません"
   code: "コード"
+  code4plu: "PLUコード"
   price: "価格"
   Price: "価格"
   datetime: "日付"
