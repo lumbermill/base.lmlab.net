@@ -1,6 +1,8 @@
 # base.lmlab.net
 Online shopping system for small(individual) distributors.
 
+I have started development [v2(private repo)](https://github.com/lumbermill/base). ** The followings are about v1. **
+
 ## Actors
 - User
   - can sign in/out.
